@@ -11,7 +11,7 @@ export function MobileHeader({ className }: { className?: string }) {
   const { itemCount, setCartOpen } = useCart();
 
   return (
-    <header className={cn('md:hidden border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md', className)}>
+    <header className={cn('md:hidden border-b border-white/[0.05] bg-background/80 backdrop-blur-xl sticky top-0 z-40', className)}>
       <div className="container flex items-center justify-between h-14 gap-3">
         <LogoLink className="text-lg min-w-0" />
         <div className="flex items-center gap-0.5 shrink-0">

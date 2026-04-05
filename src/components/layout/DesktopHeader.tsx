@@ -14,18 +14,20 @@ export function DesktopHeader() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="hidden md:block sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b">
-      <div className="container flex items-center justify-between h-16 gap-6">
+    <header className="hidden md:block sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-white/[0.08] shadow-sm">
+      <div className="container flex items-center justify-between h-16 gap-8">
         <LogoLink />
 
-        <button
-          type="button"
-          onClick={() => setSearchOpen(true)}
-          className="flex-1 max-w-lg flex items-center gap-2 bg-secondary rounded-full px-4 py-2.5 text-sm text-muted-foreground hover:bg-secondary/80 transition-colors cursor-pointer"
-        >
-          <Search className="h-4 w-4" />
-          <span>{t('searchPlaceholder')}</span>
-        </button>
+        <div className="flex-1 max-w-xl group">
+          <button
+            type="button"
+            onClick={() => setSearchOpen(true)}
+            className="w-full flex items-center gap-3 bg-secondary/50 border border-white/[0.05] rounded-full px-5 py-2.5 text-sm text-muted-foreground hover:bg-secondary/80 hover:border-primary/20 transition-all duration-300 cursor-pointer shadow-inner"
+          >
+            <Search className="h-4 w-4 text-primary" />
+            <span className="font-medium tracking-tight">{t('searchPlaceholder')}</span>
+          </button>
+        </div>
 
         <nav className="flex items-center gap-1">
           <Button variant="ghost" size="sm" asChild>

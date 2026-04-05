@@ -3,4 +3,5 @@ export const POLICY_ROUTES = {
   authenticity: '/authenticity',
   privacy: '/privacy',
   returns: '/returns',
+  terms: '/terms',
 } as const;

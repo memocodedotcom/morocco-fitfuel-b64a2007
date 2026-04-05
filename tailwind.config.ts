@@ -26,19 +26,21 @@ export default {
       },
       transitionDuration: {
         design: "200ms",
-        "design-slow": "280ms",
+        "design-slow": "400ms",
       },
       transitionTimingFunction: {
-        "out-soft": "cubic-bezier(0.33, 1, 0.68, 1)",
+        "out-soft": "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       boxShadow: {
-        card: "0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05)",
+        card: "0 2px 4px 0 rgb(0 0 0 / 0.02), 0 1px 2px -1px rgb(0 0 0 / 0.02)",
         "card-hover":
-          "0 12px 28px -8px rgb(0 0 0 / 0.1), 0 4px 8px -4px rgb(0 0 0 / 0.06)",
-        lift: "0 4px 14px -2px rgb(0 0 0 / 0.08)",
+          "0 20px 40px -15px rgb(0 0 0 / 0.1), 0 8px 16px -8px rgb(0 0 0 / 0.05)",
+        lift: "0 10px 20px -5px rgb(0 0 0 / 0.08)",
+        "primary-glow": "0 0 20px -5px var(--primary-glow)",
       },
       fontFamily: {
         sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        display: ["Outfit", "Plus Jakarta Sans", "system-ui", "sans-serif"],
         arabic: ["Cairo", "Tahoma", "system-ui", "sans-serif"],
       },
       colors: {
@@ -50,6 +52,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "var(--primary-glow)",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -75,30 +78,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        urgency: {
-          DEFAULT: "hsl(var(--urgency))",
-          foreground: "hsl(var(--urgency-foreground))",
-        },
-        trust: {
-          DEFAULT: "hsl(var(--trust))",
-          foreground: "hsl(var(--trust-foreground))",
-        },
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          foreground: "hsl(var(--gold-foreground))",
-        },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
       },
       borderRadius: {
+        xl: "calc(var(--radius) + 4px)",
+        "2xl": "calc(var(--radius) + 12px)",
+        "3xl": "calc(var(--radius) + 20px)",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
@@ -120,12 +104,40 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(50%)" },
         },
+        shimmer: {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
+        "fade-in-up": {
+          from: {
+            opacity: "0",
+            transform: "translateY(20px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "scale-in": {
+          from: {
+            opacity: "0",
+            transform: "scale(0.95)",
+          },
+          to: {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        marquee: "marquee 30s linear infinite",
-        "marquee-rtl": "marquee-rtl 30s linear infinite",
+        marquee: "marquee 35s linear infinite",
+        "marquee-rtl": "marquee-rtl 35s linear infinite",
+        shimmer: "shimmer 2s infinite",
+        "fade-in-up": "fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "scale-in": "scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
     },
   },
