@@ -9,8 +9,11 @@ export const translations = {
     profile: 'Profil',
     products: 'Produits',
     
-    // Promo bar
+    // Promo bar (rotating + desktop strip)
     promoBar: '🚚 Livraison gratuite à partir de 500 MAD | 🛡️ 100% Authentique',
+    promoFreeShipping: 'Livraison gratuite à partir de 500 MAD',
+    promoAuthentic: '100% Authentique',
+    promoSecurePayment: 'Paiement sécurisé',
     
     // Search
     searchPlaceholder: 'Rechercher un produit...',
@@ -18,9 +21,11 @@ export const translations = {
     noResultsSuggestion: 'Nous n\'avons pas "{term}", mais ces alternatives populaires vous donneront les mêmes résultats :',
     
     // Hero
-    heroTitle: 'Suppléments Premium',
+    heroTitle: 'Suppléments premium',
+    heroEmphasis: 'au Maroc',
     heroSubtitle: 'Livraison rapide partout au Maroc',
     heroCta: 'Voir les offres',
+    heroPromoBadge: 'Jusqu’à -20% sur les stacks',
     
     // Categories
     categories: 'Catégories',
@@ -59,6 +64,13 @@ export const translations = {
     priceRange: 'Fourchette de prix',
     goal: 'Objectif',
     allCategories: 'Toutes les catégories',
+    allBrands: 'Toutes les marques',
+    priceAll: 'Tous les prix',
+    priceUnder500: 'Moins de 500 MAD',
+    price500to1000: '500 — 1000 MAD',
+    priceOver1000: 'Plus de 1000 MAD',
+    applyFilters: 'Appliquer',
+    clearFilters: 'Réinitialiser',
     
     // PDP
     verifiedAuthentic: 'Vérifié Authentique',
@@ -71,6 +83,7 @@ export const translations = {
     frequentlyBought: 'Fréquemment achetés ensemble',
     reviews: 'Avis',
     onlyLeft: 'Plus que {n} en stock — Commandez vite !',
+    lowStockShort: 'Plus que {n} !',
     
     // Cart
     yourCart: 'Votre Panier',
@@ -85,9 +98,15 @@ export const translations = {
     total: 'Total',
     orderWhatsApp: 'Commander via WhatsApp',
     secureCheckout: 'Paiement Sécurisé',
+    addedToCart: 'Ajouté au panier',
     
     // Checkout
     checkout: 'Paiement',
+    checkoutStepCart: 'Panier',
+    checkoutStepDetails: 'Coordonnées',
+    checkoutStepPayment: 'Paiement',
+    continueShopping: 'Continuer les achats',
+    viewCartDrawer: 'Voir le panier',
     fullName: 'Nom complet',
     phone: 'Téléphone',
     address: 'Adresse',
@@ -98,10 +117,33 @@ export const translations = {
     securePayment: 'Paiement Sécurisé',
     fastDelivery: 'Livraison 24h',
     authenticProducts: 'Produits Authentiques',
+    marqueeAuthentic: '100% Authentique',
+    marqueeDelivery24h: 'Livraison 24h',
+    marqueeSecurePay: 'Paiement sécurisé',
+    paymentLogoVisa: 'Visa',
+    paymentLogoMastercard: 'Mastercard',
+    paymentLogoCmi: 'CMI',
+    
+    // Support / profile (stub pages)
+    profileTitle: 'Mon compte',
+    profileSubtitle: 'Connectez-vous pour suivre vos commandes et gérer vos adresses. Bientôt disponible.',
+    profileCtaBrowse: 'Parcourir les produits',
+    helpTrackTitle: 'Suivi de commande',
+    helpTrackBody: 'Entrez votre numéro de commande (reçu par e-mail ou WhatsApp) pour voir le statut. Cette fonction sera activée dès l’ouverture officielle.',
+    helpFaqTitle: 'FAQ',
+    helpFaqBody: 'Questions fréquentes : délais de livraison 24–48h dans les grandes villes, produits 100% authentiques, paiement à la livraison ou en ligne selon les options affichées au checkout.',
+    helpReturnsTitle: 'Politique de retour',
+    helpReturnsBody: 'Vous pouvez demander un retour sous 14 jours si le produit est non ouvert et dans son emballage d’origine. Contactez-nous via WhatsApp avec votre numéro de commande.',
+    productNotFound: 'Produit introuvable',
+    backToProducts: 'Retour aux produits',
+    shippingAccordionBody: 'Livraison gratuite à partir de 500 MAD. Livraison sous 24-48h dans les grandes villes. Tous nos produits sont 100% authentiques et importés directement des fabricants.',
     
     // Misc
     mad: 'MAD',
     language: 'العربية',
+    themeLight: 'Clair',
+    themeDark: 'Sombre',
+    themeToggle: 'Thème',
   },
   ar: {
     home: 'الرئيسية',
@@ -111,14 +153,19 @@ export const translations = {
     products: 'المنتجات',
     
     promoBar: '🚚 توصيل مجاني ابتداءً من 500 درهم | 🛡️ 100% أصلي',
+    promoFreeShipping: 'توصيل مجاني ابتداءً من 500 درهم',
+    promoAuthentic: '100% أصلي',
+    promoSecurePayment: 'دفع آمن',
     
     searchPlaceholder: 'ابحث عن منتج...',
     noResults: 'لا نتائج',
     noResultsSuggestion: 'لا يوجد لدينا "{term}"، لكن هذه البدائل الشائعة ستحقق لك نفس النتائج:',
     
     heroTitle: 'مكملات غذائية فاخرة',
+    heroEmphasis: 'في المغرب',
     heroSubtitle: 'توصيل سريع في جميع أنحاء المغرب',
     heroCta: 'اكتشف العروض',
+    heroPromoBadge: 'خصم حتى 20٪ على الستاكس',
     
     categories: 'الفئات',
     protein: 'بروتين',
@@ -153,6 +200,13 @@ export const translations = {
     priceRange: 'نطاق السعر',
     goal: 'الهدف',
     allCategories: 'جميع الفئات',
+    allBrands: 'جميع العلامات',
+    priceAll: 'كل الأسعار',
+    priceUnder500: 'أقل من 500 درهم',
+    price500to1000: '500 — 1000 درهم',
+    priceOver1000: 'أكثر من 1000 درهم',
+    applyFilters: 'تطبيق',
+    clearFilters: 'إعادة التعيين',
     
     verifiedAuthentic: 'أصلي ومضمون',
     expiresOn: 'ينتهي في',
@@ -164,6 +218,7 @@ export const translations = {
     frequentlyBought: 'كثيراً ما يُشترى معاً',
     reviews: 'التقييمات',
     onlyLeft: 'بقي فقط {n} — اطلب بسرعة!',
+    lowStockShort: 'بقي {n} فقط!',
     
     yourCart: 'سلتك',
     cartEmpty: 'سلتك فارغة',
@@ -177,8 +232,14 @@ export const translations = {
     total: 'المجموع',
     orderWhatsApp: 'اطلب عبر واتساب',
     secureCheckout: 'دفع آمن',
+    addedToCart: 'تمت الإضافة للسلة',
     
     checkout: 'الدفع',
+    checkoutStepCart: 'السلة',
+    checkoutStepDetails: 'البيانات',
+    checkoutStepPayment: 'الدفع',
+    continueShopping: 'متابعة التسوق',
+    viewCartDrawer: 'عرض السلة',
     fullName: 'الاسم الكامل',
     phone: 'الهاتف',
     address: 'العنوان',
@@ -188,9 +249,31 @@ export const translations = {
     securePayment: 'دفع آمن',
     fastDelivery: 'توصيل 24 ساعة',
     authenticProducts: 'منتجات أصلية',
+    marqueeAuthentic: '100% أصلي',
+    marqueeDelivery24h: 'توصيل 24 ساعة',
+    marqueeSecurePay: 'دفع آمن',
+    paymentLogoVisa: 'فيزا',
+    paymentLogoMastercard: 'ماستركارد',
+    paymentLogoCmi: 'CMI',
+    
+    profileTitle: 'حسابي',
+    profileSubtitle: 'سجّل الدخول لمتابعة الطلبات والعناوين. قريباً.',
+    profileCtaBrowse: 'تصفح المنتجات',
+    helpTrackTitle: 'تتبع الطلب',
+    helpTrackBody: 'أدخل رقم الطلب (عبر البريد أو واتساب) لمعرفة الحالة. سيتم تفعيل هذه الخدمة مع الافتتاح الرسمي.',
+    helpFaqTitle: 'الأسئلة الشائعة',
+    helpFaqBody: 'أسئلة شائعة: التوصيل خلال 24–48 ساعة في المدن الكبرى، منتجات 100% أصلية، الدفع عند الاستلام أو عبر الإنترنت حسب الخيارات عند إتمام الطلب.',
+    helpReturnsTitle: 'سياسة الإرجاع',
+    helpReturnsBody: 'يمكنك طلب الإرجاع خلال 14 يوماً إذا كان المنتج غير مفتوح وبعبوته الأصلية. تواصل معنا عبر واتساب مع رقم الطلب.',
+    productNotFound: 'المنتج غير موجود',
+    backToProducts: 'العودة إلى المنتجات',
+    shippingAccordionBody: 'توصيل مجاني ابتداءً من 500 درهم. توصيل خلال 24-48 ساعة في المدن الكبرى. جميع منتجاتنا 100% أصلية ومستوردة مباشرة من الشركات المصنعة.',
     
     mad: 'درهم',
     language: 'Français',
+    themeLight: 'فاتح',
+    themeDark: 'داكن',
+    themeToggle: 'المظهر',
   }
 } as const;
 

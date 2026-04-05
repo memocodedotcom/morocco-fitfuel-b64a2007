@@ -14,6 +14,7 @@ import {
 import { ReviewSection } from '@/components/product/ReviewSection';
 import { ShoppingCart, Shield, Star, ChevronLeft, Minus, Plus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from '@/components/ui/sonner';
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -30,8 +31,10 @@ export default function ProductDetail() {
     return (
       <AppLayout>
         <div className="container py-12 text-center">
-          <p className="text-muted-foreground">Product not found</p>
-          <Button asChild className="mt-4"><Link to="/products">← {t('products')}</Link></Button>
+          <p className="text-muted-foreground">{t('productNotFound')}</p>
+          <Button asChild className="mt-4">
+            <Link to="/products">{t('backToProducts')}</Link>
+          </Button>
         </div>
       </AppLayout>
     );
@@ -49,15 +52,18 @@ export default function ProductDetail() {
   };
 
   const handleAddBoth = () => {
-    addItem(product.id, 1, product.flavors?.[selectedFlavor], product.sizes?.[selectedSize]);
-    crossSellProducts.forEach(p => p && addItem(p.id));
+    addItem(product.id, 1, product.flavors?.[selectedFlavor], product.sizes?.[selectedSize], {
+      silent: true,
+    });
+    crossSellProducts.forEach((p) => p && addItem(p.id, 1, undefined, undefined, { silent: true }));
+    toast.success(t('addedToCart'));
   };
 
   return (
     <AppLayout>
       <div className="container py-4 md:py-8">
         <Link to="/products" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
           {t('products')}
         </Link>
 
@@ -220,10 +226,7 @@ export default function ProductDetail() {
               <AccordionItem value="shipping">
                 <AccordionTrigger className="text-sm font-semibold">{t('shippingGuarantee')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground">
-                  {locale === 'fr'
-                    ? 'Livraison gratuite à partir de 500 MAD. Livraison sous 24-48h dans les grandes villes. Tous nos produits sont 100% authentiques et importés directement des fabricants.'
-                    : 'توصيل مجاني ابتداءً من 500 درهم. توصيل خلال 24-48 ساعة في المدن الكبرى. جميع منتجاتنا 100% أصلية ومستوردة مباشرة من الشركات المصنعة.'
-                  }
+                  {t('shippingAccordionBody')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

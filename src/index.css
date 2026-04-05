@@ -118,3 +118,10 @@
     display: none;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-rtl {
+    animation: none;
+  }
+}

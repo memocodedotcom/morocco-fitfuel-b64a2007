@@ -1,13 +1,17 @@
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
 import { Shield, Truck, CreditCard, MessageCircle, Mail, Instagram, Facebook } from 'lucide-react';
+import { categories } from '@/data/products';
+import { socialUrls } from '@/config/site';
+import { PaymentMethodLogos } from '@/components/payment/PaymentMethodLogos';
 
 export function Footer() {
   const { locale, t } = useLanguage();
+  const showInstagram = Boolean(socialUrls.instagram);
+  const showFacebook = Boolean(socialUrls.facebook);
 
   return (
     <footer className="bg-foreground text-background">
-      {/* Trust strip */}
       <div className="border-b border-background/10">
         <div className="container py-6">
           <div className="grid grid-cols-3 gap-4 text-center">
@@ -33,90 +37,119 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Links */}
       <div className="container py-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-lg font-bold text-primary mb-2">NutriMaroc</h3>
             <p className="text-xs text-background/60 leading-relaxed">
               {locale === 'fr'
                 ? 'Votre boutique de suppléments premium au Maroc. Produits 100% authentiques, importés directement des fabricants.'
-                : 'متجرك للمكملات الغذائية الفاخرة في المغرب. منتجات 100% أصلية، مستوردة مباشرة من الشركات المصنعة.'
-              }
+                : 'متجرك للمكملات الغذائية الفاخرة في المغرب. منتجات 100% أصلية، مستوردة مباشرة من الشركات المصنعة.'}
             </p>
           </div>
 
-          {/* Categories */}
           <div>
             <h4 className="text-sm font-semibold mb-3">{t('categories')}</h4>
             <ul className="space-y-2">
-              {['protein', 'creatine', 'vitamins', 'preWorkout', 'weightLoss'].map(cat => (
-                <li key={cat}>
-                  <Link to="/products" className="text-xs text-background/60 hover:text-primary transition-colors">
-                    {t(cat as any)}
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    to={`/products?category=${encodeURIComponent(cat.id)}`}
+                    className="text-xs text-background/60 hover:text-primary transition-colors"
+                  >
+                    {cat.name[locale]}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Help */}
           <div>
             <h4 className="text-sm font-semibold mb-3">
               {locale === 'fr' ? 'Aide' : 'المساعدة'}
             </h4>
             <ul className="space-y-2">
-              <li><span className="text-xs text-background/60">{locale === 'fr' ? 'Suivi de commande' : 'تتبع الطلب'}</span></li>
-              <li><span className="text-xs text-background/60">{locale === 'fr' ? 'Politique de retour' : 'سياسة الإرجاع'}</span></li>
-              <li><span className="text-xs text-background/60">{locale === 'fr' ? 'FAQ' : 'الأسئلة الشائعة'}</span></li>
+              <li>
+                <Link
+                  to="/track-order"
+                  className="text-xs text-background/60 hover:text-primary transition-colors"
+                >
+                  {t('helpTrackTitle')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/returns" className="text-xs text-background/60 hover:text-primary transition-colors">
+                  {t('helpReturnsTitle')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="text-xs text-background/60 hover:text-primary transition-colors">
+                  {t('helpFaqTitle')}
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="text-sm font-semibold mb-3">
               {locale === 'fr' ? 'Contact' : 'تواصل معنا'}
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="https://wa.me/212600000000" className="flex items-center gap-1.5 text-xs text-background/60 hover:text-primary transition-colors">
-                  <MessageCircle className="h-3.5 w-3.5" />
+                <a
+                  href="https://wa.me/212600000000"
+                  className="flex items-center gap-1.5 text-xs text-background/60 hover:text-primary transition-colors"
+                >
+                  <MessageCircle className="h-3.5 w-3.5 shrink-0" />
                   WhatsApp
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@nutrimaroc.ma" className="flex items-center gap-1.5 text-xs text-background/60 hover:text-primary transition-colors">
-                  <Mail className="h-3.5 w-3.5" />
+                <a
+                  href="mailto:contact@nutrimaroc.ma"
+                  className="flex items-center gap-1.5 text-xs text-background/60 hover:text-primary transition-colors"
+                >
+                  <Mail className="h-3.5 w-3.5 shrink-0" />
                   contact@nutrimaroc.ma
                 </a>
               </li>
             </ul>
-            <div className="flex gap-3 mt-3">
-              <a href="#" className="text-background/40 hover:text-primary transition-colors">
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a href="#" className="text-background/40 hover:text-primary transition-colors">
-                <Facebook className="h-4 w-4" />
-              </a>
-            </div>
+            {(showInstagram || showFacebook) && (
+              <div className="flex gap-3 mt-3">
+                {showInstagram && (
+                  <a
+                    href={socialUrls.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/40 hover:text-primary transition-colors"
+                  >
+                    <Instagram className="h-4 w-4" />
+                    <span className="sr-only">Instagram</span>
+                  </a>
+                )}
+                {showFacebook && (
+                  <a
+                    href={socialUrls.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-background/40 hover:text-primary transition-colors"
+                  >
+                    <Facebook className="h-4 w-4" />
+                    <span className="sr-only">Facebook</span>
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Bottom */}
       <div className="border-t border-background/10">
-        <div className="container py-4 flex items-center justify-between">
-          <p className="text-[10px] text-background/40">
+        <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[10px] text-background/40 text-center sm:text-start">
             © 2026 NutriMaroc. {locale === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
           </p>
-          <div className="flex gap-2">
-            {['Visa', 'MC', 'CMI'].map(m => (
-              <span key={m} className="text-[10px] bg-background/10 px-2 py-0.5 rounded">
-                {m}
-              </span>
-            ))}
-          </div>
+          <PaymentMethodLogos tone="on-dark" />
         </div>
       </div>
     </footer>

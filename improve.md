@@ -109,3 +109,9 @@ This document turns the UI/UX review into an ordered plan. Scope is front-end on
 ---
 
 *Last updated: aligned with current codebase layout (`AppLayout`, `DesktopHeader`, `BottomNav`, `Footer`, `LanguageContext`, product pages).*
+
+---
+
+## Implementation status (done in repo)
+
+Phases 1–6 from this document are implemented: new routes (`/profile`, `/track-order`, `/faq`, `/returns`), footer and category links, optional social URLs via `VITE_SOCIAL_INSTAGRAM` / `VITE_SOCIAL_FACEBOOK`, mobile header + sticky bar, bilingual promo bar and product strings, RTL marquee and chevrons, Sonner-only toasts with add-to-cart feedback, reduced-motion handling for marquee and key Framer blocks, product filters (brand + price tier, URL params, mobile sheet), checkout layout with step indicator and empty-cart state, `PageSection` on home blocks, theme toggle + `next-themes`, and footer payment marks (`PaymentMethodLogos`).

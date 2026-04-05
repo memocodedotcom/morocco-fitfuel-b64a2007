@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function ProductCard({ product, variant = 'light' }: Props) {
-  const { locale } = useLanguage();
+  const { locale, t } = useLanguage();
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
@@ -52,7 +52,7 @@ export function ProductCard({ product, variant = 'light' }: Props) {
             )}
             {product.stock <= 5 && product.stock > 0 && (
               <span className="absolute bottom-2 start-2 bg-destructive/90 text-destructive-foreground text-[10px] font-medium px-2 py-0.5 rounded-full">
-                Plus que {product.stock} !
+                {t('lowStockShort', { n: product.stock })}
               </span>
             )}
             {/* Quick add */}

@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { type Product, getProduct } from '@/data/products';
+import { toast } from '@/components/ui/sonner';
+import { translations, type Locale } from '@/i18n/translations';
+
+function localeFromStorage(): Locale {
+  const raw = localStorage.getItem('locale');
+  return raw === 'ar' ? 'ar' : 'fr';
+}
 
 export interface CartItem {
   productId: string;
@@ -8,9 +15,17 @@ export interface CartItem {
   size?: string;
 }
 
+export type AddItemOptions = { silent?: boolean };
+
 interface CartContextType {
   items: CartItem[];
-  addItem: (productId: string, qty?: number, flavor?: string, size?: string) => void;
+  addItem: (
+    productId: string,
+    qty?: number,
+    flavor?: string,
+    size?: string,
+    options?: AddItemOptions,
+  ) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, qty: number) => void;
   clearCart: () => void;
@@ -38,16 +53,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(CART_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = useCallback((productId: string, qty = 1, flavor?: string, size?: string) => {
-    setItems(prev => {
-      const existing = prev.find(i => i.productId === productId);
-      if (existing) {
-        return prev.map(i => i.productId === productId ? { ...i, quantity: i.quantity + qty } : i);
+  const addItem = useCallback(
+    (productId: string, qty = 1, flavor?: string, size?: string, options?: AddItemOptions) => {
+      setItems((prev) => {
+        const existing = prev.find((i) => i.productId === productId);
+        if (existing) {
+          return prev.map((i) =>
+            i.productId === productId ? { ...i, quantity: i.quantity + qty } : i,
+          );
+        }
+        return [...prev, { productId, quantity: qty, flavor, size }];
+      });
+      setCartOpen(true);
+      if (!options?.silent) {
+        toast.success(translations[localeFromStorage()].addedToCart);
       }
-      return [...prev, { productId, quantity: qty, flavor, size }];
-    });
-    setCartOpen(true);
-  }, []);
+    },
+    [],
+  );
 
   const removeItem = useCallback((productId: string) => {
     setItems(prev => prev.filter(i => i.productId !== productId));

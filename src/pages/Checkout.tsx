@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { AppLayout } from '@/components/layout/AppLayout';
+import { Link } from 'react-router-dom';
+import { CheckoutLayout } from '@/components/layout/CheckoutLayout';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CreditCard, Shield } from 'lucide-react';
+import { CreditCard, Shield, Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function CheckoutPage() {
   const { t, locale } = useLanguage();
-  const { getCartProducts, subtotal, clearCart } = useCart();
+  const { getCartProducts, subtotal } = useCart();
   const cartProducts = getCartProducts();
   const shippingCost = subtotal >= 500 ? 0 : 35;
   const total = subtotal + shippingCost;
@@ -26,13 +28,65 @@ export default function CheckoutPage() {
     alert('Stripe integration will be enabled soon. For now, use WhatsApp checkout!');
   };
 
+  const steps = [
+    { id: 'cart', label: t('checkoutStepCart'), state: 'done' as const },
+    { id: 'details', label: t('checkoutStepDetails'), state: 'current' as const },
+    { id: 'payment', label: t('checkoutStepPayment'), state: 'upcoming' as const },
+  ];
+
+  if (cartProducts.length === 0) {
+    return (
+      <CheckoutLayout>
+        <div className="container py-12 max-w-md mx-auto text-center">
+          <p className="text-muted-foreground mb-4">{t('cartEmpty')}</p>
+          <Button asChild variant="outline" className="rounded-full">
+            <Link to="/products">{t('continueShopping')}</Link>
+          </Button>
+        </div>
+      </CheckoutLayout>
+    );
+  }
+
   return (
-    <AppLayout>
+    <CheckoutLayout>
       <div className="container py-6 max-w-2xl">
-        <h1 className="text-2xl font-extrabold mb-6">{t('checkout')}</h1>
+        <h1 className="text-2xl font-extrabold mb-2">{t('checkout')}</h1>
+
+        <nav aria-label="Checkout progress" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+            {steps.map((step, i) => (
+              <li key={step.id} className="flex items-center gap-2">
+                <span
+                  className={cn(
+                    'flex h-7 w-7 items-center justify-center rounded-full border text-[10px] font-bold shrink-0',
+                    step.state === 'done' && 'border-primary bg-primary text-primary-foreground',
+                    step.state === 'current' && 'border-primary text-primary',
+                    step.state === 'upcoming' && 'border-muted-foreground/30 text-muted-foreground',
+                  )}
+                >
+                  {step.state === 'done' ? <Check className="h-3.5 w-3.5" /> : i + 1}
+                </span>
+                <span
+                  className={cn(
+                    'font-medium',
+                    step.state === 'done' && 'text-foreground',
+                    step.state === 'current' && 'text-foreground',
+                    step.state === 'upcoming' && 'text-muted-foreground',
+                  )}
+                >
+                  {step.label}
+                </span>
+                {i < steps.length - 1 && (
+                  <span className="text-muted-foreground/40 mx-1 hidden sm:inline" aria-hidden>
+                    —
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
 
         <div className="grid md:grid-cols-5 gap-6">
-          {/* Form */}
           <form onSubmit={handleSubmit} className="md:col-span-3 space-y-4">
             <div>
               <Label htmlFor="name">{t('fullName')}</Label>
@@ -79,20 +133,21 @@ export default function CheckoutPage() {
             </Button>
 
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <Shield className="h-3.5 w-3.5" />
+              <Shield className="h-3.5 w-3.5 shrink-0" />
               {t('securePayment')}
             </div>
           </form>
 
-          {/* Summary */}
           <div className="md:col-span-2">
             <div className="bg-secondary/50 rounded-xl p-4 sticky top-20">
               <h3 className="font-semibold mb-3 text-sm">{t('yourCart')}</h3>
               <div className="space-y-2 mb-4">
                 {cartProducts.map(({ product, quantity }) => (
-                  <div key={product.id} className="flex justify-between text-sm">
-                    <span className="truncate flex-1">{product.name[locale]} ×{quantity}</span>
-                    <span className="font-medium ms-2">{product.price * quantity} MAD</span>
+                  <div key={product.id} className="flex justify-between text-sm gap-2">
+                    <span className="truncate flex-1">
+                      {product.name[locale]} ×{quantity}
+                    </span>
+                    <span className="font-medium shrink-0">{product.price * quantity} MAD</span>
                   </div>
                 ))}
               </div>
@@ -116,6 +171,6 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
-    </AppLayout>
+    </CheckoutLayout>
   );
 }
