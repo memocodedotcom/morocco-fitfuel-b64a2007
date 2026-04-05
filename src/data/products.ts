@@ -34,22 +34,32 @@ export interface Brand {
   logo: string;
 }
 
+export interface Review {
+  id: string;
+  productId: string;
+  author: string;
+  rating: number;
+  date: string;
+  comment: { fr: string; ar: string };
+  verified: boolean;
+}
+
 export const categories: Category[] = [
-  { id: 'protein', name: { fr: 'Protéines', ar: 'بروتين' }, icon: '💪', slug: 'proteines' },
-  { id: 'creatine', name: { fr: 'Créatine', ar: 'كرياتين' }, icon: '⚡', slug: 'creatine' },
-  { id: 'vitamins', name: { fr: 'Vitamines', ar: 'فيتامينات' }, icon: '🍊', slug: 'vitamines' },
-  { id: 'pre-workout', name: { fr: 'Pré-Workout', ar: 'بري ووركاوت' }, icon: '🔥', slug: 'pre-workout' },
-  { id: 'weight-loss', name: { fr: 'Perte de Poids', ar: 'إنقاص الوزن' }, icon: '🏃', slug: 'perte-de-poids' },
-  { id: 'mass-gainer', name: { fr: 'Mass Gainer', ar: 'ماس جينر' }, icon: '🏋️', slug: 'mass-gainer' },
+  { id: 'protein', name: { fr: 'Protéines', ar: 'بروتين' }, icon: 'dumbbell', slug: 'proteines' },
+  { id: 'creatine', name: { fr: 'Créatine', ar: 'كرياتين' }, icon: 'zap', slug: 'creatine' },
+  { id: 'vitamins', name: { fr: 'Vitamines', ar: 'فيتامينات' }, icon: 'pill', slug: 'vitamines' },
+  { id: 'pre-workout', name: { fr: 'Pré-Workout', ar: 'بري ووركاوت' }, icon: 'flame', slug: 'pre-workout' },
+  { id: 'weight-loss', name: { fr: 'Perte de Poids', ar: 'إنقاص الوزن' }, icon: 'trending-down', slug: 'perte-de-poids' },
+  { id: 'mass-gainer', name: { fr: 'Mass Gainer', ar: 'ماس جينر' }, icon: 'weight', slug: 'mass-gainer' },
 ];
 
 export const brands: Brand[] = [
-  { id: 'on', name: 'Optimum Nutrition', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
-  { id: 'dymatize', name: 'Dymatize', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
-  { id: 'muscletech', name: 'MuscleTech', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
-  { id: 'bsn', name: 'BSN', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
-  { id: 'cellucor', name: 'Cellucor', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
-  { id: 'myprotein', name: 'MyProtein', logo: 'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=120&h=60&fit=crop' },
+  { id: 'on', name: 'Optimum Nutrition', logo: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=120&h=60&fit=crop&auto=format' },
+  { id: 'dymatize', name: 'Dymatize', logo: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=120&h=60&fit=crop&auto=format' },
+  { id: 'muscletech', name: 'MuscleTech', logo: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=120&h=60&fit=crop&auto=format' },
+  { id: 'bsn', name: 'BSN', logo: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=120&h=60&fit=crop&auto=format' },
+  { id: 'cellucor', name: 'Cellucor', logo: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=120&h=60&fit=crop&auto=format' },
+  { id: 'myprotein', name: 'MyProtein', logo: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=120&h=60&fit=crop&auto=format' },
 ];
 
 export const products: Product[] = [
@@ -64,12 +74,12 @@ export const products: Product[] = [
     price: 899,
     originalPrice: 1099,
     images: [
-      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1606902965551-dce093cda6e7?w=600&h=600&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1612532275185-6e2e5a2b4629?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'protein',
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.8,
     reviewCount: 234,
     stock: 12,
@@ -98,11 +108,11 @@ export const products: Product[] = [
     },
     price: 349,
     images: [
-      'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=600&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'creatine',
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.9,
     reviewCount: 178,
     stock: 25,
@@ -123,11 +133,11 @@ export const products: Product[] = [
     price: 449,
     originalPrice: 549,
     images: [
-      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=600&h=600&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'pre-workout',
-    brand: 'cellucor',
+    brand: 'Cellucor',
     rating: 4.6,
     reviewCount: 156,
     stock: 8,
@@ -147,11 +157,11 @@ export const products: Product[] = [
     },
     price: 999,
     images: [
-      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596357395217-80de13130e92?w=600&h=600&fit=crop&auto=format',
+      'https://images.unsplash.com/photo-1614859324110-86eec4f34bfe?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'protein',
-    brand: 'dymatize',
+    brand: 'Dymatize',
     rating: 4.7,
     reviewCount: 98,
     stock: 3,
@@ -172,10 +182,10 @@ export const products: Product[] = [
     },
     price: 79,
     images: [
-      'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1594498653385-d5172c532c00?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'accessories' as any,
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.5,
     reviewCount: 312,
     stock: 50,
@@ -192,10 +202,10 @@ export const products: Product[] = [
     },
     price: 199,
     images: [
-      'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'vitamins',
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.4,
     reviewCount: 67,
     stock: 18,
@@ -215,10 +225,10 @@ export const products: Product[] = [
     price: 299,
     originalPrice: 359,
     images: [
-      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1622484212850-eb596d769edc?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'protein',
-    brand: 'bsn',
+    brand: 'BSN',
     rating: 4.3,
     reviewCount: 89,
     stock: 20,
@@ -236,10 +246,10 @@ export const products: Product[] = [
     },
     price: 149,
     images: [
-      'https://images.unsplash.com/photo-1594381898411-846e7d168826?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'vitamins',
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.6,
     reviewCount: 145,
     stock: 30,
@@ -259,10 +269,10 @@ export const products: Product[] = [
     price: 699,
     originalPrice: 849,
     images: [
-      'https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'mass-gainer',
-    brand: 'on',
+    brand: 'Optimum Nutrition',
     rating: 4.5,
     reviewCount: 112,
     stock: 6,
@@ -282,10 +292,10 @@ export const products: Product[] = [
     },
     price: 399,
     images: [
-      'https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=600&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop&auto=format',
     ],
     category: 'weight-loss',
-    brand: 'muscletech',
+    brand: 'MuscleTech',
     rating: 4.2,
     reviewCount: 78,
     stock: 15,
@@ -294,6 +304,17 @@ export const products: Product[] = [
     goalTags: ['lose-weight', 'energy'],
     crossSellIds: ['6', '8'],
   },
+];
+
+export const reviews: Review[] = [
+  { id: 'r1', productId: '1', author: 'Ahmed M.', rating: 5, date: '2026-03-20', comment: { fr: 'Excellente whey ! Goût incroyable et bonne dissolution. Je recommande vivement.', ar: 'واي ممتازة! طعم رائع وذوبان جيد. أنصح بها بشدة.' }, verified: true },
+  { id: 'r2', productId: '1', author: 'Fatima Z.', rating: 4, date: '2026-03-15', comment: { fr: 'Bonne protéine, livraison rapide. Le goût vanille est un peu trop sucré.', ar: 'بروتين جيد، توصيل سريع. نكهة الفانيليا حلوة بعض الشيء.' }, verified: true },
+  { id: 'r3', productId: '1', author: 'Youssef K.', rating: 5, date: '2026-02-28', comment: { fr: 'La meilleure whey que j\'ai essayée. Résultats visibles en 3 semaines !', ar: 'أفضل واي جربتها. نتائج ملحوظة في 3 أسابيع!' }, verified: true },
+  { id: 'r4', productId: '2', author: 'Omar B.', rating: 5, date: '2026-03-18', comment: { fr: 'Créatine pure, excellente qualité. Prise de force notable.', ar: 'كرياتين نقي، جودة ممتازة. زيادة ملحوظة في القوة.' }, verified: true },
+  { id: 'r5', productId: '3', author: 'Karim L.', rating: 4, date: '2026-03-10', comment: { fr: 'Bon pré-workout, donne un vrai boost. Attention au dosage pour les débutants.', ar: 'بري ووركاوت جيد، يعطي دفعة حقيقية. انتبه للجرعة إذا كنت مبتدئ.' }, verified: true },
+  { id: 'r6', productId: '4', author: 'Nadia H.', rating: 5, date: '2026-03-05', comment: { fr: 'Protéine isolat de haute qualité. Se mélange parfaitement, pas de grumeaux.', ar: 'بروتين آيزوليت عالي الجودة. يختلط بشكل مثالي، بدون كتل.' }, verified: true },
+  { id: 'r7', productId: '9', author: 'Hamza T.', rating: 4, date: '2026-02-20', comment: { fr: 'Parfait pour la prise de masse. Bon goût chocolat mais un peu lourd à digérer.', ar: 'مثالي لزيادة الوزن. طعم الشوكولاتة جيد لكنه ثقيل قليلاً على الهضم.' }, verified: true },
+  { id: 'r8', productId: '10', author: 'Sara M.', rating: 4, date: '2026-03-01', comment: { fr: 'Efficace pour la perte de poids combiné avec du sport. Bon produit.', ar: 'فعال لإنقاص الوزن مع الرياضة. منتج جيد.' }, verified: true },
 ];
 
 export const stackBundles = {
@@ -336,6 +357,10 @@ export function getTrendingProducts() {
 
 export function getUpsellProducts() {
   return products.filter(p => p.tags?.includes('upsell'));
+}
+
+export function getReviewsByProduct(productId: string) {
+  return reviews.filter(r => r.productId === productId);
 }
 
 export function searchProducts(query: string) {

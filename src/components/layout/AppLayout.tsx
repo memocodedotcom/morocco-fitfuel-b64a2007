@@ -1,7 +1,9 @@
 import { PromoBar } from './PromoBar';
 import { DesktopHeader } from './DesktopHeader';
 import { BottomNav } from './BottomNav';
+import { Footer } from './Footer';
 import { CartDrawer } from '@/components/cart/CartDrawer';
+import { PageTransition } from './PageTransition';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,8 +11,11 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <PromoBar />
       <DesktopHeader />
       <main className="flex-1 pb-20 md:pb-0">
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </main>
+      <Footer />
       <BottomNav />
       <CartDrawer />
     </div>
