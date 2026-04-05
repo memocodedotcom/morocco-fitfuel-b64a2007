@@ -7,6 +7,8 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { getUpsellProducts } from '@/data/products';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { whatsappE164 } from '@/config/site';
+import { ShoppingBag } from 'lucide-react';
 
 const FREE_SHIPPING_THRESHOLD = 500;
 
@@ -31,9 +33,11 @@ export function CartDrawer() {
 
   return (
     <Sheet open={isCartOpen} onOpenChange={setCartOpen}>
-      <SheetContent className="w-full sm:max-w-md flex flex-col p-0">
-        <SheetHeader className="p-4 border-b">
-          <SheetTitle>{t('yourCart')} ({itemCount})</SheetTitle>
+      <SheetContent className="w-full sm:max-w-md flex flex-col p-0 gap-0">
+        <SheetHeader className="p-5 border-b bg-muted/20">
+          <SheetTitle className="text-lg font-bold tracking-tight">
+            {t('yourCart')} <span className="text-muted-foreground font-semibold">({itemCount})</span>
+          </SheetTitle>
         </SheetHeader>
 
         {/* Free shipping bar */}
@@ -55,10 +59,15 @@ export function CartDrawer() {
         {/* Cart items */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {cartProducts.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-4xl mb-3">🛒</p>
-              <p className="text-muted-foreground mb-4">{t('cartEmpty')}</p>
-              <Button asChild onClick={() => setCartOpen(false)}>
+            <div className="flex flex-col items-center text-center py-14 px-4">
+              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <ShoppingBag className="h-8 w-8" strokeWidth={1.75} />
+              </div>
+              <p className="text-title font-semibold text-foreground mb-2">{t('cartEmpty')}</p>
+              <p className="text-sm text-muted-foreground max-w-[260px] mb-6 leading-relaxed">
+                {t('cartEmptyHint')}
+              </p>
+              <Button className="rounded-full px-8" asChild onClick={() => setCartOpen(false)}>
                 <Link to="/products">{t('discoverBestSellers')}</Link>
               </Button>
             </div>
@@ -71,7 +80,7 @@ export function CartDrawer() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="flex gap-3 bg-card rounded-lg p-3 border"
+                  className="flex gap-3 bg-card rounded-2xl p-3 border border-border/80 shadow-card"
                 >
                   <img
                     src={product.images[0]}
@@ -83,21 +92,24 @@ export function CartDrawer() {
                     <p className="text-primary font-bold text-sm">{product.price} MAD</p>
                     <div className="flex items-center gap-2 mt-1.5">
                       <button
+                        type="button"
                         onClick={() => updateQuantity(productId, quantity - 1)}
-                        className="h-7 w-7 rounded-md border flex items-center justify-center hover:bg-secondary transition-colors"
+                        className="h-9 w-9 rounded-lg border flex items-center justify-center hover:bg-secondary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         <Minus className="h-3 w-3" />
                       </button>
                       <span className="text-sm font-medium w-6 text-center">{quantity}</span>
                       <button
+                        type="button"
                         onClick={() => updateQuantity(productId, quantity + 1)}
-                        className="h-7 w-7 rounded-md border flex items-center justify-center hover:bg-secondary transition-colors"
+                        className="h-9 w-9 rounded-lg border flex items-center justify-center hover:bg-secondary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         <Plus className="h-3 w-3" />
                       </button>
                       <button
+                        type="button"
                         onClick={() => removeItem(productId)}
-                        className="ms-auto text-muted-foreground hover:text-destructive transition-colors"
+                        className="ms-auto p-1.5 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -132,8 +144,8 @@ export function CartDrawer() {
 
         {/* Footer */}
         {cartProducts.length > 0 && (
-          <div className="border-t p-4 space-y-3">
-            <div className="space-y-1 text-sm">
+          <div className="border-t bg-muted/15 p-5 space-y-4 mt-auto">
+            <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">{t('subtotal')}</span>
                 <span className="font-medium">{subtotal} MAD</span>
@@ -151,10 +163,10 @@ export function CartDrawer() {
             </div>
 
             <a
-              href={`https://wa.me/212600000000?text=${generateWhatsAppMessage()}`}
+              href={`https://wa.me/${whatsappE164}?text=${generateWhatsAppMessage()}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[hsl(145,63%,42%)] text-white rounded-lg py-3 font-semibold text-sm hover:opacity-90 transition-opacity"
+              className="flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-sm shadow-lift hover:bg-primary/90 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <MessageCircle className="h-4 w-4" />
               {t('orderWhatsApp')}
@@ -162,7 +174,7 @@ export function CartDrawer() {
 
             <Button
               variant="outline"
-              className="w-full gap-2"
+              className="w-full gap-2 rounded-xl h-11 border-border/80"
               asChild
               onClick={() => setCartOpen(false)}
             >

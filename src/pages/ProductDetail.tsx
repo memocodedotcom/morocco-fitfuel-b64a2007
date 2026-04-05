@@ -90,7 +90,7 @@ export default function ProductDetail() {
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
-                    className={`w-16 h-16 rounded-lg overflow-hidden border-2 shrink-0 transition-colors ${
+                    className={`w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 shrink-0 transition-colors duration-200 ${
                       i === selectedImage ? 'border-primary' : 'border-transparent'
                     }`}
                   >
@@ -140,7 +140,7 @@ export default function ProductDetail() {
                 </span>
               )}
               {product.stock <= 5 && product.stock > 0 && (
-                <span className="flex items-center gap-1 bg-destructive/10 text-destructive text-xs font-medium px-3 py-1.5 rounded-full animate-pulse">
+                <span className="flex items-center gap-1 bg-amber-500/15 text-amber-900 dark:text-amber-100 border border-amber-500/25 text-xs font-semibold px-3 py-1.5 rounded-full">
                   🔥 {t('onlyLeft', { n: String(product.stock) })}
                 </span>
               )}
@@ -208,27 +208,37 @@ export default function ProductDetail() {
               </Button>
             </div>
 
-            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+            <p className="max-w-prose text-base text-muted-foreground mb-8 leading-relaxed">
               {product.description[locale]}
             </p>
 
             {/* Accordions */}
-            <Accordion type="single" collapsible className="mb-6">
+            <Accordion type="single" collapsible className="mb-6 divide-y rounded-xl border bg-card px-1">
               {product.ingredients && (
-                <AccordionItem value="ingredients">
-                  <AccordionTrigger className="text-sm font-semibold">{t('ingredients')}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">{product.ingredients[locale]}</AccordionContent>
+                <AccordionItem value="ingredients" className="border-0">
+                  <AccordionTrigger className="text-base font-semibold py-4 hover:no-underline">
+                    {t('ingredients')}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {product.ingredients[locale]}
+                  </AccordionContent>
                 </AccordionItem>
               )}
               {product.suggestedUse && (
-                <AccordionItem value="use">
-                  <AccordionTrigger className="text-sm font-semibold">{t('suggestedUse')}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">{product.suggestedUse[locale]}</AccordionContent>
+                <AccordionItem value="use" className="border-0">
+                  <AccordionTrigger className="text-base font-semibold py-4 hover:no-underline">
+                    {t('suggestedUse')}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
+                    {product.suggestedUse[locale]}
+                  </AccordionContent>
                 </AccordionItem>
               )}
-              <AccordionItem value="shipping">
-                <AccordionTrigger className="text-sm font-semibold">{t('shippingGuarantee')}</AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground">
+              <AccordionItem value="shipping" className="border-0">
+                <AccordionTrigger className="text-base font-semibold py-4 hover:no-underline">
+                  {t('shippingGuarantee')}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
                   {t('shippingAccordionBody')}
                 </AccordionContent>
               </AccordionItem>
@@ -265,7 +275,7 @@ export default function ProductDetail() {
       </div>
 
       {/* Sticky bottom CTA - mobile */}
-      <div className="md:hidden fixed bottom-16 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-t p-3 flex items-center gap-3">
+      <div className="md:hidden fixed left-0 right-0 z-40 border-t bg-background/95 backdrop-blur-md shadow-[0_-8px_30px_-12px_rgba(0,0,0,0.12)] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] flex items-center gap-3 bottom-[calc(4rem+env(safe-area-inset-bottom,0px))]">
         <div>
           <span className="text-lg font-extrabold text-primary">{product.price} MAD</span>
         </div>

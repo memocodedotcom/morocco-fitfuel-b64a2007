@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ShieldCheck, Truck, CreditCard, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { POLICY_ROUTES } from '@/config/policies';
+import { cn } from '@/lib/utils';
 
 export function HomeValueCards() {
   const { t, dir } = useLanguage();

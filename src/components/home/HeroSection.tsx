@@ -14,7 +14,7 @@ export function HeroSection() {
       <span className="inline-block bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-semibold mb-4">
         {t('heroPromoBadge')}
       </span>
-      <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-4">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-[1.1] tracking-tight mb-4">
         {t('heroTitle')}
         <br />
         <span className="text-primary">{t('heroEmphasis')}</span>

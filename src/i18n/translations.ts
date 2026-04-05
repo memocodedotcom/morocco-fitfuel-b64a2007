@@ -16,6 +16,7 @@ export const translations = {
     promoSecurePayment: 'Paiement sécurisé',
     
     // Search
+    close: 'Fermer',
     searchPlaceholder: 'Rechercher un produit...',
     noResults: 'Aucun résultat trouvé',
     noResultsSuggestion: 'Nous n\'avons pas "{term}", mais ces alternatives populaires vous donneront les mêmes résultats :',
@@ -99,6 +100,7 @@ export const translations = {
     // Cart
     yourCart: 'Votre Panier',
     cartEmpty: 'Votre panier est vide',
+    cartEmptyHint: 'Parcourez le catalogue et ajoutez vos compléments préférés.',
     discoverBestSellers: 'Découvrez nos best-sellers',
     freeShippingBar: 'Plus que {amount} MAD pour la livraison gratuite !',
     freeShippingReached: 'Félicitations ! Livraison gratuite 🎉',
@@ -213,6 +215,14 @@ export const translations = {
     themeLight: 'Clair',
     themeDark: 'Sombre',
     themeToggle: 'Thème',
+
+    notFoundTitle: 'Page introuvable',
+    notFoundBody: 'Cette adresse n’existe pas ou a été déplacée.',
+    notFoundCta: 'Retour à l’accueil',
+    emptyCatalogTitle: 'Aucun produit ne correspond',
+    emptyCatalogBody: 'Modifiez les filtres ou affichez toute la gamme.',
+    emptyCatalogReset: 'Voir tous les produits',
+    searchTypeMore: 'Saisissez au moins 2 caractères pour rechercher.',
   },
   ar: {
     home: 'الرئيسية',
@@ -226,6 +236,7 @@ export const translations = {
     promoAuthentic: '100% أصلي',
     promoSecurePayment: 'دفع آمن',
     
+    close: 'إغلاق',
     searchPlaceholder: 'ابحث عن منتج...',
     noResults: 'لا نتائج',
     noResultsSuggestion: 'لا يوجد لدينا "{term}"، لكن هذه البدائل الشائعة ستحقق لك نفس النتائج:',
@@ -301,6 +312,7 @@ export const translations = {
     
     yourCart: 'سلتك',
     cartEmpty: 'سلتك فارغة',
+    cartEmptyHint: 'تصفح الكتالوج وأضف مكملاتك المفضلة.',
     discoverBestSellers: 'اكتشف الأكثر مبيعاً',
     freeShippingBar: 'باقي {amount} درهم للتوصيل المجاني!',
     freeShippingReached: 'مبروك! التوصيل مجاني 🎉',
@@ -408,6 +420,14 @@ export const translations = {
     themeLight: 'فاتح',
     themeDark: 'داكن',
     themeToggle: 'المظهر',
+
+    notFoundTitle: 'الصفحة غير موجودة',
+    notFoundBody: 'هذا العنوان غير موجود أو تم نقله.',
+    notFoundCta: 'العودة للرئيسية',
+    emptyCatalogTitle: 'لا يوجد منتج مطابق',
+    emptyCatalogBody: 'غيّر الفلاتر أو اعرض كل المنتجات.',
+    emptyCatalogReset: 'عرض الكل',
+    searchTypeMore: 'أدخل حرفين على الأقل للبحث.',
   }
 } as const;
 

@@ -16,15 +16,19 @@ export function SupportDocPage({
 
   return (
     <AppLayout>
-      <div className="container py-8 max-w-prose">
-        <Button variant="ghost" size="sm" className="mb-4 -ms-2 gap-1" asChild>
+      <div className="container py-10 md:py-14 max-w-prose mx-auto">
+        <Button variant="ghost" size="sm" className="mb-6 -ms-2 gap-1" asChild>
           <Link to="/products">
             <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
             {t('products')}
           </Link>
         </Button>
-        <h1 className="text-2xl font-extrabold mb-4">{t(titleKey)}</h1>
-        <p className="text-muted-foreground leading-relaxed">{t(bodyKey)}</p>
+        <article className="prose-policy">
+          <h1 className="!mt-0 !mb-6 text-title-lg md:text-3xl font-extrabold text-foreground not-prose">
+            {t(titleKey)}
+          </h1>
+          <p className="whitespace-pre-line text-base">{t(bodyKey)}</p>
+        </article>
       </div>
     </AppLayout>
   );

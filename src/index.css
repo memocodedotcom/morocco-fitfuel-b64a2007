@@ -78,7 +78,7 @@
     --secondary-foreground: 30 20% 98%;
 
     --muted: 220 20% 16%;
-    --muted-foreground: 220 10% 60%;
+    --muted-foreground: 220 10% 68%;
 
     --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
@@ -104,8 +104,26 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family:
+      'Plus Jakarta Sans',
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+  }
+  [dir='rtl'] body {
+    font-family: 'Cairo', 'Tahoma', system-ui, sans-serif;
   }
 }
 
@@ -123,5 +141,20 @@
   .animate-marquee,
   .animate-marquee-rtl {
     animation: none;
+  }
+}
+
+/* Pause brand marquee on hover (desktop) to reduce visual fatigue */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .marquee-hover-pause:hover .animate-marquee,
+  .marquee-hover-pause:hover .animate-marquee-rtl {
+    animation-play-state: paused;
+  }
+}
+
+@layer components {
+  /* Long-form legal / policy readability */
+  .prose-policy {
+    @apply prose prose-neutral dark:prose-invert max-w-prose prose-headings:font-semibold prose-headings:tracking-tight prose-p:leading-relaxed prose-p:text-muted-foreground;
   }
 }

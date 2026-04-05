@@ -8,7 +8,7 @@ export function BrandMarquee() {
   const marqueeClass = dir === 'rtl' ? 'animate-marquee-rtl' : 'animate-marquee';
 
   return (
-    <section className="py-6 border-b bg-secondary/30 overflow-hidden">
+    <section className="marquee-hover-pause py-6 border-b bg-secondary/30 overflow-hidden">
       <div className={`flex ${marqueeClass} gap-12 items-center whitespace-nowrap`}>
         {items.map((brand, i) => (
           <span key={i} className="text-muted-foreground font-bold text-sm tracking-wider uppercase shrink-0">

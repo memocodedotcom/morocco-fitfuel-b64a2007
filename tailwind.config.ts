@@ -18,9 +18,28 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        display: ["2.25rem", { lineHeight: "1.12", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "display-lg": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "800" }],
+        title: ["1.375rem", { lineHeight: "1.3", fontWeight: "700" }],
+        "title-lg": ["1.625rem", { lineHeight: "1.25", fontWeight: "700" }],
+      },
+      transitionDuration: {
+        design: "200ms",
+        "design-slow": "280ms",
+      },
+      transitionTimingFunction: {
+        "out-soft": "cubic-bezier(0.33, 1, 0.68, 1)",
+      },
+      boxShadow: {
+        card: "0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05)",
+        "card-hover":
+          "0 12px 28px -8px rgb(0 0 0 / 0.1), 0 4px 8px -4px rgb(0 0 0 / 0.06)",
+        lift: "0 4px 14px -2px rgb(0 0 0 / 0.08)",
+      },
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "sans-serif"],
-        arabic: ["Cairo", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        arabic: ["Cairo", "Tahoma", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

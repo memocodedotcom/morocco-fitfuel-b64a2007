@@ -55,7 +55,7 @@ export function ProductCard({ product, variant = 'light' }: Props) {
               </span>
             )}
             {product.stock <= 5 && product.stock > 0 && (
-              <span className="absolute bottom-2 start-2 bg-destructive/90 text-destructive-foreground text-[10px] font-medium px-2 py-0.5 rounded-full">
+              <span className="absolute bottom-2 start-2 bg-amber-500/95 text-amber-950 dark:bg-amber-400/90 dark:text-amber-950 text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-sm border border-amber-600/20">
                 {t('lowStockShort', { n: product.stock })}
               </span>
             )}

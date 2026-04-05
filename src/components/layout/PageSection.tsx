@@ -18,7 +18,7 @@ export function PageSection({
   containerClassName,
 }: PageSectionProps) {
   return (
-    <section className={cn('py-8', sectionClassName)}>
+    <section className={cn('py-10 md:py-14', sectionClassName)}>
       <div className={cn('container', containerClassName, className)}>{children}</div>
     </section>
   );

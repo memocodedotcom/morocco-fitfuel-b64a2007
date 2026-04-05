@@ -18,20 +18,24 @@ export default function AuthenticityPage() {
 
   return (
     <AppLayout>
-      <div className="container py-8 max-w-prose">
-        <Button variant="ghost" size="sm" className="mb-4 -ms-2 gap-1" asChild>
+      <div className="container py-10 md:py-14 max-w-prose mx-auto">
+        <Button variant="ghost" size="sm" className="mb-6 -ms-2 gap-1" asChild>
           <Link to="/">
             <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
             {t('home')}
           </Link>
         </Button>
-        <h1 className="text-2xl font-extrabold mb-8">{t('policyAuthenticityTitle')}</h1>
-        {SECTIONS.map((s) => (
-          <section key={s.titleKey} className="mb-8">
-            <h2 className="text-lg font-semibold mb-2">{t(s.titleKey)}</h2>
-            <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">{t(s.bodyKey)}</p>
-          </section>
-        ))}
+        <article className="prose-policy">
+          <h1 className="!mt-0 !mb-10 text-title-lg md:text-3xl font-extrabold text-foreground not-prose">
+            {t('policyAuthenticityTitle')}
+          </h1>
+          {SECTIONS.map((s) => (
+            <section key={s.titleKey} className="mb-10 last:mb-0">
+              <h2 className="text-title font-semibold text-foreground mb-3 not-prose">{t(s.titleKey)}</h2>
+              <p className="whitespace-pre-line text-base leading-relaxed">{t(s.bodyKey)}</p>
+            </section>
+          ))}
+        </article>
       </div>
     </AppLayout>
   );

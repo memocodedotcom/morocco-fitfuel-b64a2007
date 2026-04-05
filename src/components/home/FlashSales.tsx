@@ -31,13 +31,13 @@ export function FlashSales() {
   if (products.length === 0) return null;
 
   return (
-    <PageSection sectionClassName="py-8 bg-urgency text-urgency-foreground">
-      <div className="flex items-center justify-between mb-6">
+    <PageSection sectionClassName="bg-urgency text-urgency-foreground">
+      <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-2">
           <span className="text-xl" aria-hidden>
             ⚡
           </span>
-          <h2 className="text-lg font-bold">{t('flashSales')}</h2>
+          <h2 className="text-title-lg md:text-2xl font-extrabold tracking-tight">{t('flashSales')}</h2>
         </div>
         <div className="flex items-center gap-1.5 text-sm font-mono">
           <Timer className="h-4 w-4 text-accent shrink-0" />
@@ -54,7 +54,7 @@ export function FlashSales() {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
         {products.map((p) => (
           <ProductCard key={p.id} product={p} variant="dark" />
         ))}

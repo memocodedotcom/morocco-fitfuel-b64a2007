@@ -131,12 +131,12 @@ export default function ProductsPage() {
 
   return (
     <AppLayout>
-      <div className="container py-6">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide mb-5 pb-1">
+      <div className="container py-8 md:py-10">
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide mb-6 pb-1 snap-x snap-mandatory">
           <Link
             to="/products"
-            className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-              !categoryFilter ? 'bg-primary text-primary-foreground' : 'bg-secondary hover:bg-secondary/80'
+            className={`inline-flex shrink-0 snap-start items-center justify-center min-h-11 px-5 rounded-full text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+              !categoryFilter ? 'bg-primary text-primary-foreground shadow-sm' : 'bg-secondary hover:bg-secondary/80'
             }`}
           >
             {t('allCategories')}
@@ -145,8 +145,8 @@ export default function ProductsPage() {
             <Link
               key={cat.id}
               to={`/products?category=${encodeURIComponent(cat.id)}`}
-              className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                categoryFilter === cat.id ? 'bg-primary text-primary-foreground' : 'bg-secondary hover:bg-secondary/80'
+              className={`inline-flex shrink-0 snap-start items-center justify-center min-h-11 px-5 rounded-full text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                categoryFilter === cat.id ? 'bg-primary text-primary-foreground shadow-sm' : 'bg-secondary hover:bg-secondary/80'
               }`}
             >
               {cat.icon} {cat.name[locale]}
@@ -154,7 +154,7 @@ export default function ProductsPage() {
           ))}
         </div>
 
-        <div className="hidden md:flex flex-wrap items-end gap-3 mb-4">
+        <div className="hidden md:flex flex-wrap items-end gap-4 mb-5 rounded-xl border bg-muted/20 p-4">
           {filterFields}
           {hasExtraFilters && (
             <Button type="button" variant="ghost" size="sm" onClick={clearExtraFilters}>
@@ -163,10 +163,10 @@ export default function ProductsPage() {
           )}
         </div>
 
-        <div className="flex md:hidden mb-4">
+        <div className="flex md:hidden mb-5">
           <Sheet>
             <SheetTrigger asChild>
-              <Button type="button" variant="outline" className="gap-2">
+              <Button type="button" variant="outline" className="gap-2 min-h-11 rounded-full">
                 <SlidersHorizontal className="h-4 w-4" />
                 {t('filters')}
               </Button>
@@ -188,13 +188,13 @@ export default function ProductsPage() {
           </Sheet>
         </div>
 
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <p className="text-sm font-medium text-muted-foreground">
             {filtered.length} {t('products')}
           </p>
           <div className="flex items-center gap-2">
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-40 h-9 text-xs">
+              <SelectTrigger className="w-[10.5rem] h-10 text-xs rounded-full border-border/80">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -207,7 +207,7 @@ export default function ProductsPage() {
             <Button
               variant="outline"
               size="icon"
-              className="h-9 w-9 hidden md:flex"
+              className="h-10 w-10 hidden md:flex rounded-full border-border/80"
               onClick={() => setView((v) => (v === 'grid' ? 'list' : 'grid'))}
             >
               {view === 'grid' ? <List className="h-4 w-4" /> : <Grid3X3 className="h-4 w-4" />}
@@ -215,15 +215,27 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        <div
-          className={
-            view === 'grid' ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3' : 'space-y-3'
-          }
-        >
-          {filtered.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {filtered.length === 0 ? (
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/80 bg-muted/20 py-16 px-6 text-center">
+            <p className="text-title font-semibold text-foreground mb-2">{t('emptyCatalogTitle')}</p>
+            <p className="text-sm text-muted-foreground max-w-md mb-8 leading-relaxed">{t('emptyCatalogBody')}</p>
+            <Button asChild className="rounded-full">
+              <Link to="/products">{t('emptyCatalogReset')}</Link>
+            </Button>
+          </div>
+        ) : (
+          <div
+            className={
+              view === 'grid'
+                ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5'
+                : 'space-y-4'
+            }
+          >
+            {filtered.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        )}
       </div>
     </AppLayout>
   );

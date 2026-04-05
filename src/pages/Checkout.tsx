@@ -227,7 +227,7 @@ export default function CheckoutPage() {
       </div>
 
       <Dialog open={handoffOpen} onOpenChange={setHandoffOpen}>
-        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border-border/80 shadow-lift">
           <DialogHeader>
             <DialogTitle>{t('orderConfirmTitle')}</DialogTitle>
           </DialogHeader>
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                 <span className="font-mono font-semibold text-foreground">{handoff.ref}</span>
               </p>
               <p className="text-xs text-muted-foreground">{t('orderConfirmCopyHint')}</p>
-              <pre className="text-xs whitespace-pre-wrap break-words rounded-md bg-muted p-3 max-h-40 overflow-y-auto">
+              <pre className="text-xs whitespace-pre-wrap break-words rounded-xl bg-muted/80 border border-border/60 p-3 max-h-40 overflow-y-auto">
                 {handoff.message}
               </pre>
             </div>
