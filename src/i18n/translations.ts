@@ -28,7 +28,7 @@ export const translations = {
     heroCta: 'Voir les offres',
     heroPromoBadge: 'Jusqu’à -20% sur les stacks',
     homeValueEyebrow: 'Pourquoi NutriMaroc',
-    homeValueHeadline: 'Moins de flou. Plus de clarté sur l’origine et la qualité.',
+    homeValueHeadline: 'Notre Engagement envers la Qualité & la Performance.',
     homeValueAuthenticTitle: 'Authentique & traçable',
     homeValueAuthenticDesc:
       'Approvisionnement officiel, numéros de lot, politique publique. Pas de promesses vides.',
@@ -59,6 +59,9 @@ export const translations = {
     gainMuscle: 'Gagner du muscle',
     energy: 'Énergie & Endurance',
     addBundle: 'Ajouter le bundle',
+    videoSectionTitle: 'Performance en Action',
+    videoSectionSubtitle: 'Découvrez pourquoi nos athlètes nous font confiance',
+    videoWatchNow: 'Regarder',
     
     // Products
     trending: 'Tendances',
@@ -248,7 +251,7 @@ export const translations = {
     heroCta: 'اكتشف العروض',
     heroPromoBadge: 'خصم حتى 20٪ على الستاكس',
     homeValueEyebrow: 'لماذا نوتريماروك',
-    homeValueHeadline: 'وضوح أكبر حول المصدر والجودة، دون غموض.',
+    homeValueHeadline: 'التزامنا بالجودة والأداء.',
     homeValueAuthenticTitle: 'أصلي وقابل للتتبع',
     homeValueAuthenticDesc: 'توريد رسمي، أرقام دُفعات، سياسة منشورة. بلا وعود فارغة.',
     homeValueAuthenticCta: 'اقرأ التزامنا',
@@ -275,6 +278,9 @@ export const translations = {
     gainMuscle: 'بناء العضلات',
     energy: 'طاقة و تحمّل',
     addBundle: 'أضف الحزمة',
+    videoSectionTitle: 'الأداء في الواقع',
+    videoSectionSubtitle: 'اكتشف لماذا يثق بنا رياضيونا',
+    videoWatchNow: 'مشاهدة',
     
     trending: 'الأكثر رواجاً',
     bestSellers: 'الأكثر مبيعاً',

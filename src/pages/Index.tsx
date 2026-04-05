@@ -6,17 +6,19 @@ import { CategoryPills } from '@/components/home/CategoryPills';
 import { FlashSales } from '@/components/home/FlashSales';
 import { BuildYourStack } from '@/components/home/BuildYourStack';
 import { TrendingGrid } from '@/components/home/TrendingGrid';
+import { PerformanceVideoFeed } from '@/components/home/PerformanceVideoFeed';
 
 const Index = () => {
   return (
     <AppLayout>
       <HeroSection />
-      <HomeValueCards />
-      <BrandMarquee />
-      <CategoryPills />
       <FlashSales />
       <BuildYourStack />
       <TrendingGrid />
+      <CategoryPills />
+      <BrandMarquee />
+      <PerformanceVideoFeed />
+      <HomeValueCards />
     </AppLayout>
   );
 };

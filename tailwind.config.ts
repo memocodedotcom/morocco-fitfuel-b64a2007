@@ -129,6 +129,12 @@ export default {
             transform: "scale(1)",
           },
         },
+        "ping-slow": {
+          "75%, 100%": {
+            transform: "scale(2)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -138,6 +144,7 @@ export default {
         shimmer: "shimmer 2s infinite",
         "fade-in-up": "fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "scale-in": "scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "ping-slow": "ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite",
       },
     },
   },
