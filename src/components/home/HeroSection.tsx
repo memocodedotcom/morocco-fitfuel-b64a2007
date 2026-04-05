@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 
@@ -20,12 +20,30 @@ export function HeroSection() {
         <span className="text-primary">{t('heroEmphasis')}</span>
       </h1>
       <p className="text-background/70 text-base md:text-lg mb-6 max-w-md">{t('heroSubtitle')}</p>
-      <Button asChild size="lg" className="gap-2 rounded-full text-sm font-semibold">
+      <Button asChild size="lg" className="gap-2 rounded-full text-sm font-semibold shadow-lg shadow-primary/20">
         <Link to="/products">
           {t('heroCta')}
           <ArrowRight className="h-4 w-4 rtl:rotate-180" />
         </Link>
       </Button>
+
+      <div
+        className="mt-10 pt-8 border-t border-background/15 flex flex-wrap gap-x-8 gap-y-4"
+        aria-label={t('homeValueEyebrow')}
+      >
+        <span className="flex items-center gap-2.5 text-sm text-background/85">
+          <ShieldCheck className="h-5 w-5 text-primary shrink-0" strokeWidth={2} />
+          {t('marqueeAuthentic')}
+        </span>
+        <span className="flex items-center gap-2.5 text-sm text-background/85">
+          <Truck className="h-5 w-5 text-primary shrink-0" strokeWidth={2} />
+          {t('marqueeDelivery24h')}
+        </span>
+        <span className="flex items-center gap-2.5 text-sm text-background/85">
+          <CreditCard className="h-5 w-5 text-primary shrink-0" strokeWidth={2} />
+          {t('marqueeSecurePay')}
+        </span>
+      </div>
     </>
   );
 

@@ -26,6 +26,17 @@ export const translations = {
     heroSubtitle: 'Livraison rapide partout au Maroc',
     heroCta: 'Voir les offres',
     heroPromoBadge: 'Jusqu’à -20% sur les stacks',
+    homeValueEyebrow: 'Pourquoi NutriMaroc',
+    homeValueHeadline: 'Moins de flou. Plus de clarté sur l’origine et la qualité.',
+    homeValueAuthenticTitle: 'Authentique & traçable',
+    homeValueAuthenticDesc:
+      'Approvisionnement officiel, numéros de lot, politique publique. Pas de promesses vides.',
+    homeValueAuthenticCta: 'Lire notre engagement',
+    homeValueDeliveryTitle: 'Livraison au Maroc',
+    homeValueDeliveryDesc: 'Préparation soignée et délais annoncés franchement — 24 à 48h dans les grandes villes.',
+    homeValuePaymentTitle: 'Paiement encadré',
+    homeValuePaymentDesc: 'Validation de commande accompagnée. Carte bancaire (CMI) dès activation technique.',
+    trendingSubtitle: 'La sélection la plus demandée cette semaine.',
     
     // Categories
     categories: 'Catégories',
@@ -137,6 +148,64 @@ export const translations = {
     productNotFound: 'Produit introuvable',
     backToProducts: 'Retour aux produits',
     shippingAccordionBody: 'Livraison gratuite à partir de 500 MAD. Livraison sous 24-48h dans les grandes villes. Tous nos produits sont 100% authentiques et importés directement des fabricants.',
+
+    // Phase A — legal, privacy, authenticity (review with counsel before production)
+    navAuthenticity: 'Authenticité',
+    navPrivacy: 'Confidentialité',
+    policyAuthenticityTitle: 'Authenticité & approvisionnement',
+    policyAuthIntroTitle: 'Notre positionnement',
+    policyAuthIntroBody:
+      'NutriMaroc s’approvisionne auprès de circuits officiels et traçables. Nous décrivons ci-dessous notre modèle pour que vous sachiez ce que nous faisons — et ce que nous ne faisons pas. Ce texte est fourni à titre informatif et doit être validé par vos équipes juridiques et commerciales.',
+    policyAuthSourcingTitle: 'D’où viennent les produits ?',
+    policyAuthSourcingBody:
+      'Nous travaillons avec des importations directes ou des distributeurs agréés par les marques, selon les contrats en vigueur. La marchandise est destinée au marché légal ; les documents d’achat sont conservés en interne pour contrôle.',
+    policyAuthVerifyTitle: 'Comment vérifier votre produit ?',
+    policyAuthVerifyBody:
+      'Le numéro de lot et la date de péremption sur l’étiquette assurent la traçabilité. Certaines marques proposent une vérification sur le site du fabricant. Vous pouvez nous envoyer par WhatsApp des photos nettes du sceau, du lot et du code-barres : objectif de premier retour sous 24 h ouvrées.',
+    policyAuthWhatWeDontTitle: 'Ce que nous ne faisons pas',
+    policyAuthWhatWeDontBody:
+      'Nous ne revendons pas de produits sans provenance déclarée. Nous ne publions pas de certificats d’analyse sans accord du fournisseur. Nous ne pouvons pas engager une marque fabricant au nom de nos clients.',
+    policyAuthSupportTitle: 'Contact & délais',
+    policyAuthSupportBody:
+      'Authenticité et SAV : WhatsApp ou e-mail en pied de page. Premier retour visé sous 24 h les jours ouvrés (hors jours fériés).',
+    privacyTitle: 'Politique de confidentialité',
+    privacyBody:
+      'Données collectées : nom, téléphone, adresse de livraison et ville lors d’une commande ; contenu des messages si vous nous contactez par WhatsApp ou e-mail.\n\nFinalités : traiter et livrer votre commande, vous répondre, améliorer le service. Base légale : exécution du contrat et intérêt légitime pour le support client.\n\nConservation : le temps nécessaire à la commande et aux obligations légales (facturation, litiges).\n\nDestinataires : équipe NutriMaroc, transporteur, prestataire de paiement lorsque le paiement en ligne (CMI ou autre) sera activé.\n\nDroits : accès, rectification, suppression selon la réglementation applicable — contactez contact@nutrimaroc.ma.\n\nCookies : ce site peut utiliser des cookies techniques nécessaires au panier et à la session.\n\nTexte à valider par un conseil compétent au Maroc avant mise en production.',
+    returnsPolicyBody:
+      'Délai : vous pouvez demander un retour sous 14 jours à compter de la réception, sous réserve que le produit soit non ouvert, dans son emballage d’origine et en parfait état de revente.\n\nExceptions : produits ouverts ou consommés, produits personnalisés, promotions indiquées comme « ventes finales » si la loi le permet.\n\nFrais : les frais de retour sont à votre charge sauf erreur de notre part ou produit défectueux avéré.\n\nRemboursement : après contrôle du colis, remboursement sur le moyen utilisé ou avoir, sous délai indiqué lors du traitement (à préciser en interne).\n\nPaiement à la livraison (COD) : si vous refusez le colis à réception, les frais de préparation ou de réexpédition peuvent être facturés selon votre politique interne — à définir clairement ici après validation opérationnelle.\n\nContact : WhatsApp avec numéro de commande et photos du produit.\n\nTexte à aligner sur votre politique réelle et à valider juridiquement.',
+    supplementDisclaimerShort:
+      'Les compléments alimentaires ne se substituent pas à une alimentation variée et équilibrée ni à un mode de vie sain. Ils ne sont pas des médicaments. En cas de grossesse, d’allaitement, de traitement médical ou d’allergie, demandez l’avis d’un professionnel de santé.',
+    pdpComplianceTitle: 'Étiquette & traçabilité',
+    pdpManufacturerLabel: 'Fabricant (étiquette)',
+    pdpCountryLabel: 'Origine',
+    pdpAllergensTitle: 'Allergènes & mentions importantes',
+    pdpAllergensFootnote: 'Reproduit selon les informations fournies sur l’étiquette du produit. Vérifier toujours l’étiquette physique reçue.',
+    pdpExtraVerificationTitle: 'Vérifications complémentaires',
+    pdpViewCoaPdf: 'Voir le document (PDF)',
+    pdpCertificateOnRequest:
+      'Certificat d’analyse ou fiche technique du lot en stock : disponible sur demande auprès du service client (sous réserve d’accord fournisseur).',
+    pdpProofDefault:
+      'Les informations de traçabilité (lot, DLC) sont sur l’emballage. Pour notre politique d’approvisionnement et d’authenticité :',
+    pdpProofDefaultLink: 'voir la page Authenticité',
+    pdpStimulantWarningTitle: 'Produit contenant des stimulants',
+    pdpStimulantWarningBody:
+      'Ce produit contient de la caféine ou d’autres stimulants. Réservé aux adultes en bonne santé. Ne pas dépasser la dose indiquée. Éviter la consommation avec d’autres sources de caféine ou d’alcool.',
+    checkoutPaymentOptionsTitle: 'Paiement — options disponibles',
+    checkoutPaymentOptionsBody:
+      'Actuellement, la finalisation de commande s’effectue via WhatsApp avec notre équipe. Le paiement en ligne sécurisé (CMI / carte bancaire) sera proposé dès l’activation technique. Paiement à la livraison (COD) : uniquement si vous l’offrez réellement — à confirmer côté opérations avant communication publique.',
+    checkoutTlsNote: 'Connexion chiffrée (HTTPS) entre votre navigateur et notre site.',
+    checkoutPoliciesLine:
+      'En passant commande, vous reconnaissez avoir pris connaissance de nos politiques de retour et de confidentialité.',
+    checkoutReadReturns: 'Politique de retour',
+    checkoutReadPrivacy: 'Confidentialité',
+    orderConfirmTitle: 'Étapes suivantes',
+    orderConfirmIntro:
+      'Votre demande a été préparée. Référence de commande (à communiquer au service client) :',
+    orderConfirmCopyHint: 'Copiez le message ci-dessous ou ouvrez WhatsApp pour l’envoyer directement.',
+    orderConfirmWhatsappCta: 'Ouvrir WhatsApp avec ce message',
+    orderConfirmClose: 'Fermer',
+    whatsappOrderMessageTemplate:
+      'Commande NutriMaroc — Ref: {ref}\nClient: {name}\nTél: {phone}\nLivraison: {address}, {city}\nTotal: {total} MAD\nArticles: {items}',
     
     // Misc
     mad: 'MAD',
@@ -166,6 +235,16 @@ export const translations = {
     heroSubtitle: 'توصيل سريع في جميع أنحاء المغرب',
     heroCta: 'اكتشف العروض',
     heroPromoBadge: 'خصم حتى 20٪ على الستاكس',
+    homeValueEyebrow: 'لماذا نوتريماروك',
+    homeValueHeadline: 'وضوح أكبر حول المصدر والجودة، دون غموض.',
+    homeValueAuthenticTitle: 'أصلي وقابل للتتبع',
+    homeValueAuthenticDesc: 'توريد رسمي، أرقام دُفعات، سياسة منشورة. بلا وعود فارغة.',
+    homeValueAuthenticCta: 'اقرأ التزامنا',
+    homeValueDeliveryTitle: 'التوصيل في المغرب',
+    homeValueDeliveryDesc: 'تجهيز بعناية وآجال واقعية — 24 إلى 48 ساعة في المدن الكبرى.',
+    homeValuePaymentTitle: 'دفع منظم',
+    homeValuePaymentDesc: 'إتمام الطلب بمساعدة الفريق. البطاقة (CMI) عند الجاهزية التقنية.',
+    trendingSubtitle: 'الأكثر طلباً هذا الأسبوع.',
     
     categories: 'الفئات',
     protein: 'بروتين',
@@ -268,6 +347,61 @@ export const translations = {
     productNotFound: 'المنتج غير موجود',
     backToProducts: 'العودة إلى المنتجات',
     shippingAccordionBody: 'توصيل مجاني ابتداءً من 500 درهم. توصيل خلال 24-48 ساعة في المدن الكبرى. جميع منتجاتنا 100% أصلية ومستوردة مباشرة من الشركات المصنعة.',
+
+    navAuthenticity: 'الأصالة',
+    navPrivacy: 'الخصوصية',
+    policyAuthenticityTitle: 'الأصالة والتوريد',
+    policyAuthIntroTitle: 'موقفنا',
+    policyAuthIntroBody:
+      'تعتمد نوتريماروك على مسارات توريد رسمية وقابلة للتتبع. نوضح أدناه نموذج عملنا حتى تعرفوا ماذا نفعل — وماذا لا نفعل. هذا النص إعلامي ويجب مراجعته مع الفريق القانوني والتجاري قبل الإنتاج.',
+    policyAuthSourcingTitle: 'من أين تأتي المنتجات؟',
+    policyAuthSourcingBody:
+      'نعمل مع استيراد مباشر أو موزعين معتمدين من العلامات التجارية حسب العقود السارية. البضائع مخصصة للسوق القانونية ونحتفظ بوثائق الشراء داخلياً للمراجعة.',
+    policyAuthVerifyTitle: 'كيف تتحققون من المنتج؟',
+    policyAuthVerifyBody:
+      'رقم الدُفعة وتاريخ الانتهاء على الملصق يضمنان التتبع. بعض العلامات تتيح التحقق عبر موقع المصنع. يمكنكم إرسال صور واضحة للختم والدُفعة والباركود عبر واتساب: نستهدف رداً أولياً خلال 24 ساعة عمل.',
+    policyAuthWhatWeDontTitle: 'ما لا نقوم به',
+    policyAuthWhatWeDontBody:
+      'لا نبيع منتجات دون مصدر معلن. لا ننشر شهادات تحليل دون موافقة المورد. لا يمكننا الالتزام نيابةً عنكم لدى المصنع.',
+    policyAuthSupportTitle: 'التواصل والآجال',
+    policyAuthSupportBody:
+      'الأصالة وخدمة ما بعد البيع: واتساب أو البريد في تذييل الصفحة. رد أولي مستهدف خلال 24 ساعة عمل (عطلات محلية مستثناة).',
+    privacyTitle: 'سياسة الخصوصية',
+    privacyBody:
+      'البيانات المجمعة: الاسم، الهاتف، عنوان التسليم والمدينة عند الطلب؛ ومحتوى الرسائل عند التواصل عبر واتساب أو البريد.\n\nالأغراض: معالجة الطلب والتسليم، الرد عليكم، تحسين الخدمة. الأساس القانوني: تنفيذ العقد والمصلحة المشروعة لدعم العملاء.\n\nالاحتفاظ: المدة اللازمة للطلب والالتزامات القانونية (الفوترة، النزاعات).\n\nالمستلمون: فريق نوتريماروك، شركة الشحن، مزود الدفع عند تفعيل الدفع عبر الإنترنت (CMI أو غيره).\n\nالحقوق: الوصول، التصحيح، الحذف وفق القانون المعمول — contact@nutrimaroc.ma.\n\nملفات تعريف الارتباط: قد نستخدم ملفات تقنية ضرورية للسلة والجلسة.\n\nيُراجع النص مع مستشار مختص في المغرب قبل الإطلاق.',
+    returnsPolicyBody:
+      'المدة: يمكن طلب الإرجاع خلال 14 يوماً من الاستلام إذا كان المنتج غير مفتوح، في عبوته الأصلية، وصالحاً للبيع.\n\nالاستثناءات: منتجات مفتوحة أو مستهلكة، تخصيصات، عروض «بيع نهائي» إن سمح القانون.\n\nالتكاليف: تكاليف الإرجاع على العميل ما لم يكن الخطأ منا أو عيباً مثبتاً.\n\nالاسترداد: بعد فحص الشحنة، استرداد أو رصيد حسب الوسيلة المستخدمة والآجال الداخلية.\n\nالدفع عند الاستلام: عند رفض الطرد قد تُفرض رسوم تحضير أو إعادة إرسال حسب سياستكم — يجب توضيحها بعد اعتماد العمليات.\n\nالتواصل: واتساب مع رقم الطلب وصور المنتج.\n\nيُوافق النص على السياسة الفعلية ويُراجع قانونياً.',
+    supplementDisclaimerShort:
+      'المكملات الغذائية لا تحل محل نظام غذائي متوازن ولا نمط حياة صحي. وليست أدوية. في حال الحمل أو الرضاعة أو العلاج أو الحساسية، استشر مختصاً صحياً.',
+    pdpComplianceTitle: 'الملصق والتتبع',
+    pdpManufacturerLabel: 'الشركة المصنعة (حسب الملصق)',
+    pdpCountryLabel: 'المنشأ',
+    pdpAllergensTitle: 'مسببات الحساسية وإشارات مهمة',
+    pdpAllergensFootnote: 'وفق المعلومات على ملصق المنتج. تحقق دائماً من العبوة المستلمة.',
+    pdpExtraVerificationTitle: 'تحقق إضافي',
+    pdpViewCoaPdf: 'عرض المستند (PDF)',
+    pdpCertificateOnRequest:
+      'شهادة تحليل أو بيان تقني للدُفعة المتوفرة: متاحة عند الطلب من خدمة العملاء (بموافقة المورد).',
+    pdpProofDefault: 'بيانات التتبع (الدُفعة، الانتهاء) على العبوة. لسياسة التوريد والأصالة:',
+    pdpProofDefaultLink: 'صفحة الأصالة',
+    pdpStimulantWarningTitle: 'منتج يحتوي منبهات',
+    pdpStimulantWarningBody:
+      'يحتوي هذا المنتج على كافيين أو منبهات أخرى. للبالغين الأصحاء. لا تتجاوز الجرعة الموصى بها. تجنب الجمع مع مصادر أخرى للكافيين أو الكحول.',
+    checkoutPaymentOptionsTitle: 'الدفع — الخيارات المتاحة',
+    checkoutPaymentOptionsBody:
+      'حالياً تتم إتمام الطلب عبر واتساب مع فريقنا. سيُفعّل الدفع الآمن عبر الإنترنت (CMI / البطاقة) بعد الجاهزية التقنية. الدفع عند الاستلام: فقط إن كنتم تقدمونه فعلياً — يُؤكد عملياً قبل الإعلان.',
+    checkoutTlsNote: 'اتصال مشفّر (HTTPS) بين المتصفح والموقع.',
+    checkoutPoliciesLine:
+      'بإتمام الطلب تقرّون الاطلاع على سياسات الإرجاع والخصوصية.',
+    checkoutReadReturns: 'سياسة الإرجاع',
+    checkoutReadPrivacy: 'الخصوصية',
+    orderConfirmTitle: 'الخطوات التالية',
+    orderConfirmIntro: 'تم تجهيز طلبكم. مرجع الطلب (للتواصل مع خدمة العملاء):',
+    orderConfirmCopyHint: 'انسخوا الرسالة أدناه أو افتحوا واتساب لإرسالها مباشرة.',
+    orderConfirmWhatsappCta: 'فتح واتساب بهذه الرسالة',
+    orderConfirmClose: 'إغلاق',
+    whatsappOrderMessageTemplate:
+      'طلب نوتريماروك — مرجع: {ref}\nالعميل: {name}\nالهاتف: {phone}\nالتوصيل: {address}، {city}\nالمجموع: {total} درهم\nالمنتجات: {items}',
     
     mad: 'درهم',
     language: 'Français',

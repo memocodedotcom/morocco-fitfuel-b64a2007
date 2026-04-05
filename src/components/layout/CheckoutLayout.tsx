@@ -6,6 +6,8 @@ import { LogoLink } from './LogoLink';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { PaymentMethodLogos } from '@/components/payment/PaymentMethodLogos';
 import { PageTransition } from './PageTransition';
+import { POLICY_ROUTES } from '@/config/policies';
+import { SupplementDisclaimer } from '@/components/legal/SupplementDisclaimer';
 
 export function CheckoutLayout({ children }: { children: React.ReactNode }) {
   const { t, locale } = useLanguage();
@@ -32,11 +34,25 @@ export function CheckoutLayout({ children }: { children: React.ReactNode }) {
       </main>
 
       <footer className="border-t mt-auto py-4 bg-muted/20">
-        <div className="container flex flex-col sm:flex-row items-center justify-between gap-3">
-          <PaymentMethodLogos tone="on-light" />
-          <p className="text-[10px] text-muted-foreground text-center sm:text-end">
-            © 2026 NutriMaroc. {locale === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
-          </p>
+        <div className="container space-y-3">
+          <SupplementDisclaimer tone="muted" className="text-center max-w-prose mx-auto" />
+          <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
+            <Link to={POLICY_ROUTES.authenticity} className="hover:text-foreground underline-offset-2 hover:underline">
+              {t('navAuthenticity')}
+            </Link>
+            <Link to={POLICY_ROUTES.privacy} className="hover:text-foreground underline-offset-2 hover:underline">
+              {t('navPrivacy')}
+            </Link>
+            <Link to={POLICY_ROUTES.returns} className="hover:text-foreground underline-offset-2 hover:underline">
+              {t('helpReturnsTitle')}
+            </Link>
+          </nav>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-border/60">
+            <PaymentMethodLogos tone="on-light" />
+            <p className="text-[10px] text-muted-foreground text-center sm:text-end">
+              © 2026 NutriMaroc. {locale === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
+            </p>
+          </div>
         </div>
       </footer>
 

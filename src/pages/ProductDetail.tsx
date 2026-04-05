@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { ReviewSection } from '@/components/product/ReviewSection';
+import { ProductComplianceSection } from '@/components/product/ProductComplianceSection';
 import { ShoppingCart, Shield, Star, ChevronLeft, Minus, Plus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from '@/components/ui/sonner';
@@ -144,6 +145,8 @@ export default function ProductDetail() {
                 </span>
               )}
             </div>
+
+            <ProductComplianceSection product={product} />
 
             {/* Flavors */}
             {product.flavors && product.flavors.length > 0 && (

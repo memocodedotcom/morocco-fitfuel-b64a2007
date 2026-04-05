@@ -34,9 +34,13 @@ export function ProductCard({ product, variant = 'light' }: Props) {
       className="group"
     >
       <Link to={`/products/${product.slug}`} className="block">
-        <div className={`rounded-xl overflow-hidden border ${
-          variant === 'dark' ? 'bg-urgency border-white/10' : 'bg-card'
-        }`}>
+        <div
+          className={`rounded-2xl overflow-hidden border shadow-sm transition-shadow duration-300 group-hover:shadow-md ${
+            variant === 'dark'
+              ? 'bg-urgency border-white/10 ring-1 ring-white/5 group-hover:ring-white/15'
+              : 'bg-card border-border/80 ring-1 ring-transparent group-hover:ring-primary/15 group-hover:border-primary/20'
+          }`}
+        >
           {/* Image */}
           <div className="relative aspect-square overflow-hidden">
             <img

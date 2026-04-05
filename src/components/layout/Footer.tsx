@@ -2,8 +2,10 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
 import { Shield, Truck, CreditCard, MessageCircle, Mail, Instagram, Facebook } from 'lucide-react';
 import { categories } from '@/data/products';
-import { socialUrls } from '@/config/site';
+import { socialUrls, whatsappE164 } from '@/config/site';
+import { POLICY_ROUTES } from '@/config/policies';
 import { PaymentMethodLogos } from '@/components/payment/PaymentMethodLogos';
+import { SupplementDisclaimer } from '@/components/legal/SupplementDisclaimer';
 
 export function Footer() {
   const { locale, t } = useLanguage();
@@ -97,7 +99,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="https://wa.me/212600000000"
+                  href={`https://wa.me/${whatsappE164}`}
                   className="flex items-center gap-1.5 text-xs text-background/60 hover:text-primary transition-colors"
                 >
                   <MessageCircle className="h-3.5 w-3.5 shrink-0" />
@@ -145,11 +147,28 @@ export function Footer() {
       </div>
 
       <div className="border-t border-background/10">
-        <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[10px] text-background/40 text-center sm:text-start">
-            © 2026 NutriMaroc. {locale === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
-          </p>
-          <PaymentMethodLogos tone="on-dark" />
+        <div className="container py-4 space-y-4">
+          <SupplementDisclaimer tone="onDark" className="max-w-3xl mx-auto text-center sm:text-start sm:mx-0" />
+          <nav
+            className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-1 text-[11px]"
+            aria-label="Legal"
+          >
+            <Link to={POLICY_ROUTES.authenticity} className="text-background/60 hover:text-primary transition-colors">
+              {t('navAuthenticity')}
+            </Link>
+            <Link to={POLICY_ROUTES.privacy} className="text-background/60 hover:text-primary transition-colors">
+              {t('navPrivacy')}
+            </Link>
+            <Link to={POLICY_ROUTES.returns} className="text-background/60 hover:text-primary transition-colors">
+              {t('helpReturnsTitle')}
+            </Link>
+          </nav>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-background/10">
+            <p className="text-[10px] text-background/40 text-center sm:text-start">
+              © 2026 NutriMaroc. {locale === 'fr' ? 'Tous droits réservés.' : 'جميع الحقوق محفوظة.'}
+            </p>
+            <PaymentMethodLogos tone="on-dark" />
+          </div>
         </div>
       </div>
     </footer>

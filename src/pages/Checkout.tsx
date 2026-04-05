@@ -8,6 +8,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CreditCard, Shield, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { POLICY_ROUTES } from '@/config/policies';
+import { whatsappE164 } from '@/config/site';
+import { SupplementDisclaimer } from '@/components/legal/SupplementDisclaimer';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 export default function CheckoutPage() {
   const { t, locale } = useLanguage();
@@ -23,9 +33,32 @@ export default function CheckoutPage() {
     city: '',
   });
 
+  const [handoffOpen, setHandoffOpen] = useState(false);
+  const [handoff, setHandoff] = useState<{ ref: string; message: string } | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Stripe integration will be enabled soon. For now, use WhatsApp checkout!');
+    const ref = `NM-${Date.now().toString(36).toUpperCase().slice(-10)}`;
+    const items = cartProducts
+      .map(({ product, quantity }) => `${product.name[locale]} ×${quantity}`)
+      .join('; ');
+    const message = t('whatsappOrderMessageTemplate', {
+      ref,
+      name: form.fullName.trim(),
+      phone: form.phone.trim(),
+      address: form.address.trim(),
+      city: form.city.trim(),
+      total: String(total),
+      items,
+    });
+    setHandoff({ ref, message });
+    setHandoffOpen(true);
+  };
+
+  const openWhatsApp = () => {
+    if (!handoff) return;
+    const url = `https://wa.me/${whatsappE164}?text=${encodeURIComponent(handoff.message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const steps = [
@@ -52,7 +85,7 @@ export default function CheckoutPage() {
       <div className="container py-6 max-w-2xl">
         <h1 className="text-2xl font-extrabold mb-2">{t('checkout')}</h1>
 
-        <nav aria-label="Checkout progress" className="mb-8">
+        <nav aria-label="Checkout progress" className="mb-6">
           <ol className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
             {steps.map((step, i) => (
               <li key={step.id} className="flex items-center gap-2">
@@ -85,6 +118,14 @@ export default function CheckoutPage() {
             ))}
           </ol>
         </nav>
+
+        <div className="rounded-lg border bg-card p-4 mb-6 space-y-2">
+          <h2 className="text-sm font-semibold">{t('checkoutPaymentOptionsTitle')}</h2>
+          <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
+            {t('checkoutPaymentOptionsBody')}
+          </p>
+          <p className="text-[10px] text-muted-foreground">{t('checkoutTlsNote')}</p>
+        </div>
 
         <div className="grid md:grid-cols-5 gap-6">
           <form onSubmit={handleSubmit} className="md:col-span-3 space-y-4">
@@ -126,6 +167,19 @@ export default function CheckoutPage() {
                 required
               />
             </div>
+
+            <SupplementDisclaimer tone="muted" className="rounded-md border border-dashed p-3 bg-muted/20" />
+
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              {t('checkoutPoliciesLine')}{' '}
+              <Link to={POLICY_ROUTES.returns} className="text-primary underline-offset-2 hover:underline">
+                {t('checkoutReadReturns')}
+              </Link>
+              {' · '}
+              <Link to={POLICY_ROUTES.privacy} className="text-primary underline-offset-2 hover:underline">
+                {t('checkoutReadPrivacy')}
+              </Link>
+            </p>
 
             <Button type="submit" className="w-full gap-2 rounded-full h-12 text-sm font-semibold">
               <CreditCard className="h-4 w-4" />
@@ -171,6 +225,34 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      <Dialog open={handoffOpen} onOpenChange={setHandoffOpen}>
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{t('orderConfirmTitle')}</DialogTitle>
+          </DialogHeader>
+          {handoff && (
+            <div className="space-y-3 text-sm">
+              <p className="text-muted-foreground">
+                {t('orderConfirmIntro')}{' '}
+                <span className="font-mono font-semibold text-foreground">{handoff.ref}</span>
+              </p>
+              <p className="text-xs text-muted-foreground">{t('orderConfirmCopyHint')}</p>
+              <pre className="text-xs whitespace-pre-wrap break-words rounded-md bg-muted p-3 max-h-40 overflow-y-auto">
+                {handoff.message}
+              </pre>
+            </div>
+          )}
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button type="button" variant="outline" onClick={() => setHandoffOpen(false)}>
+              {t('orderConfirmClose')}
+            </Button>
+            <Button type="button" className="gap-2" onClick={openWhatsApp}>
+              {t('orderConfirmWhatsappCta')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </CheckoutLayout>
   );
 }

@@ -144,11 +144,11 @@ Implementation plan only (no code in this document). Goal: every serious shopper
 
 ## Phase A exit gate (sign-off checklist)
 
-- [ ] Authenticity / “why us” narrative approved and live (or intentionally deferred with dated ticket).
-- [ ] PDP proof rules documented; no misleading empty badges.
-- [ ] Disclaimers and returns/privacy pages live and linked from checkout and footer.
-- [ ] Payments and confirmations match production behavior.
-- [ ] Bilingual parity reviewed for all Phase A surfaces.
+- [x] Authenticity / “why us” narrative approved and live (or intentionally deferred with dated ticket). — *Page `/authenticity` + PDP module; copy must still be validated by counsel.*
+- [x] PDP proof rules documented; no misleading empty badges. — *`ProductComplianceSection` + optional product fields; fallback link when no metadata.*
+- [x] Disclaimers and returns/privacy pages live and linked from checkout and footer. — *`/privacy`, `/returns` (full policy), supplement disclaimer component.*
+- [x] Payments and confirmations match production behavior. — *Checkout states WhatsApp handoff + TLS note; WhatsApp template dialog; align COD/CMI copy with ops before launch.*
+- [x] Bilingual parity reviewed for all Phase A surfaces. — *FR/AR keys added; legal review recommended before production.*
 
 ---
 

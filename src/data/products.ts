@@ -19,6 +19,17 @@ export interface Product {
   tags?: string[];
   goalTags?: string[];
   crossSellIds?: string[];
+  /** As printed on label */
+  manufacturerName?: string;
+  countryOfOrigin?: { fr: string; ar: string };
+  allergens?: { fr: string; ar: string };
+  extraVerificationNote?: { fr: string; ar: string };
+  /** Public COA / spec sheet PDF URL when approved */
+  coaUrl?: string;
+  /** When true, show “certificate available on request” instead of a public PDF */
+  certificateOnRequest?: boolean;
+  /** High-caffeine / stimulant pre-workout — show age & health notice */
+  stimulantWarning?: boolean;
 }
 
 export interface Category {
@@ -97,6 +108,18 @@ export const products: Product[] = [
     tags: ['best-seller', 'flash-sale'],
     goalTags: ['gain-muscle', 'lose-weight'],
     crossSellIds: ['5', '7'],
+    manufacturerName: 'Optimum Nutrition, Inc.',
+    countryOfOrigin: { fr: 'Fabriqué aux États-Unis', ar: 'صُنع في الولايات المتحدة' },
+    allergens: {
+      fr: 'Contient du lait (lactose). Peut contenir des traces de soja et de céréales contenant du gluten.',
+      ar: 'يحتوي على الحليب (اللاكتوز). قد يحوي آثار فول الصويا والحبوب التي تحتوي على الغلوتين.',
+    },
+    extraVerificationNote: {
+      fr: 'Traçabilité par numéro de lot sur l’étiquette. Analyses fournisseur disponibles sur demande pour les lots en stock.',
+      ar: 'التتبع عبر رقم الدُفعة على الملصق. تقارير المورد متاحة عند الطلب للدُفعات المتوفرة.',
+    },
+    certificateOnRequest: true,
+    coaUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
   },
   {
     id: '2',
@@ -121,6 +144,9 @@ export const products: Product[] = [
     tags: ['best-seller'],
     goalTags: ['gain-muscle', 'energy'],
     crossSellIds: ['1', '4'],
+    manufacturerName: 'Optimum Nutrition, Inc.',
+    countryOfOrigin: { fr: 'Fabriqué aux États-Unis', ar: 'صُنع في الولايات المتحدة' },
+    certificateOnRequest: true,
   },
   {
     id: '3',
@@ -146,6 +172,14 @@ export const products: Product[] = [
     tags: ['flash-sale'],
     goalTags: ['energy', 'gain-muscle'],
     crossSellIds: ['1', '2'],
+    manufacturerName: 'Cellucor (Nutrabolt)',
+    countryOfOrigin: { fr: 'Fabriqué aux États-Unis', ar: 'صُنع في الولايات المتحدة' },
+    stimulantWarning: true,
+    certificateOnRequest: true,
+    allergens: {
+      fr: 'Contient de la caféine. Ne convient pas aux enfants, femmes enceintes ou allaitantes. Personnes sensibles à la caféine : demandez l’avis d’un professionnel de santé.',
+      ar: 'يحتوي على الكافيين. غير مناسب للأطفال أو الحوامل أو المرضعات. يُنصح مرضى الحساسية للكافيين باستشارة أخصائي.',
+    },
   },
   {
     id: '4',
@@ -171,6 +205,13 @@ export const products: Product[] = [
     tags: ['trending'],
     goalTags: ['gain-muscle', 'lose-weight'],
     crossSellIds: ['2', '5'],
+    manufacturerName: 'Dymatize Enterprises LLC',
+    countryOfOrigin: { fr: 'Fabriqué aux États-Unis', ar: 'صُنع في الولايات المتحدة' },
+    allergens: {
+      fr: 'Contient du lait. Peut contenir des traces d’œuf, de soja et de noix.',
+      ar: 'يحتوي على الحليب. قد يحوي آثار البيض وفول الصويا والمكسرات.',
+    },
+    certificateOnRequest: true,
   },
   {
     id: '5',

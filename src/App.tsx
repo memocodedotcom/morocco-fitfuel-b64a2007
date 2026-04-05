@@ -14,6 +14,8 @@ import ProfilePage from "./pages/Profile.tsx";
 import TrackOrderPage from "./pages/TrackOrder.tsx";
 import FaqPage from "./pages/Faq.tsx";
 import ReturnsPage from "./pages/Returns.tsx";
+import AuthenticityPage from "./pages/AuthenticityPage.tsx";
+import PrivacyPage from "./pages/PrivacyPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,8 @@ const App = () => (
                 <Route path="/track-order" element={<TrackOrderPage />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/returns" element={<ReturnsPage />} />
+                <Route path="/authenticity" element={<AuthenticityPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
