@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { ReviewSection } from '@/components/product/ReviewSection';
 import { ShoppingCart, Shield, Star, ChevronLeft, Minus, Plus, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -42,12 +43,7 @@ export default function ProductDetail() {
     : 0;
 
   const handleAdd = () => {
-    addItem(
-      product.id,
-      qty,
-      product.flavors?.[selectedFlavor],
-      product.sizes?.[selectedSize]
-    );
+    addItem(product.id, qty, product.flavors?.[selectedFlavor], product.sizes?.[selectedSize]);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -60,7 +56,6 @@ export default function ProductDetail() {
   return (
     <AppLayout>
       <div className="container py-4 md:py-8">
-        {/* Back */}
         <Link to="/products" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
           <ChevronLeft className="h-4 w-4" />
           {t('products')}
@@ -104,7 +99,6 @@ export default function ProductDetail() {
             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">{product.brand}</p>
             <h1 className="text-2xl font-extrabold mb-2">{product.name[locale]}</h1>
 
-            {/* Rating */}
             <div className="flex items-center gap-2 mb-3">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -115,7 +109,6 @@ export default function ProductDetail() {
               <span className="text-sm text-muted-foreground">({product.reviewCount} {t('reviews')})</span>
             </div>
 
-            {/* Price */}
             <div className="flex items-center gap-3 mb-4">
               <span className="text-3xl font-extrabold text-primary">{product.price} MAD</span>
               {product.originalPrice && (
@@ -140,7 +133,7 @@ export default function ProductDetail() {
                 </span>
               )}
               {product.stock <= 5 && product.stock > 0 && (
-                <span className="flex items-center gap-1 bg-destructive/10 text-destructive text-xs font-medium px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-1 bg-destructive/10 text-destructive text-xs font-medium px-3 py-1.5 rounded-full animate-pulse">
                   🔥 {t('onlyLeft', { n: String(product.stock) })}
                 </span>
               )}
@@ -193,34 +186,19 @@ export default function ProductDetail() {
             {/* Qty + ATC */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center border rounded-full">
-                <button
-                  onClick={() => setQty(q => Math.max(1, q - 1))}
-                  className="p-2.5 hover:bg-secondary rounded-s-full transition-colors"
-                >
+                <button onClick={() => setQty(q => Math.max(1, q - 1))} className="p-2.5 hover:bg-secondary rounded-s-full transition-colors">
                   <Minus className="h-4 w-4" />
                 </button>
                 <span className="w-10 text-center font-medium text-sm">{qty}</span>
-                <button
-                  onClick={() => setQty(q => q + 1)}
-                  className="p-2.5 hover:bg-secondary rounded-e-full transition-colors"
-                >
+                <button onClick={() => setQty(q => q + 1)} className="p-2.5 hover:bg-secondary rounded-e-full transition-colors">
                   <Plus className="h-4 w-4" />
                 </button>
               </div>
-              <Button
-                onClick={handleAdd}
-                className="flex-1 rounded-full gap-2 h-11"
-                disabled={added}
-              >
-                {added ? (
-                  <><Check className="h-4 w-4" /> ✓</>
-                ) : (
-                  <><ShoppingCart className="h-4 w-4" /> {t('addToCart')}</>
-                )}
+              <Button onClick={handleAdd} className="flex-1 rounded-full gap-2 h-11" disabled={added}>
+                {added ? <><Check className="h-4 w-4" /> ✓</> : <><ShoppingCart className="h-4 w-4" /> {t('addToCart')}</>}
               </Button>
             </div>
 
-            {/* Description */}
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
               {product.description[locale]}
             </p>
@@ -230,23 +208,22 @@ export default function ProductDetail() {
               {product.ingredients && (
                 <AccordionItem value="ingredients">
                   <AccordionTrigger className="text-sm font-semibold">{t('ingredients')}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
-                    {product.ingredients[locale]}
-                  </AccordionContent>
+                  <AccordionContent className="text-sm text-muted-foreground">{product.ingredients[locale]}</AccordionContent>
                 </AccordionItem>
               )}
               {product.suggestedUse && (
                 <AccordionItem value="use">
                   <AccordionTrigger className="text-sm font-semibold">{t('suggestedUse')}</AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground">
-                    {product.suggestedUse[locale]}
-                  </AccordionContent>
+                  <AccordionContent className="text-sm text-muted-foreground">{product.suggestedUse[locale]}</AccordionContent>
                 </AccordionItem>
               )}
               <AccordionItem value="shipping">
                 <AccordionTrigger className="text-sm font-semibold">{t('shippingGuarantee')}</AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground">
-                  Livraison gratuite à partir de 500 MAD. Livraison sous 24-48h dans les grandes villes. Tous nos produits sont 100% authentiques et importés directement des fabricants.
+                  {locale === 'fr'
+                    ? 'Livraison gratuite à partir de 500 MAD. Livraison sous 24-48h dans les grandes villes. Tous nos produits sont 100% authentiques et importés directement des fabricants.'
+                    : 'توصيل مجاني ابتداءً من 500 درهم. توصيل خلال 24-48 ساعة في المدن الكبرى. جميع منتجاتنا 100% أصلية ومستوردة مباشرة من الشركات المصنعة.'
+                  }
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -260,7 +237,7 @@ export default function ProductDetail() {
                   <span className="text-lg font-bold text-muted-foreground">+</span>
                   {crossSellProducts.map(cp => cp && (
                     <Link key={cp.id} to={`/products/${cp.slug}`}>
-                      <img src={cp.images[0]} alt={cp.name[locale]} className="w-16 h-16 rounded-lg object-cover" />
+                      <img src={cp.images[0]} alt={cp.name[locale]} className="w-16 h-16 rounded-lg object-cover hover:ring-2 ring-primary transition-all" />
                     </Link>
                   ))}
                 </div>
@@ -276,6 +253,9 @@ export default function ProductDetail() {
             )}
           </div>
         </div>
+
+        {/* Reviews */}
+        <ReviewSection product={product} />
       </div>
 
       {/* Sticky bottom CTA - mobile */}
