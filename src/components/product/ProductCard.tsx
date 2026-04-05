@@ -58,7 +58,7 @@ export function ProductCard({ product, variant = 'light' }: Props) {
             {/* Quick add */}
             <button
               onClick={handleAdd}
-              className="absolute bottom-2 end-2 bg-primary text-primary-foreground rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all hover:scale-110 shadow-lg"
+              className="absolute bottom-2 end-2 bg-primary text-primary-foreground rounded-full p-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all hover:scale-110 shadow-lg"
             >
               {added ? (
                 <motion.span
