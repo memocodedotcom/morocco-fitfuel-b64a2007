@@ -226,7 +226,7 @@ export const products: Product[] = [
     images: [
       'https://images.unsplash.com/photo-1594498653385-d5172c532c00?w=600&h=600&fit=crop&auto=format',
     ],
-    category: 'accessories' as any,
+    category: 'accessories',
     brand: 'Optimum Nutrition',
     rating: 4.5,
     reviewCount: 312,

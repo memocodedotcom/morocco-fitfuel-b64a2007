@@ -1,155 +1,96 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { Button } from '@/components/ui/button';
-import { Quote, ArrowRight, Plus, MapPin, CheckCircle2, TrendingUp } from 'lucide-react';
+import { Star, Quote, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getProduct } from '@/data/products';
-import { Magnetic } from '@/components/ui/magnetic';
 
 export function SuccessStories() {
   const { t, locale } = useLanguage();
-
+  
   const stories = [
     {
-      id: 'marrakech-elite',
-      name: 'Salma k.',
-      location: 'Marrakech - High Atlas Training',
-      goal: locale === 'fr' ? 'Énergie & Endurance' : 'طاقة وتحمل',
-      quote: locale === 'fr' 
-        ? "NutriMaroc a redéfini mes limites. Ma récupération est 2x plus rapide."
-        : "نيوترالماروك أعاد تعريف حدودي. تعافي جسمي أصبح أسرع بمرتين.",
-      image: '/stories/transformation_marrakech.png',
-      stack: ['nm-2', '8'],
-      stats: [
-        { label: 'Endurance', value: '+45%' },
-        { label: 'Fatigue', value: '-30%' },
-      ],
-      size: 'large'
+      name: "Ahmed K.",
+      role: "Athl├⌐te Pro",
+      text: "NutriMaroc a litt├⌐ralement transform├⌐ ma pr├⌐paration. La qualit├⌐ des prot├⌐ines est in├⌐gal├⌐e au Maroc.",
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
+      results: "+5kg Muscle",
+      rating: 5
     },
     {
-      id: 'agadir-power',
-      name: 'Yassine B.',
-      location: 'Agadir - Atlantic Power',
-      goal: locale === 'fr' ? 'Masse Musculaire' : 'كتلة عضلية',
-      quote: locale === 'fr' 
-        ? "+8kg de muscle sec. La science ne ment pas."
-        : "+8 كغ من العضلات الصافية. العلم لا يكذب.",
-      image: '/stories/transformation_agadir.png',
-      stack: ['nm-1'],
-      stats: [
-        { label: 'Strength', value: '+25%' },
-      ],
-      size: 'small'
+      name: "Sara L.",
+      role: "CrossFit Coach",
+      text: "Enfin une marque locale qui respecte les standards internationaux. Ma r├⌐cup├⌐ration est 2x plus rapide.",
+      image: "https://images.unsplash.com/photo-1548690312-e3b507d17a12?w=400&h=400&fit=crop",
+      results: "Peak Performance",
+      rating: 5
     },
     {
-      id: 'casablanca-perf',
-      name: 'Omar T.',
-      location: 'Casablanca - Palmier Club',
-      goal: locale === 'fr' ? 'Perte de Poids' : 'فقدان الوزن',
-      quote: locale === 'fr' 
-        ? "Transformation radicale en 12 semaines."
-        : "تحول جذري في 12 أسبوعاً.",
-      image: 'https://images.unsplash.com/photo-1571019623129-fbf8a2f18d2e?w=800&q=80',
-      stack: ['nm-3'],
-      stats: [
-        { label: 'Bodyfat', value: '-12%' },
-      ],
-      size: 'small'
+       name: "Yassine M.",
+       role: "Bodybuilder",
+       text: "La Whey Isolate NutriMaroc est ma favorite. Digestion parfaite et go├╗t exceptionnel.",
+       image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
+       results: "Elite Recovery",
+       rating: 5
     }
   ];
 
   return (
-    <section className="py-32 bg-obsidian relative overflow-hidden">
-      {/* Precision Background - Subtle Grid Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
+    <section className="py-32 md:py-48 bg-[#050505] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#ffffff03_0%,transparent_70%)]" />
       
       <div className="container relative z-10 px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12 max-w-6xl mx-auto">
-          <div className="space-y-8">
-            <div className="flex items-center gap-3">
-              <div className="h-[1px] w-8 bg-electric" />
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-electric">COMMUNAUTÉ DE PERFORMANCE</span>
-            </div>
-            <h2 className="text-huge font-display font-extrabold uppercase tracking-tight leading-[0.85] text-white">
-              RÉSULTATS<br />
-              <span className="text-white/30">CERTIFIÉS.</span>
+        <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-12 max-w-7xl mx-auto">
+          <div className="space-y-6">
+            <div className="h-0.5 w-12 bg-electric" />
+            <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-white leading-tight">
+              HISTOIRES DE<br/>
+              <span className="serif-display text-white/30 italic">SUCC├êS.</span>
             </h2>
           </div>
-          <p className="text-slate-500 text-lg max-w-md font-normal leading-relaxed border-l border-white/10 pl-8">
+          <p className="text-slate-500 max-w-sm text-base md:text-lg font-normal mb-2 leading-relaxed">
             {locale === 'fr' 
-              ? "Une analyse précise des transformations réelles au sein de l'élite athlétique NutriMaroc."
-              : "تحليل دقيق للتحولات الحقيقية ضمن نخبة الرياضيين في نوتريماروك."}
+              ? "Rejoignez l'élite des athlètes marocains qui ont choisi l'excellence nutritionnelle."
+              : "انضم إلى نخبة الرياضيين المغاربة الذين اختاروا التميز الغذائي."}
           </p>
         </div>
 
-        {/* Community Wall Grid - Geometric Alignment */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
           {stories.map((story, idx) => (
             <motion.div
-              key={story.id}
+              key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="aspect-[3/4] rounded-sm border border-white/[0.05] overflow-hidden group relative bg-white/[0.02]"
+              transition={{ delay: idx * 0.2 }}
+              className="group relative"
             >
-              {/* Image with Direct Neutral Overlay */}
-              <img 
-                src={story.image} 
-                alt={story.name} 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105" 
-              />
-              <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/40 to-transparent" />
+              <div className="relative z-10 bg-white/[0.01] border border-white/5 p-10 rounded-sm transition-all duration-700 hover:bg-white/[0.03] hover:border-white/10">
+                <Quote className="h-10 w-10 text-electric/20 mb-8 transform -rotate-12 group-hover:rotate-0 transition-transform duration-500" />
+                
+                <p className="text-xl md:text-2xl text-white font-light italic leading-snug mb-10 group-hover:text-electric transition-colors duration-500">
+                  "{story.text}"
+                </p>
 
-              {/* Data Badge */}
-              <div className="absolute top-6 left-6 z-20">
-                 <div className="px-3 py-1 bg-white/5 border border-white/10 text-[8px] font-extrabold uppercase tracking-widest text-white backdrop-blur-md">
-                    VERIFIED CASE {idx + 1}
-                 </div>
-              </div>
-
-              {/* Functional Content Overlay */}
-              <div className="absolute inset-x-0 bottom-0 p-8 space-y-8 z-20">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2 text-white/30 text-[8px] font-extrabold uppercase tracking-widest">
-                    <MapPin className="h-2.5 w-2.5" />
-                    <span>{story.location}</span>
+                <div className="flex items-center gap-6 border-t border-white/5 pt-10">
+                  <div className="h-16 w-16 grayscale group-hover:grayscale-0 transition-all duration-700 overflow-hidden rounded-full border border-white/10">
+                    <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
                   </div>
-                  
-                  <h3 className="text-xl font-display font-extrabold text-white uppercase tracking-tight">
-                    {story.name}
-                  </h3>
-                  <p className="text-slate-300 text-sm font-normal leading-relaxed opacity-60">
-                    "{story.quote}"
-                  </p>
-                </div>
-
-                {/* Analytical Stats Bar */}
-                <div className="pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
-                  {story.stats.map((stat, sIdx) => (
-                     <div key={sIdx} className="space-y-1">
-                        <div className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{stat.label}</div>
-                        <div className="text-lg font-extrabold text-electric tracking-tight">
-                           {stat.value}
-                        </div>
-                     </div>
-                  ))}
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-display font-black uppercase tracking-tighter text-white">{story.name}</h4>
+                    <p className="text-[10px] uppercase tracking-widest text-electric font-black">{story.results}</p>
+                    <div className="flex gap-1">
+                       {[...Array(story.rating)].map((_, i) => (
+                         <Star key={i} className="h-2.5 w-2.5 fill-electric text-electric" />
+                       ))}
+                    </div>
+                  </div>
                 </div>
               </div>
+              
+              {/* Artistic Glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-electric/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </motion.div>
           ))}
         </div>
-
-        <motion.div 
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           className="mt-20 flex justify-center"
-        >
-           <Button variant="outline" className="h-14 px-10 rounded-sm border-white/10 text-white font-extrabold uppercase tracking-widest text-[9px] hover:bg-white hover:text-black transition-all duration-300 shadow-none">
-              REJOINDRE LE RÉSEAU ÉLITE
-              <ArrowRight className="ml-4 h-4 w-4" />
-           </Button>
-        </motion.div>
       </div>
     </section>
   );

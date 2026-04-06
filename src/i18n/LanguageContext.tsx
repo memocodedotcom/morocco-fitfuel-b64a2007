@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { translations, type Locale, type TranslationKey } from './translations';
+import { translations, Locale, TranslationKey } from './translations';
 
 interface LanguageContextType {
   locale: Locale;
@@ -17,17 +17,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = dir;
+    localStorage.setItem('locale', locale);
+  }, [locale, dir]);
+
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);
-    localStorage.setItem('locale', l);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.dir = dir;
-    document.documentElement.lang = locale;
-  }, [dir, locale]);
-
-  const t = useCallback((key: TranslationKey, vars?: Record<string, string | number>): string => {
+  const t = useCallback((key: TranslationKey, vars?: Record<string, string | number>) => {
     let text: string = translations[locale][key] || translations.fr[key] || key;
     if (vars) {
       Object.entries(vars).forEach(([k, v]) => {
@@ -45,7 +45,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useLanguage() {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider');
-  return ctx;
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 }

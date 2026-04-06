@@ -1,178 +1,166 @@
-import { useState } from 'react';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { stackBundles, getProduct } from '@/data/products';
-import { useCart } from '@/contexts/CartContext';
-import { Button } from '@/components/ui/button';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target, Dumbbell, Zap, Plus, Sparkles, ShoppingBag, ChevronRight } from 'lucide-react';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { Button } from '@/components/ui/button';
+import { useCart } from '@/hooks/use-cart';
+import { products } from '@/data/products';
 import { cn } from '@/lib/utils';
-import { toast } from '@/components/ui/sonner';
-import { Magnetic } from '@/components/ui/magnetic';
-
-const goals = [
-  { id: 'lose-weight', icon: Target },
-  { id: 'gain-muscle', icon: Dumbbell },
-  { id: 'energy', icon: Zap },
-] as const;
-
-type GoalKey = keyof typeof stackBundles;
+import { Zap, Target, Dumbbell, ArrowRight, ShoppingCart, Check } from 'lucide-react';
 
 export function BuildYourStack() {
-  const { locale, t } = useLanguage();
+  const { t, locale } = useLanguage();
   const { addItem } = useCart();
-  const [selected, setSelected] = useState<GoalKey>('gain-muscle');
-  const bundle = stackBundles[selected];
-  const bundleProducts = bundle.productIds.map((id) => getProduct(id)!).filter(Boolean);
-  const totalPrice = bundleProducts.reduce((s, p) => s + p.price, 0);
-  const discountedPrice = Math.round(totalPrice * (1 - bundle.discount / 100));
+  const [selectedGoal, setSelectedGoal] = useState<'lose-weight' | 'gain-muscle' | 'energy'>('gain-muscle');
+  const [added, setAdded] = useState(false);
 
-  const goalLabels: Record<GoalKey, string> = {
-    'lose-weight': t('loseWeight'),
-    'gain-muscle': t('gainMuscle'),
-    energy: t('energy'),
-  };
+  const goals = [
+    { id: 'gain-muscle', label: t('gainMuscle'), icon: Dumbbell, color: 'electric' },
+    { id: 'lose-weight', label: t('loseWeight'), icon: Target, color: 'terracotta' },
+    { id: 'energy', label: t('energy'), icon: Zap, color: 'teal' },
+  ] as const;
+
+  const currentBundle = useMemo(() => {
+    // Basic logic for bundle generation
+    const bundleProducts = products
+      .filter(p => (p.category === 'protein' || p.category === 'creatine' || p.category === 'pre-workout'))
+      .slice(0, 3);
+      
+    const totalPrice = bundleProducts.reduce((sum, p) => sum + p.price, 0);
+    const bundlePrice = Math.round(totalPrice * 0.85); // 15% Bundle Discount
+
+    return {
+      products: bundleProducts,
+      totalPrice,
+      bundlePrice,
+      name: {
+        fr: `Stack ${goals.find(g => g.id === selectedGoal)?.label}`,
+        ar: `باقة ${goals.find(g => g.id === selectedGoal)?.label}`
+      }
+    };
+  }, [selectedGoal, locale]);
 
   const handleAddBundle = () => {
-    bundleProducts.forEach((p) => addItem(p.id, 1, undefined, undefined, { silent: true }));
-    toast.success(t('addedToCart'));
+    currentBundle.products.forEach(p => addItem(p));
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
   };
 
   return (
-    <section className="py-32 bg-obsidian relative overflow-hidden">
-      {/* Structural Background Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:32px_32px]" />
-      
-      <div className="container relative z-10 px-4">
-        <div className="text-center max-w-5xl mx-auto mb-24 space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div className="flex items-center justify-center gap-4">
-               <div className="h-px w-8 bg-electric" />
-               <span className="text-[10px] font-extrabold uppercase tracking-widest text-electric">{t('buildStack')}</span>
-            </div>
-            <h2 className="text-6xl md:text-huge font-display font-extrabold uppercase tracking-tight text-white leading-[0.9]">
-              PROTOCOLE <br />
-              <span className="text-white/30">SUR MESURE.</span>
-            </h2>
-          </motion.div>
+    <section id="goal-selector" className="py-32 md:py-48 bg-black relative overflow-hidden">
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 z-0">
+         <div className="absolute top-1/2 left-0 w-full h-[600px] bg-electric/5 -translate-y-1/2 blur-[150px] opacity-30" />
+      </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mt-12 pb-4 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-            {goals.map((g) => (
-              <button
-                key={g.id}
-                type="button"
-                onClick={() => setSelected(g.id)}
-                className={cn(
-                  "shrink-0 h-14 px-8 rounded-sm text-[9px] font-extrabold transition-all duration-300 uppercase tracking-widest border",
-                  selected === g.id
-                    ? "bg-electric text-black border-electric"
-                    : "bg-white/[0.02] text-white/40 border-white/10 hover:border-white/20 hover:text-white"
-                )}
-              >
-                <div className="flex items-center gap-4 relative z-10">
-                  <g.icon className={cn("h-4 w-4", selected === g.id ? "text-black" : "text-electric/60")} />
-                  <span>{goalLabels[g.id]}</span>
+      <div className="container relative z-10 px-4">
+        <div className="grid lg:grid-cols-2 gap-24 items-center max-w-7xl mx-auto">
+          {/* Left: Selector */}
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                 <div className="h-px w-10 bg-electric" />
+                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-electric">OPTIMISER VOTRE STACK</span>
+              </div>
+              <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-white leading-[0.9]">
+                BUILD YOUR<br/>
+                <span className="serif-display italic text-white/30 lowercase">excellence.</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+               {goals.map((goal) => (
+                 <button
+                   key={goal.id}
+                   onClick={() => setSelectedGoal(goal.id)}
+                   className={cn(
+                     "relative p-8 rounded-sm border transition-all duration-500 text-left group overflow-hidden",
+                     selectedGoal === goal.id 
+                      ? "bg-white/[0.05] border-electric/40" 
+                      : "bg-transparent border-white/5 hover:border-white/10"
+                   )}
+                 >
+                   <div className="relative z-10 flex items-center justify-between">
+                      <div className="flex items-center gap-6">
+                         <div className={cn(
+                            "h-12 w-12 flex items-center justify-center rounded-sm transition-colors",
+                            selectedGoal === goal.id ? "bg-electric text-black" : "bg-white/5 text-white"
+                         )}>
+                            <goal.icon className="h-6 w-6" />
+                         </div>
+                         <span className={cn(
+                           "text-xl font-display font-black uppercase tracking-tighter transition-colors",
+                           selectedGoal === goal.id ? "text-white" : "text-slate-500"
+                         )}>
+                           {goal.label}
+                         </span>
+                      </div>
+                      {selectedGoal === goal.id && (
+                        <ArrowRight className="h-6 w-6 text-electric" />
+                      )}
+                   </div>
+                 </button>
+               ))}
+            </div>
+          </div>
+
+          {/* Right: Bundle Card */}
+          <div className="relative">
+             <div className="relative z-10 bg-white/[0.02] border border-white/10 p-12 rounded-sm backdrop-blur-3xl space-y-10 group hover:border-white/20 transition-all duration-700">
+                <div className="flex justify-between items-start">
+                   <div className="space-y-2">
+                     <span className="text-[10px] font-black uppercase tracking-widest text-electric">BUNDLE ELITE -15%</span>
+                     <h3 className="text-4xl font-display font-black uppercase tracking-tighter text-white">
+                       {currentBundle.name[locale]}
+                     </h3>
+                   </div>
+                   <div className="text-right">
+                      <div className="text-slate-500 line-through text-sm">{currentBundle.totalPrice} MAD</div>
+                      <div className="text-4xl font-display font-black text-white">{currentBundle.bundlePrice} MAD</div>
+                   </div>
                 </div>
-              </button>
-            ))}
+
+                <div className="space-y-6">
+                   <p className="text-slate-500 text-[10px] uppercase tracking-widest font-extrabold pb-4 border-b border-white/5">COMPOSITION DU STACK</p>
+                   <div className="grid gap-6">
+                      {currentBundle.products.map((product) => (
+                        <div key={product.id} className="flex items-center gap-6 group/item">
+                           <div className="h-16 w-16 bg-white/5 p-2 rounded-sm border border-white/5 group-hover/item:border-white/20 transition-colors">
+                              <img src={product.images[0]} alt={product.name} className="w-full h-full object-contain grayscale group-hover/item:grayscale-0 transition-all" />
+                           </div>
+                           <div className="space-y-1">
+                              <h4 className="text-xs font-black uppercase tracking-widest text-white">{product.name}</h4>
+                              <p className="text-[10px] text-slate-500 uppercase tracking-widest">{product.brand}</p>
+                           </div>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+
+                <Button 
+                  onClick={handleAddBundle}
+                  className={cn(
+                    "w-full h-16 rounded-sm font-black uppercase tracking-[0.2em] text-xs transition-all duration-500 mt-6",
+                    added ? "bg-green-500 text-white" : "bg-electric text-black hover:bg-white"
+                  )}
+                >
+                  {added ? (
+                    <>
+                      <Check className="mr-2 h-5 w-5" />
+                      {locale === 'fr' ? 'ADDITIONN├ë' : '┘à╪│╪¬╪╣╪» ┘ä┘ä╪¬┘ê╪╡┘è┘ä'}
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="mr-2 h-5 w-5" />
+                      {t('addBundle')}
+                    </>
+                  )}
+                </Button>
+             </div>
+
+             {/* Decorative Background Element */}
+             <div className="absolute -inset-4 border border-white/5 -z-10 translate-x-2 translate-y-2 opacity-50" />
           </div>
         </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selected}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5 }}
-            className="grid lg:grid-cols-12 gap-10 items-stretch max-w-7xl mx-auto"
-          >
-            {/* Main Bundle Card */}
-            <div className="lg:col-span-8 bg-white/[0.02] border border-white/[0.05] rounded-sm p-10 md:p-16 relative overflow-hidden group">
-              <div className="relative z-10 h-full flex flex-col">
-                <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-6">
-                  <h3 className="text-4xl md:text-6xl font-display font-extrabold uppercase mb-0 max-w-xl leading-none tracking-tight text-white order-2 md:order-1">
-                    {bundle.name[locale]}
-                  </h3>
-                  <div className="bg-electric text-black px-6 py-2 rounded-sm text-[10px] font-extrabold tracking-widest uppercase border border-electric order-1 md:order-2">
-                    -{bundle.discount}% OFF
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 items-center mt-auto">
-                  {bundleProducts.map((p, i) => (
-                    <div key={p.id} className="relative group/item flex flex-col items-center md:items-start text-center md:text-left">
-                      <div className="relative w-full aspect-square rounded-sm p-8 overflow-hidden mb-6 border border-white/[0.05] bg-black/20 group-hover/item:border-electric transition-colors">
-                        <img
-                          src={p.images[0]}
-                          alt={p.name[locale]}
-                          className="w-full h-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] group-hover/item:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-electric mb-1">{p.brand}</p>
-                        <p className="text-sm font-display font-bold uppercase tracking-tight text-white line-clamp-1">{p.name[locale]}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Summary & Checkout */}
-            <div className="lg:col-span-4 flex flex-col justify-between border border-white/[0.05] bg-white/[0.02] rounded-sm p-10 md:p-14 text-white relative">
-               <div>
-                 <div className="flex items-center gap-4 mb-12">
-                   <div className="h-px w-6 bg-electric" />
-                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">PACK CONTENT</span>
-                 </div>
-
-                 <ul className="space-y-6 mb-16">
-                   {bundleProducts.map((p) => (
-                     <li key={p.id} className="flex items-center justify-between pb-6 border-b border-white/[0.05] group/li">
-                        <div className="space-y-1">
-                          <span className="text-xs font-bold text-white group-hover:text-electric transition-colors uppercase tracking-tight">{p.name[locale]}</span>
-                          <p className="text-[9px] font-extrabold text-slate-500 uppercase tracking-widest">{p.brand}</p>
-                        </div>
-                        <span className="text-[10px] font-extrabold text-slate-500">{p.price} MAD</span>
-                     </li>
-                   ))}
-                 </ul>
-               </div>
-
-               <div className="space-y-10">
-                 <div className="flex items-end justify-between p-8 bg-black/40 border border-white/[0.05] rounded-sm">
-                    <div>
-                      <p className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 mb-3">LIST PRICE</p>
-                      <p className="text-xl font-display font-medium line-through text-slate-600">{totalPrice} MAD</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-[9px] font-extrabold uppercase tracking-widest text-electric mb-3">MEMBER PRICE</p>
-                      <p className="text-4xl font-display font-black tracking-tighter text-white">{discountedPrice} MAD</p>
-                    </div>
-                 </div>
-
-                 <div className="space-y-6">
-                    <Button 
-                      onClick={handleAddBundle} 
-                      className="w-full h-16 rounded-sm bg-white text-black font-extrabold tracking-widest text-[10px] uppercase hover:bg-electric transition-all group overflow-hidden border-0"
-                    >
-                      <ShoppingBag className="mr-4 h-4 w-4" />
-                      ACTIVER LE PACK
-                      <ChevronRight className="ml-4 h-4 w-4" />
-                    </Button>
-                    <p className="text-[9px] text-center font-extrabold text-slate-600 uppercase tracking-widest">
-                      *Économie garantie de {totalPrice - discountedPrice} MAD
-                    </p>
-                 </div>
-               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );

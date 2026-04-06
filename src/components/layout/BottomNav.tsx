@@ -27,7 +27,6 @@ export function BottomNav() {
           {navItems.map((item) => {
             const isActive = item.path && location.pathname === item.path;
             const Component = item.path ? Link : 'button';
-            // @ts-ignore
             const props = item.path ? { to: item.path } : { onClick: item.action };
 
             return (

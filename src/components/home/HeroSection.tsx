@@ -1,22 +1,19 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Truck, CreditCard, Sparkles, Activity, Zap, TrendingUp, Star } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Magnetic } from '@/components/ui/magnetic';
+import { ArrowRight, Sparkles, Activity, ShieldCheck } from 'lucide-react';
+import { useRef } from 'react';
 
 export function HeroSection() {
-  const { t, locale, dir } = useLanguage();
+  const { t, locale } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 500]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
@@ -24,128 +21,121 @@ export function HeroSection() {
       ref={containerRef}
       className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden bg-black text-white pt-32 md:pt-0 atmospheric-depth"
     >
-      {/* Background Parallax Identity - Sophisticated Layering */}
+      {/* Cinematic Background Layers */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-electric/5 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
+      </div>
+
+      {/* Parallax Background Text */}
       <motion.div 
         style={{ y: textY, opacity }}
-        className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0"
       >
-        <span className="text-[50vw] font-serif italic tracking-tighter leading-none text-white whitespace-nowrap">
-          Elite
+        <span className="text-[20vw] font-black uppercase tracking-tighter opacity-[0.02] leading-none whitespace-nowrap">
+          {locale === 'fr' ? 'UNLEASH' : '┘é┘ê╪⌐'}
         </span>
       </motion.div>
 
-      {/* Atmospheric Accents */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-electric/[0.02] rounded-full blur-[150px] pointer-events-none translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none -translate-x-1/4 translate-y-1/4" />
-
-      <div className="container relative z-10 px-4">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-center max-w-7xl mx-auto">
-          
-          {/* Content side - Prestige focus */}
-          <div className="lg:col-span-7 space-y-12 text-left">
-            <div className="space-y-6">
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1 }}
-                className="flex items-center gap-6"
-              >
-                <div className="h-px w-12 bg-electric/40" />
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-electric/80">
-                   {locale === 'fr' ? 'ÉLITE ATHLÉTIQUE DU MAROC' : 'نخبة الرياضيين بالمغرب'}
+      <div className="container relative z-10 px-4 pt-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Main Content */}
+          <div className="lg:col-span-8 space-y-10">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-4">
+                <div className="h-px w-10 bg-electric" />
+                <span className="text-[10px] font-extrabold uppercase tracking-[0.4em] text-electric">
+                  {t('heroPromoBadge')}
                 </span>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 0.1 }}
-                className="space-y-2"
-              >
-                <h1 className="text-6xl md:text-huge font-display font-black leading-[0.85] tracking-tight uppercase">
-                  {locale === 'fr' ? 'LA PERFORMANCE' : 'الأداء'}
-                </h1>
-                <h2 className="text-4xl md:text-7xl serif-display text-white/40 leading-none">
-                  {locale === 'fr' ? 'définitive.' : 'النهائي.'}
-                </h2>
-              </motion.div>
-              
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="text-base md:text-lg text-slate-400 max-w-xl font-normal leading-relaxed opacity-80"
-              >
-                {locale === 'fr' 
-                  ? "Protocoles de nutrition de précision pour les athlètes exigeant une clarté et une puissance absolues dans leur quête de perfection."
-                  : "بروتوكولات تغذية دقيقة للرياضيين الذين يطالبون بوضوح وقوة مطلقة في سعيهم نحو الكمال."}
-              </motion.p>
-            </div>
+              </div>
+
+              <h1 className="flex flex-col gap-2">
+                <span className="text-6xl md:text-[10rem] font-display font-black uppercase tracking-tight leading-[0.8] text-white">
+                  {t('heroTitle')}
+                </span>
+                <span className="serif-display italic text-6xl md:text-[11rem] text-electric leading-[0.85] -ml-2 md:-ml-4 drop-shadow-[0_0_30px_rgba(212,255,0,0.3)]">
+                  {t('heroEmphasis')}
+                </span>
+              </h1>
+
+              <p className="max-w-xl text-slate-400 text-lg md:text-2xl font-light leading-relaxed border-l-2 border-white/5 pl-8 py-2">
+                {t('heroSubtitle')}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="flex flex-wrap items-center gap-6"
+            >
+              <Link to="/products">
+                <Button 
+                  size="huge" 
+                  className="bg-electric text-black hover:bg-white transition-all duration-500 rounded-none font-black uppercase tracking-widest text-xs px-12 h-16 shadow-[0_0_40px_rgba(212,255,0,0.2)]"
+                >
+                  {t('heroCta')}
+                  <ArrowRight className="ml-3 h-5 w-5" strokeWidth={3} />
+                </Button>
+              </Link>
+              <Link to="/#goal-selector">
+                <Button 
+                  variant="outline" 
+                  size="huge" 
+                  className="border-white/10 hover:border-electric transition-all duration-500 rounded-none font-black uppercase tracking-widest text-xs px-12 h-16 bg-white/[0.02]"
+                >
+                  {t('buildStack')}
+                </Button>
+              </Link>
+            </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center gap-12 pt-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="flex items-center gap-10 pt-10"
             >
-              <Button asChild size="lg" className="h-16 px-12 rounded-sm bg-white text-black hover:bg-electric transition-all duration-500 border-none shadow-2xl group">
-                <Link to="/products" className="flex items-center gap-6">
-                  <span className="font-extrabold tracking-[0.2em] text-[10px] uppercase">{t('heroCta')}</span>
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-
-              <div className="flex flex-col gap-3 items-start border-l border-white/5 pl-8">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-12 w-12 rounded-sm border-2 border-black bg-slate-900 overflow-hidden">
-                      <img src={`https://i.pravatar.cc/150?u=${i+10}`} alt="Athlete" className="grayscale opacity-50 hover:opacity-100 transition-opacity" />
-                    </div>
-                  ))}
+              <div className="flex items-center gap-3 group">
+                <div className="h-10 w-10 flex items-center justify-center rounded-sm bg-white/5 border border-white/5 transition-colors group-hover:border-electric/30">
+                  <ShieldCheck className="h-5 w-5 text-electric" />
                 </div>
-                <div className="text-[9px] font-extrabold tracking-widest text-white/20 uppercase">
-                    PRO LEVEL SUPPORTS
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-white">{t('promoAuthentic')}</span>
+                  <span className="text-[8px] font-bold uppercase tracking-widest text-slate-500">IMPORT OFFICIEL</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 group">
+                <div className="h-10 w-10 flex items-center justify-center rounded-sm bg-white/5 border border-white/5 transition-colors group-hover:border-electric/30">
+                  <Activity className="h-5 w-5 text-electric" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-white">{t('fastDelivery')}</span>
+                  <span className="text-[8px] font-bold uppercase tracking-widest text-slate-500">MAINTENANT DISPONIBLE</span>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Image side - Cinematic Depth */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2, ease: "easeOut" }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/[0.03] bg-white/[0.01] group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
-              <img 
-                src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=1000&q=95" 
-                alt="Elite Performance Supplement" 
-                className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-              
-              {/* Floating Performance Data */}
-              <div className="absolute bottom-8 left-8 right-8 p-10 glass border-white/5 rounded-sm">
-                <div className="flex items-center justify-between">
-                   <div className="space-y-1">
-                      <p className="text-[9px] font-bold text-white/30 uppercase tracking-[0.3em]">PHASE</p>
-                      <p className="text-xl serif-display text-white italic">Elite 2.0</p>
-                   </div>
-                   <div className="h-10 w-px bg-white/10" />
-                   <div className="space-y-1 text-right">
-                      <p className="text-[9px] font-bold text-electric/40 uppercase tracking-[0.3em]">CERTIFIED</p>
-                      <p className="text-sm font-black text-white">WADA READY</p>
-                   </div>
+          {/* Side Graphic / Info (Optional) */}
+          <div className="hidden lg:block lg:col-span-4 relative">
+             {/* Decorative element */}
+             <div className="aspect-[4/5] bg-gradient-to-br from-white/[0.05] to-transparent border border-white/5 p-12 relative overflow-hidden backdrop-blur-3xl">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593095948071-474c5cc2c2d8?w=800&q=80')] bg-cover bg-center mix-blend-overlay opacity-30 grayscale" />
+                <div className="relative z-10 h-full flex flex-col justify-end gap-6">
+                  <Sparkles className="h-12 w-12 text-electric mb-4" />
+                  <span className="text-4xl font-display font-black uppercase tracking-tighter leading-none">
+                    Performance<br/>Elite.
+                  </span>
+                  <div className="h-1 w-20 bg-electric" />
                 </div>
-              </div>
-            </div>
-
-            {/* Subliminal Accents */}
-            <div className="absolute -top-12 -right-12 text-[15vw] serif-display text-white/[0.02] rotate-12 pointer-events-none select-none">
-              Elite
-            </div>
-          </motion.div>
+             </div>
+          </div>
         </div>
       </div>
     </section>
