@@ -1,117 +1,92 @@
-# Front-end improvement implementation plan
+# 🚀 NutriMaroc: Performance Luxury Overhaul - Implementation Plan
 
-This document turns the UI/UX review into an ordered plan. Scope is front-end only (React, layout, i18n, styling, routing). Adjust order if backend or content work is scheduled in parallel.
-
----
-
-## Goals
-
-- Fix broken navigation and inconsistent bilingual UX.
-- Align mobile and desktop shells so the brand and key actions are always discoverable.
-- Reduce “template” signals (placeholders, non-links, mixed languages).
-- Keep changes incremental; ship in small PRs where possible.
+This plan outlines the transformation of the current prototype into a world-class, authority-driven supplement brand: **NutriMaroc**. We will shift from a generic aggregator to a premium, research-backed Moroccan brand.
 
 ---
 
-## Phase 1 — Navigation and routing (high priority)
+## 🏗️ 1. Brand Identity & "Fake Company" Definition
+We will establish **NutriMaroc** as the "Elite Standard" for Moroccan athletes.
 
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 1.1 Profile destination | Either add a real `/profile` route (account placeholder, sign-in CTA, or order lookup stub) or remove/replace the bottom-nav item until it exists. | Tapping Profile never lands on 404; copy matches FR/AR. |
-| 1.2 Footer category links | Link each footer category to `/products?category=<id>` (or equivalent) so destinations match labels. | Each category opens the filtered listing. |
-| 1.3 Footer help links | Turn help rows into `Link` targets to real routes (`/faq`, `/returns`, `/track-order`) or a single `/help` hub with anchors. | Keyboard and screen-reader users can activate every item; no dead `span`-only rows. |
-| 1.4 Social links | Replace `href="#"` with real URLs or hide icons until URLs exist. | No inert social icons in production build. |
-
-**Dependencies:** Product category `id` values must match `categories` in data. New pages can be minimal static content at first.
+*   **Brand Name**: NutriMaroc.
+*   **Tagline**: "La Performance au Sommet" (Performance at the Peak).
+*   **Core Value**: "L'Excellence Scientifique au Service de l'Athlète" (Scientific Excellence at the Service of the Athlete).
+*   **Visual Direction**: High-contrast dark mode, Electric Lime (`#D4FF00`) accents for energy, and Metallic Silver for premium quality.
+*   **Assets**: We will use AI-generated imagery featuring Moroccan sports environments (Casablanca coast workouts, high-end Atlas gyms) and sleek, minimalist supplement packaging.
 
 ---
 
-## Phase 2 — Mobile shell (high priority)
+## 🛍️ 2. Product Expansion (Signature Line)
+We will add a "NutriMaroc Signature Series" to the database in `src/data/products.ts`.
 
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 2.1 Mobile header | Add a compact bar below `PromoBar` for `md` hidden: logo (home), optional cart icon, language toggle. Keep search accessible via bottom nav or header icon—pick one primary pattern and document it. | First paint on phone shows brand; cart/language reachable without opening drawer-only flows if that is the chosen pattern. |
-| 2.2 Sticky behavior | Decide what sticks: promo only, or promo + header; avoid double shadows or jumpy layout. | Scroll on iOS/Android feels stable; safe-area insets respected. |
-
-**Dependencies:** Reuse `DesktopHeader` patterns (cart count, `SearchOverlay`, `setLocale`) to avoid duplicated logic; extract shared pieces if needed.
-
----
-
-## Phase 3 — Internationalization and RTL (high priority)
-
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 3.1 Promo bar | Move rotating and static promo strings into `translations` (FR + AR). | Switching locale updates promo text; RTL layout still readable. |
-| 3.2 Product card strings | Localize low-stock and any other hardcoded UI strings (e.g. discount labels if not already keyed). | No French-only strings when locale is Arabic. |
-| 3.3 Directional icons | Mirror or swap icons that imply direction (e.g. CTA chevrons, back links) using `dir` or logical CSS. | Arabic UI does not show “backward” arrows on primary actions. |
-| 3.4 Marquee | Ensure `BrandMarquee` uses the RTL animation variant when `dir="rtl"`. | Marquee scroll direction feels natural in Arabic. |
-
-**Dependencies:** Extend `TranslationKey` and both locale objects together to satisfy TypeScript.
+*   **NutriMaroc Whey Isolate**: Ultra-filtered, local flavors (e.g., Amlou, Mint Tea - limited editions).
+*   **NutriMaroc Pure Creatine**: 200 Mesh micronized for maximum absorption.
+*   **NutriMaroc Extreme Gainer**: 1500+ calories for the Moroccan "hardgainer."
+*   **Enhanced Metadata**: Add "Laboratory Tested" badges, Batch Numbers, and specific goal tags for each.
 
 ---
 
-## Phase 4 — Trust and polish (medium priority)
+## 🧭 3. Navigation & UX Overhaul
+Current navigation is too simple. We will upgrade the `DesktopHeader` and `MobileHeader`.
 
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 4.1 Payment badges | Replace text chips with accessible SVG or image logos (Visa, Mastercard, CMI) plus `alt` text; maintain contrast on dark footer. | Legible at small sizes; documented license for assets. |
-| 4.2 Notifications | Choose Sonner **or** shadcn Toaster as the single user-facing toast system; remove or isolate the other for dev-only if needed. | One consistent style for add-to-cart, errors, and success. |
-| 4.3 Reduced motion | Respect `prefers-reduced-motion` for Framer Motion (and optional marquee) per section or globally. | With OS “reduce motion” on, no distracting continuous animation. |
-
----
-
-## Phase 5 — Product discovery and checkout UX (medium priority)
-
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 5.1 Filters | Add filters that match catalog needs (e.g. price range, brand) with a mobile-friendly surface (sheet or full-width panel). | Filters compose with existing category query params; URL reflects state where useful. |
-| 5.2 Checkout layout variant | Optional `AppLayout` variant: minimal chrome (logo + back link, slim footer) for `/checkout`. | Fewer competing CTAs during checkout; cart drawer behavior defined (e.g. still available or suppressed). |
-| 5.3 Checkout steps | Visual steps (Cart → Details → Payment) even if payment is still placeholder. | User always knows where they are in the flow. |
+*   **Mega Menu**: Implement a dropdown that categorizes products by **Category** (Proteins, Vitamins) and **Goal** (Build Muscle, Burn Fat, Endurance).
+*   **The "Goal Selector"**: A prominent "Trouvez votre Stack" (Find your Stack) CTA in the nav to guide beginners.
+*   **Visual Polish**: Use full-width glassmorphism, subtle blur transitions, and animated underlines for active links.
+*   **Visibility**: Move the Search bar to a more prominent position or make it an expandable search for better clarity.
 
 ---
 
-## Phase 6 — Design system hygiene (lower priority)
+## 🏆 4. New Section: "Histoires de Succès" (Case Studies)
+This section will be the "Social Proof Engine" located between the Products and the Video Feed.
 
-| Task | Description | Acceptance criteria |
-|------|-------------|---------------------|
-| 6.1 Section pattern | Document or extract a shared “section” wrapper: consistent vertical padding, optional title slot, `container` usage. | New home sections match existing rhythm without one-off `py-*` values. |
-| 6.2 Dark mode | Either expose theme toggle using existing `next-themes` + `.dark` tokens or remove unused dependency and document light-only. | No half-implemented dark styles in production. |
-| 6.3 Hero tone | A/B or incremental copy/design pass: fewer decorative emoji if positioning is “premium”; single clear promise above the fold. | Stakeholder-approved copy in both locales. |
-
----
-
-## Suggested PR breakdown
-
-1. **PR A:** Phase 1 (routing + footer links + social).
-2. **PR B:** Phase 2 (mobile header + sticky tweaks).
-3. **PR C:** Phase 3 (i18n + RTL + marquee).
-4. **PR D:** Phase 4 (trust assets + toasts + motion).
-5. **PR E:** Phase 5 (filters + checkout UX).
-6. **PR F:** Phase 6 (docs/patterns + theme decision).
+*   **Component**: `SuccessStories.tsx`.
+*   **Content**: 3-4 featurettes of local athletes.
+*   **Interactions**:
+    *   **Interactive Sliders**: "Before/After" image comparison.
+    *   **"What they use"**: A small product list linked directly to the cart next to each story.
+    *   **Results Grid**: Key stats (e.g., +5kg muscle in 3 months).
 
 ---
 
-## Verification checklist (each PR)
+## ✨ 5. Missing Required Sections (Innovation)
+To compete with global brands, we need these missing components:
 
-- [ ] `npm run build` passes.
-- [ ] Manual pass in FR and AR: home, products, product detail, cart, checkout.
-- [ ] Keyboard: focus visible on new controls; no trap in overlays.
-- [ ] No new dead links or `href="#" ` in user-visible chrome.
-
----
-
-## Out of scope (for this plan)
-
-- Payment provider integration, real auth, inventory APIs.
-- SEO and server rendering strategy (unless you add a separate doc).
-- Content photography and legal copy (privacy, terms)—can stub routes with placeholders.
+1.  **Science & Quality Vault**: A dedicated section/page explaining our 3rd-party testing, COA (Certificate of Analysis) access, and ingredient transparency.
+2.  **NutriMaroc Academy (Blog/Vault)**: Educational cards on the homepage (e.g., "Combien de Créatine ?" or "Planning Repas Ramadan").
+3.  **Loyalty Club (NutriMaroc Elite)**: A small interactive block showing rewards and early access benefits.
+4.  **Local Trust Bridge**: "Livraison Express Partout au Maroc" (Next-day delivery in major cities).
 
 ---
 
-*Last updated: aligned with current codebase layout (`AppLayout`, `DesktopHeader`, `BottomNav`, `Footer`, `LanguageContext`, product pages).*
+## 📅 6. Execution Roadmap
+
+### Phase A: Brand & Content Foundation
+*   [ ] Generate 5+ high-end product/lifestyle images.
+*   [ ] Update `products.ts` with the "NutriMaroc Signature" line.
+*   [ ] Rewrite localized descriptions (FR/AR) to be more persuasive and authoritative.
+
+### Phase B: Navigation & Layout
+*   [ ] Implement the Mega Menu in `src/components/layout/DesktopHeader.tsx`.
+*   [ ] Redesign the Mobile Menu for better hierarchy of categories vs. information.
+*   [ ] Polish the `PromoBar` with rotating offers (e.g., "Free Shaker over 500 DH").
+
+### Phase C: Social Proof & Case Studies
+*   [ ] Create the `SuccessStories.tsx` component.
+*   [ ] Update `Index.tsx` to include the Case Study section as a bridge between the store and the community.
+*   [ ] Enrich the `PerformanceVideoFeed` with specific "NutriMaroc" branded content placeholders.
+
+### Phase D: Trust & Authority
+*   [ ] Add the `QualitySeal.tsx` component to the homepage.
+*   [ ] Implement the "Education/Blog" preview section.
+*   [ ] Final design pass: Hover effects, custom cursors for products, and scroll-triggered animations.
 
 ---
 
-## Implementation status (done in repo)
-
-Phases 1–6 from this document are implemented: new routes (`/profile`, `/track-order`, `/faq`, `/returns`), footer and category links, optional social URLs via `VITE_SOCIAL_INSTAGRAM` / `VITE_SOCIAL_FACEBOOK`, mobile header + sticky bar, bilingual promo bar and product strings, RTL marquee and chevrons, Sonner-only toasts with add-to-cart feedback, reduced-motion handling for marquee and key Framer blocks, product filters (brand + price tier, URL params, mobile sheet), checkout layout with step indicator and empty-cart state, `PageSection` on home blocks, theme toggle + `next-themes`, and footer payment marks (`PaymentMethodLogos`).
+### Suggested Order for Homepage (`Index.tsx`):
+1.  `HeroSection` (Modernized)
+2.  `GoalSelector` (New: Quick path)
+3.  `FlashSales` (The Hook)
+4.  `SuccessStories` (New: Trust/Case Study)
+5.  `TrendingGrid` (Best Sellers)
+6.  `PerformanceVideoFeed` (Reel-style Social Proof)
+7.  `QualitySeal` (New: Scientific Trust)
+8.  `HomeValueCards` (Closing Seal)
