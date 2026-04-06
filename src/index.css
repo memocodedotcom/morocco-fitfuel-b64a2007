@@ -62,13 +62,13 @@
   }
 
   .dark {
-    --background: 220 45% 3.5%;
+    --background: 222 47% 5%;
     --foreground: 220 20% 98%;
 
-    --card: 220 30% 6%;
+    --card: 222 47% 8%;
     --card-foreground: 220 20% 98%;
 
-    --popover: 220 30% 7%;
+    --popover: 222 47% 9%;
     --popover-foreground: 220 20% 98%;
 
     --primary: 142 76% 45%;
@@ -154,6 +154,22 @@
 
   .glass-primary {
     @apply bg-primary/10 backdrop-blur-md border border-primary/20;
+  }
+
+  .grain-overlay {
+    position: relative;
+  }
+
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.03;
+    z-index: 1;
   }
 }
 

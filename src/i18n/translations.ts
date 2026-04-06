@@ -25,13 +25,13 @@ export const translations = {
     noResultsSuggestion: 'Nous n\'avons pas "{term}", mais ces alternatives populaires vous donneront les mêmes résultats :',
     
     // Hero
-    heroTitle: 'Suppléments premium',
-    heroEmphasis: 'au Maroc',
-    heroSubtitle: 'Livraison rapide partout au Maroc',
-    heroCta: 'Voir les offres',
-    heroPromoBadge: 'Jusqu’à -20% sur les stacks',
-    homeValueEyebrow: 'Pourquoi NutriMaroc',
-    homeValueHeadline: 'Notre Engagement envers la Qualité & la Performance.',
+    heroTitle: 'L\'EXCELLENCE AU',
+    heroEmphasis: 'SOMMET.',
+    heroSubtitle: 'La nutrition de performance ultime pour les athlètes de haut niveau au Royaume.',
+    heroCta: 'COMMANDER MAINTENANT',
+    heroPromoBadge: 'Performance Luxury 2.0',
+    homeValueEyebrow: 'OBSESSION QUALITÉ',
+    homeValueHeadline: 'NORME ÉLITE. PERFORMANCE PURE.',
     homeValueAuthenticTitle: 'Authentique & traçable',
     homeValueAuthenticDesc:
       'Approvisionnement officiel, numéros de lot, politique publique. Pas de promesses vides.',

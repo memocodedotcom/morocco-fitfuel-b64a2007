@@ -32,10 +32,10 @@ export function FlashSales() {
   if (products.length === 0) return null;
 
   return (
-    <section className="relative overflow-hidden py-20 bg-[#020617] text-white">
+    <section className="relative overflow-hidden py-24 bg-obsidian text-white grain-overlay">
       {/* Dynamic Aura Background */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] translate-y-1/2" />
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-electric/10 rounded-full blur-[140px] -translate-y-1/2 opacity-30" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] translate-y-1/2 opacity-20" />
 
       <div className="container relative">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">

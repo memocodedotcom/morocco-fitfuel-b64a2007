@@ -78,6 +78,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        obsidian: {
+          DEFAULT: "#020617",
+          light: "#0f172a",
+        },
+        electric: {
+          DEFAULT: "#D4FF00",
+          glow: "rgba(212, 255, 0, 0.15)",
+        },
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

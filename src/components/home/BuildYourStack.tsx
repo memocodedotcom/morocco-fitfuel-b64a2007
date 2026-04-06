@@ -37,9 +37,9 @@ export function BuildYourStack() {
   };
 
   return (
-    <section className="relative py-24 bg-background overflow-hidden">
+    <section className="relative py-24 bg-obsidian overflow-hidden grain-overlay">
       {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-electric/10 rounded-full blur-[120px] -translate-y-1/2 opacity-20" />
       
       <div className="container relative">
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -156,7 +156,7 @@ export function BuildYourStack() {
                      <p className="text-xl font-medium line-through opacity-40">{totalPrice} MAD</p>
                    </div>
                    <div className="text-right">
-                     <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">Prix Stack</p>
+                     <p className="text-xs font-bold uppercase tracking-widest text-electric mb-1">Prix Stack</p>
                      <p className="text-4xl font-black">{discountedPrice} MAD</p>
                    </div>
                  </div>
@@ -164,7 +164,7 @@ export function BuildYourStack() {
                  <Button 
                    onClick={handleAddBundle} 
                    size="lg" 
-                   className="w-full h-16 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-black tracking-[0.1em] text-sm shadow-[0_10px_30px_rgba(34,197,94,0.3)] transition-all hover:-translate-y-1 active:translate-y-0"
+                   className="w-full h-16 rounded-2xl bg-electric hover:bg-white text-black font-black tracking-[0.1em] text-sm shadow-[0_10px_30px_rgba(34,197,94,0.3)] transition-all hover:-translate-y-1 active:translate-y-0"
                  >
                    <ShoppingBag className="mr-3 h-5 w-5" />
                    AJOUTER LE BUNDLE

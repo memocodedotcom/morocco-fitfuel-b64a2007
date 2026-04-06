@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Star, User, Quote } from 'lucide-react';
+import { Play, Star, User, Quote, Heart, ShoppingBag, Plus, Activity, Instagram } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 interface VideoTestimonial {
   id: string;
@@ -11,6 +12,8 @@ interface VideoTestimonial {
   username: string;
   role: string;
   rating: number;
+  productName?: string;
+  productPrice?: string;
 }
 
 const TESTIMONIALS: VideoTestimonial[] = [
@@ -21,6 +24,8 @@ const TESTIMONIALS: VideoTestimonial[] = [
     username: '@karim_fit',
     role: 'Athlète Pro',
     rating: 5,
+    productName: 'NM-Whey-Isolate',
+    productPrice: '599,00 DH'
   },
   {
     id: '2',
@@ -29,14 +34,8 @@ const TESTIMONIALS: VideoTestimonial[] = [
     username: '@sarah_wellness',
     role: 'Coach Fitness',
     rating: 5,
-  },
-  {
-    id: '3',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-running-on-the-beach-at-sunset-1002-large.mp4',
-    thumbnailUrl: 'https://images.pexels.com/photos/1231265/pexels-photo-1231265.jpeg?auto=compress&cs=tinysrgb&w=800',
-    username: '@mehdi_ocr',
-    role: 'Crossfit Enthusiast',
-    rating: 5,
+    productName: 'NM-Pure-Creatine',
+    productPrice: '299,00 DH'
   },
   {
     id: '4',
@@ -45,54 +44,67 @@ const TESTIMONIALS: VideoTestimonial[] = [
     username: '@amine_boxing',
     role: 'Boxeur',
     rating: 5,
+    productName: 'NM-Pre-Workout',
+    productPrice: '349,00 DH'
   },
 ];
 
 export function PerformanceVideoFeed() {
-  const { t, dir } = useLanguage();
+  const { t, locale } = useLanguage();
   
   return (
-    <section className="py-24 bg-[#020617] overflow-hidden">
+    <section className="py-32 bg-obsidian overflow-hidden grain-overlay">
       <div className="container px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="space-y-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div className="space-y-6">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20"
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+               className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-primary"
             >
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-primary">Live</span>
+               <Activity className="h-4 w-4 text-electric animate-pulse" />
+               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">Live Performance Feed</span>
             </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-display font-black tracking-tighter uppercase italic"
+              className="text-5xl md:text-8xl font-display font-black tracking-tighter uppercase italic leading-[0.8] text-white"
             >
-              {t('videoSectionTitle')}
+               PROUVEZ VOTRE <br />
+               <span className="text-electric">PERFORMANCE.</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-muted-foreground font-medium text-lg max-w-xl"
+              className="text-slate-400 font-medium text-xl max-w-xl italic"
             >
-              {t('videoSectionSubtitle')}
+               {locale === 'fr' 
+                 ? 'Rejoignez la communauté NutriMaroc sur Instagram et identifiez-nous pour apparaitre.'
+                 : 'انضم إلى مجتمع نيوترالماروك على إنستغرام وشاركنا تجربتك لتظهر هنا.'}
             </motion.p>
           </div>
+          <motion.div
+             initial={{ opacity: 0, x: 20 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true }}
+          >
+             <Button className="rounded-full px-10 py-8 bg-electric text-black font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,255,0,0.3)]">
+                <Instagram className="mr-3 h-5 w-5" />
+                @NutriMarocElite
+             </Button>
+          </motion.div>
         </div>
 
-        {/* Desktop Grid / Mobile Marquee */}
-        <div className="relative">
-          <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 scrollbar-hide snap-x snap-mandatory">
-            {TESTIMONIALS.map((testimonial, idx) => (
-              <VideoCard key={testimonial.id} testimonial={testimonial} index={idx} />
-            ))}
-          </div>
+        {/* Video Reel */}
+        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {TESTIMONIALS.map((testimonial, idx) => (
+             <VideoCard key={testimonial.id} testimonial={testimonial} index={idx} />
+          ))}
         </div>
       </div>
     </section>
@@ -102,7 +114,8 @@ export function PerformanceVideoFeed() {
 function VideoCard({ testimonial, index }: { testimonial: VideoTestimonial, index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [showHeart, setShowHeart] = useState(false);
   const { t } = useLanguage();
 
   const handleInteraction = () => {
@@ -117,87 +130,122 @@ function VideoCard({ testimonial, index }: { testimonial: VideoTestimonial, inde
     }
   };
 
+  const handleDoubleTap = (e: React.MouseEvent) => {
+     setShowHeart(true);
+     setIsLiked(true);
+     setTimeout(() => setShowHeart(false), 800);
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="relative flex-none w-[280px] md:w-full aspect-[9/16] rounded-2xl md:rounded-[2rem] overflow-hidden bg-white/5 border border-white/10 group cursor-pointer snap-center"
-      onMouseEnter={() => {
-        setIsHovered(true);
-        videoRef.current?.play().catch(() => {});
-        setIsPlaying(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        videoRef.current?.pause();
-        setIsPlaying(false);
-      }}
-      onClick={handleInteraction}
+      transition={{ delay: index * 0.2, type: 'spring', damping: 20 }}
+      className="relative flex-none aspect-[9/19] rounded-[4rem] group"
     >
-      {/* Video Element */}
-      <video
-        ref={videoRef}
-        src={testimonial.videoUrl}
-        poster={testimonial.thumbnailUrl}
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-      />
+      {/* Phone Frame Decoration */}
+      <div className="absolute -inset-4 border-[12px] border-white/5 rounded-[4.5rem] pointer-events-none group-hover:border-electric/10 transition-colors duration-700" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-obsidian rounded-b-3xl z-30" /> {/* Speaker/Sensors */}
+      
+      <div 
+         className="relative w-full h-full rounded-[4rem] overflow-hidden bg-white/5 border-4 border-slate-800 shadow-[0_40px_100px_rgba(0,0,0,0.6)] group-hover:shadow-electric/10 transition-all duration-700"
+         onClick={handleInteraction}
+         onDoubleClick={handleDoubleTap}
+      >
+        {/* Video Element */}
+        <video
+          ref={videoRef}
+          src={testimonial.videoUrl}
+          poster={testimonial.thumbnailUrl}
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+        {/* Dynamic Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 opacity-60" />
 
-      {/* Ripple Play Icon */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* Double Tap Heart */}
+        <AnimatePresence>
+           {showHeart && (
+              <motion.div 
+                 initial={{ scale: 0, opacity: 0 }}
+                 animate={{ scale: 1.5, opacity: 1 }}
+                 exit={{ scale: 2, opacity: 0 }}
+                 className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none"
+              >
+                 <Heart className="h-24 w-24 text-electric fill-electric drop-shadow-[0_0_30px_rgba(212,255,0,0.8)]" />
+              </motion.div>
+           )}
+        </AnimatePresence>
+
+        {/* Interaction Prompts */}
+        <div className="absolute inset-x-0 bottom-0 p-8 space-y-6">
+           {/* Buy Now Widget */}
+           <motion.div 
+             initial={{ x: -20, opacity: 0 }}
+             whileInView={{ x: 0, opacity: 1 }}
+             className="glass-primary p-5 rounded-[2rem] border-white/20 transform transition-transform group-hover:translate-y-[-10px]"
+           >
+              <div className="flex items-center justify-between gap-4">
+                 <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-lg pt-1">
+                       <ShoppingBag className="h-6 w-6 text-black" />
+                    </div>
+                    <div>
+                       <p className="text-[10px] font-black uppercase text-electric">{testimonial.productName}</p>
+                       <p className="text-sm font-black text-white">{testimonial.productPrice}</p>
+                    </div>
+                 </div>
+                 <Button className="h-10 w-10 p-0 rounded-full bg-electric text-black hover:scale-110 transition-transform">
+                    <Plus className="h-5 w-5" />
+                 </Button>
+              </div>
+           </motion.div>
+
+           {/* User Meta */}
+           <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                 <div className="h-10 w-10 rounded-full border-2 border-electric p-0.5">
+                    <div className="h-full w-full rounded-full bg-slate-800 overflow-hidden flex items-center justify-center">
+                       <User className="h-5 w-5 text-slate-400" />
+                    </div>
+                 </div>
+                 <div>
+                    <h4 className="text-sm font-black text-white">{testimonial.username}</h4>
+                    <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest">{testimonial.role}</p>
+                 </div>
+              </div>
+              <div 
+                 className={cn(
+                    "flex flex-col items-center gap-1 transition-all",
+                    isLiked ? "text-electric" : "text-white"
+                 )}
+                 onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
+              >
+                 <Heart className={cn("h-6 w-6 transition-all", isLiked && "fill-current scale-125")} />
+                 <span className="text-[10px] font-black">2.4k</span>
+              </div>
+           </div>
+        </div>
+
+        {/* Play Icon if Not Playing */}
         <AnimatePresence>
           {!isPlaying && (
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.5, opacity: 0 }}
-              className="relative"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm pointer-events-none"
             >
-              <div className="absolute inset-0 bg-primary/40 rounded-full blur-xl animate-pulse" />
-              <div className="relative h-16 w-16 bg-primary rounded-full flex items-center justify-center shadow-2xl">
-                <Play className="h-6 w-6 text-primary-foreground fill-current ml-1" />
+              <div className="h-20 w-20 bg-electric/20 rounded-full border border-electric/40 flex items-center justify-center">
+                 <Play className="h-10 w-10 text-electric fill-electric ml-2" />
               </div>
-              {/* Ripple Rings */}
-              <div className="absolute -inset-4 border border-primary/30 rounded-full animate-ping-slow" />
-              <div className="absolute -inset-8 border border-primary/10 rounded-full animate-ping-slow delay-300" />
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-
-      {/* Content Overlay */}
-      <div className="absolute inset-x-0 bottom-0 p-6 space-y-4">
-        {/* Glassmorphism Card */}
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 p-4 rounded-2xl space-y-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center overflow-hidden">
-                <User className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs font-black tracking-tight text-white">{testimonial.username}</p>
-                <p className="text-[10px] text-white/60 font-bold uppercase tracking-wider">{testimonial.role}</p>
-              </div>
-            </div>
-            <div className="flex gap-0.5">
-              {[...Array(testimonial.rating)].map((_, i) => (
-                <Star key={i} className="h-2.5 w-2.5 text-yellow-500 fill-yellow-500" />
-              ))}
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary pt-2 border-t border-white/5">
-            <Play className="h-2.5 w-2.5 fill-current" />
-            <span>{t('videoWatchNow')}</span>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

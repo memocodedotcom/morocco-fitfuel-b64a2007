@@ -1,160 +1,185 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Truck, CreditCard, Sparkles } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Truck, CreditCard, Sparkles, Activity, Zap, TrendingUp, Star } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Magnetic } from '@/components/ui/magnetic';
 
 export function HeroSection() {
-  const { t, dir } = useLanguage();
+  const { t, locale, dir } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 500]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#020617] text-white pt-16 md:pt-0"
+      className="relative min-h-screen flex items-center overflow-hidden bg-obsidian text-white pt-24 md:pt-0 grain-overlay"
     >
-      {/* Background Parallax Text */}
+      {/* Background Parallax Text - ULTIMATE PERFORMANCE */}
       <motion.div 
-        style={{ y: textY }}
-        className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none"
+        style={{ y: textY, opacity }}
+        className="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none"
       >
-        <span className="text-[25vw] font-black tracking-tighter leading-none">
-          PERFORMANCE
+        <span className="text-[30vw] font-black tracking-tighter leading-none italic text-electric">
+          ELITE
         </span>
       </motion.div>
 
-      {/* Decorative Aura */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
+      {/* High-End Decorative Auras */}
+      <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-electric/10 rounded-full blur-[160px] -translate-y-1/2 translate-x-1/4 animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[140px] translate-y-1/4 -translate-x-1/4" />
+      
+      {/* Grid Lines Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none" />
 
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 px-4">
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
           {/* Content side */}
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-2xl space-y-8"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl space-y-12"
           >
-            <div className="space-y-4">
+            <div className="space-y-8">
               <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, type: "spring" }}
+                className="inline-flex items-center gap-3 glass-primary px-5 py-2.5 rounded-full border-electric/30"
               >
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary-foreground/90">
-                  {t('heroPromoBadge')}
+                <div className="relative">
+                   <div className="h-3 w-3 rounded-full bg-electric animate-ping absolute inset-0" />
+                   <Activity className="h-4 w-4 text-electric relative z-10" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">
+                   {locale === 'fr' ? 'L\'EXCELLENCE AU SOMMET' : 'القمة في التميز'}
                 </span>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black leading-[0.9] tracking-tighter uppercase italic">
-                {t('heroTitle')}
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-black leading-[0.8] tracking-tighter uppercase italic">
+                {locale === 'fr' ? 'DOMINEZ' : 'سيطر'}
                 <br />
-                <span className="text-primary italic-not-really">{t('heroEmphasis')}</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric via-white to-electric/40 italic-not-really drop-shadow-[0_0_20px_rgba(212,255,0,0.3)]">
+                   {locale === 'fr' ? 'MAROC.' : 'بالمغرب.'}
+                </span>
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground/80 max-w-md font-medium leading-relaxed">
-                {t('heroSubtitle')}
+              <p className="text-xl md:text-2xl text-slate-400 max-w-lg font-medium leading-relaxed italic border-l-2 border-electric/40 pl-6">
+                {locale === 'fr' 
+                  ? "La nutrition de performance ultime pour les athlètes de haut niveau au Royaume."
+                  : "تغذية الأداء القصوى للرياضيين رفيعي المستوى في المملكة."}
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <Button asChild size="lg" className="relative h-14 px-10 rounded-xl overflow-hidden group/btn bg-primary text-primary-foreground hover:bg-primary/90 transition-all">
-                <Link to="/products" className="flex items-center gap-3">
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent shadow-shimmer" />
-                  <span className="relative font-black tracking-widest text-xs">{t('heroCta')}</span>
-                  <ArrowRight className="relative h-4 w-4 transition-transform group-hover/btn:translate-x-1 rtl:rotate-180" />
-                </Link>
-              </Button>
+            <div className="flex flex-col sm:flex-row items-center gap-8">
+              <Magnetic amount={0.2}>
+                 <Button asChild size="lg" className="h-16 px-12 rounded-[2rem] bg-electric text-black hover:bg-white transition-all duration-500 shadow-[0_0_40px_rgba(212,255,0,0.4)] group overflow-hidden">
+                   <Link to="/products" className="flex items-center gap-4">
+                     <span className="font-black tracking-[0.2em] text-xs uppercase">{t('heroCta')}</span>
+                     <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
+                   </Link>
+                 </Button>
+              </Magnetic>
 
-              <div className="flex -space-x-3 overflow-hidden">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="inline-block h-10 w-10 rounded-full ring-2 ring-[#020617] bg-secondary flex items-center justify-center text-[10px] font-bold border border-white/10 overflow-hidden">
-                    <img src={`https://i.pravatar.cc/150?u=${i+10}`} alt="User" className="opacity-80 grayscale" />
-                  </div>
-                ))}
-                <div className="h-10 px-4 rounded-full flex items-center justify-center bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <span className="text-[10px] font-bold tracking-tight">+10K ATLHETES</span>
-                </div>
-              </div>
+              <motion.div 
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 transition={{ delay: 0.6 }}
+                 className="flex flex-col gap-3"
+              >
+                 <div className="flex -space-x-3">
+                   {[1, 2, 3, 4, 5].map((i) => (
+                     <div key={i} className="h-12 w-12 rounded-full border-2 border-obsidian bg-slate-900 flex items-center justify-center overflow-hidden ring-1 ring-white/10">
+                       <img src={`https://i.pravatar.cc/150?u=${i+20}`} alt="Athlete" className="opacity-70 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0" />
+                     </div>
+                   ))}
+                 </div>
+                 <div className="flex items-center gap-3">
+                    <Star className="h-3 w-3 text-electric fill-electric" />
+                    <span className="text-[10px] font-black tracking-widest text-white/60">REJOIGNEZ +15,000 ATHLÈTES CERTIFIÉS</span>
+                 </div>
+              </motion.div>
             </div>
 
-            <div className="flex flex-wrap gap-x-12 gap-y-6 pt-12 border-t border-white/5 opacity-60">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="h-5 w-5 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-widest">{t('marqueeAuthentic')}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Truck className="h-5 w-5 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-widest">{t('marqueeDelivery24h')}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-primary" />
-                <span className="text-xs font-bold uppercase tracking-widest">{t('marqueeSecurePay')}</span>
-              </div>
+            <div className="flex flex-wrap gap-x-12 gap-y-6 pt-12 border-t border-white/5">
+              {[
+                { icon: ShieldCheck, text: t('marqueeAuthentic') },
+                { icon: Truck, text: t('marqueeDelivery24h') },
+                { icon: CreditCard, text: t('marqueeSecurePay') }
+              ].map((item, idx) => (
+                 <motion.div 
+                   key={idx}
+                   initial={{ opacity: 0, y: 10 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   transition={{ delay: 0.8 + idx * 0.1 }}
+                   className="flex items-center gap-3 group cursor-default"
+                 >
+                   <item.icon className="h-5 w-5 text-electric transition-transform group-hover:scale-125" strokeWidth={1.5} />
+                   <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 group-hover:text-white transition-colors">{item.text}</span>
+                 </motion.div>
+              ))}
             </div>
           </motion.div>
 
           {/* Image side */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            initial={{ opacity: 0, scale: 0.7, rotate: 10 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             style={{ y: imageY }}
             className="relative hidden lg:block"
           >
             {/* Main Image Glow */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[120%] w-full bg-primary/20 blur-[150px] rounded-full" />
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[140%] w-full bg-electric/20 blur-[180px] rounded-full opacity-30 animate-pulse" />
             
-            <img 
-              src="/images/hero_bottle.png" 
-              alt="Performance Supplement" 
-              className="relative z-10 w-full max-w-[600px] mx-auto filter drop-shadow-[0_20px_50px_rgba(34,197,94,0.3)]"
-            />
+            <div className="relative group">
+               <img 
+                 src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=1000&q=90" 
+                 alt="Performance Supplement" 
+                 className="relative z-10 w-full max-w-[600px] mx-auto filter drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] transition-transform duration-1000 group-hover:scale-105"
+               />
+               
+               {/* Technical Data Overlays */}
+               <motion.div 
+                 animate={{ y: [0, -20, 0] }}
+                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                 className="absolute -top-12 -right-8 glass-primary p-6 rounded-[2.5rem] border-electric/30 shadow-2xl z-20"
+               >
+                 <TrendingUp className="h-6 w-6 text-electric mb-3" />
+                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 font-display">Optimization</p>
+                 <div className="text-3xl font-black italic">+82%</div>
+                 <div className="text-[9px] font-bold text-electric">MAX OUTPUT</div>
+               </motion.div>
 
-            {/* Float Floating Stats */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-10 -right-10 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl z-20"
-            >
-              <p className="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">Pureté Vérifiée</p>
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-black">99.9</span>
-                <span className="text-xs opacity-60 font-bold">%</span>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              animate={{ y: [0, 15, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-20 -left-10 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl z-20"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <p className="text-[10px] font-black uppercase tracking-[0.2em]">Live Performance</p>
-              </div>
-              <div className="h-2 w-32 bg-white/10 rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: "0%" }}
-                  animate={{ width: "85%" }}
-                  transition={{ duration: 2, delay: 1 }}
-                  className="h-full bg-primary shadow-[0_0_10px_rgba(34,197,94,0.5)]" 
-                />
-              </div>
-            </motion.div>
+               <motion.div 
+                 animate={{ x: [0, 15, 0] }}
+                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                 className="absolute bottom-10 -left-12 glass-primary p-6 rounded-[2.5rem] border-electric/20 shadow-2xl z-20"
+               >
+                 <Zap className="h-6 w-6 text-electric mb-3 animate-pulse" />
+                 <div className="space-y-2">
+                    <div className="h-1.5 w-32 bg-white/10 rounded-full overflow-hidden">
+                       <motion.div 
+                         initial={{ width: "0%" }}
+                         animate={{ width: "94%" }}
+                         transition={{ duration: 2, delay: 1 }}
+                         className="h-full bg-electric shadow-[0_0_15px_rgba(212,255,0,0.6)]" 
+                       />
+                    </div>
+                    <p className="text-[9px] font-black text-white/60 tracking-widest uppercase">Pure Focus Flow</p>
+                 </div>
+               </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
