@@ -8,6 +8,9 @@ export const translations = {
     cart: 'Panier',
     profile: 'Profil',
     products: 'Produits',
+    shopByCategory: 'Par Catégorie',
+    shopByGoal: 'Par Objectif',
+    allProducts: 'Tous les produits',
     
     // Promo bar (rotating + desktop strip)
     promoBar: '🚚 Livraison gratuite à partir de 500 MAD | 🛡️ 100% Authentique',
@@ -234,6 +237,9 @@ export const translations = {
     cart: 'السلة',
     profile: 'الملف',
     products: 'المنتجات',
+    shopByCategory: 'حسب الفئة',
+    shopByGoal: 'حسب الهدف',
+    allProducts: 'جميع المنتجات',
     
     promoBar: '🚚 توصيل مجاني ابتداءً من 500 درهم | 🛡️ 100% أصلي',
     promoFreeShipping: 'توصيل مجاني ابتداءً من 500 درهم',

@@ -71,6 +71,7 @@ export const brands: Brand[] = [
   { id: 'bsn', name: 'BSN', logo: 'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=120&h=60&fit=crop&auto=format' },
   { id: 'cellucor', name: 'Cellucor', logo: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=120&h=60&fit=crop&auto=format' },
   { id: 'myprotein', name: 'MyProtein', logo: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=120&h=60&fit=crop&auto=format' },
+  { id: 'nutrimaroc', name: 'NutriMaroc', logo: '/nutrimaroc_whey_isolate_1775454989201.png' },
 ];
 
 export const products: Product[] = [
@@ -344,6 +345,67 @@ export const products: Product[] = [
     tags: ['trending'],
     goalTags: ['lose-weight', 'energy'],
     crossSellIds: ['6', '8'],
+  },
+  {
+    id: 'nm-1',
+    slug: 'nutrimaroc-whey-isolate',
+    name: { fr: 'NutriMaroc Whey Isolate', ar: 'واي نيوترالماروك آيزوليت' },
+    description: {
+      fr: 'La pureté absolue pour les athlètes marocains. Isolat ultra-filtré avec 27g de protéines, sans sucre ni graisses. Le standard d\'excellence pour la récupération.',
+      ar: 'أقصى درجات النقاء للرياضيين المغاربة. آيزوليت مفلتر للغاية مع 27 غ بروتين، خالي من السكر والدهون. معيار التميز للأداء.'
+    },
+    price: 949,
+    images: ['/nutrimaroc_whey_isolate_1775454989201.png'],
+    category: 'protein',
+    brand: 'NutriMaroc',
+    rating: 5.0,
+    reviewCount: 42,
+    stock: 20,
+    flavors: ['Chocolat Belge', 'Vanille Pure', 'Amlou (Édition Royale)'],
+    sizes: ['1kg', '2kg'],
+    tags: ['best-seller', 'trending'],
+    goalTags: ['gain-muscle'],
+    certificateOnRequest: true,
+  },
+  {
+    id: 'nm-2',
+    slug: 'nutrimaroc-pure-creatine',
+    name: { fr: 'NutriMaroc Pure Creatine', ar: 'كرياتين نيوترالماروك نقي' },
+    description: {
+      fr: 'Créatine monohydrate micronisée 200 mesh. Puissance brute et force explosive testée en laboratoire.',
+      ar: 'كرياتين مونوهيدرات نقي وميكرونيزد 200 ميش. طاقة خام وقوة متفجرة مختبرة معملياً.'
+    },
+    price: 389,
+    images: ['/nutrimaroc_creatine_pure_1775455002495.png'],
+    category: 'creatine',
+    brand: 'NutriMaroc',
+    rating: 4.9,
+    reviewCount: 31,
+    stock: 50,
+    sizes: ['300g', '500g'],
+    tags: ['best-seller'],
+    goalTags: ['energy', 'gain-muscle'],
+    certificateOnRequest: true,
+  },
+  {
+    id: 'nm-3',
+    slug: 'nutrimaroc-extreme-gainer',
+    name: { fr: 'NutriMaroc Extreme Gainer', ar: 'نيوترالماروك إكستريم غينر' },
+    description: {
+      fr: 'Le gainer haute densité pour les "Hard Gainers" marocains. 1650 calories, 60g de protéines et glucides complexes.',
+      ar: 'غينر عالي الكثافة لزيادة الوزن بسرعة للرياضيين. 1650 سعرة حرارية، 60 غ بروتين وكربوهيدرات معقدة.'
+    },
+    price: 749,
+    images: ['/nutrimaroc_extreme_gainer_1775455019256.png'],
+    category: 'mass-gainer',
+    brand: 'NutriMaroc',
+    rating: 4.8,
+    reviewCount: 19,
+    stock: 15,
+    flavors: ['Fudge Chocolat', 'Crème Vanille'],
+    tags: ['flash-sale'],
+    goalTags: ['gain-muscle'],
+    certificateOnRequest: true,
   },
 ];
 
