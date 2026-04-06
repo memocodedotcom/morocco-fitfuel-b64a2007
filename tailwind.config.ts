@@ -19,10 +19,18 @@ export default {
     },
     extend: {
       fontSize: {
-        display: ["2.25rem", { lineHeight: "1.12", letterSpacing: "-0.02em", fontWeight: "800" }],
-        "display-lg": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "800" }],
-        title: ["1.375rem", { lineHeight: "1.3", fontWeight: "700" }],
-        "title-lg": ["1.625rem", { lineHeight: "1.25", fontWeight: "700" }],
+        xs: "var(--font-xs)",
+        sm: "var(--font-sm)",
+        base: "var(--font-base)",
+        lg: "var(--font-lg)",
+        xl: "var(--font-xl)",
+        "2xl": "var(--font-2xl)",
+        "3xl": "var(--font-3xl)",
+        huge: "var(--font-huge)",
+        display: ["var(--font-2xl)", { lineHeight: "1.12", letterSpacing: "-0.02em", fontWeight: "800" }],
+        "display-lg": ["var(--font-3xl)", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "800" }],
+        title: ["var(--font-lg)", { lineHeight: "1.3", fontWeight: "700" }],
+        "title-lg": ["var(--font-xl)", { lineHeight: "1.25", fontWeight: "700" }],
       },
       transitionDuration: {
         design: "200ms",
@@ -40,7 +48,7 @@ export default {
       },
       fontFamily: {
         sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
-        display: ["Outfit", "Plus Jakarta Sans", "system-ui", "sans-serif"],
+        display: ["Syne", "Outfit", "Plus Jakarta Sans", "system-ui", "sans-serif"],
         arabic: ["Cairo", "Tahoma", "system-ui", "sans-serif"],
       },
       colors: {
@@ -86,11 +94,25 @@ export default {
           DEFAULT: "#D4FF00",
           glow: "rgba(212, 255, 0, 0.15)",
         },
+        // Phase 1: Earth Tone Additions
+        sage: {
+          DEFAULT: "#3A4D39",
+          light: "#4F6F52",
+        },
+        terracotta: {
+          DEFAULT: "#8B4513",
+          light: "#A0522D",
+        },
+        "slate-luxury": {
+          DEFAULT: "#1E293B",
+          accent: "#334155",
+        },
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
         "2xl": "calc(var(--radius) + 12px)",
         "3xl": "calc(var(--radius) + 20px)",
+        "4xl": "calc(var(--radius) + 32px)", // New signature radius
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",

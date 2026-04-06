@@ -230,6 +230,9 @@ export const translations = {
     emptyCatalogBody: 'Modifiez les filtres ou affichez toute la gamme.',
     emptyCatalogReset: 'Voir tous les produits',
     searchTypeMore: 'Saisissez au moins 2 caractères pour rechercher.',
+    discoverMore: 'DÉCOUVRIR LE PROTOCOLE',
+    analyzeProfile: 'ANALYSE DU PROFIL...',
+    protocolGeneration: 'Génération de votre protocole nutritionnel sur mesure.',
   },
   ar: {
     home: 'الرئيسية',
@@ -442,6 +445,9 @@ export const translations = {
     emptyCatalogBody: 'غيّر الفلاتر أو اعرض كل المنتجات.',
     emptyCatalogReset: 'عرض الكل',
     searchTypeMore: 'أدخل حرفين على الأقل للبحث.',
+    discoverMore: 'اكتشف البروتوكول',
+    analyzeProfile: 'تحليل الملف الشخصي...',
+    protocolGeneration: 'جاري إنشاء بروتوكول التغذية المخصص لك.',
   }
 } as const;
 

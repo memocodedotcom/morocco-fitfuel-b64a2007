@@ -4,9 +4,10 @@ import { stackBundles, getProduct } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target, Dumbbell, Zap, Plus, Sparkles, ShoppingBag } from 'lucide-react';
+import { Target, Dumbbell, Zap, Plus, Sparkles, ShoppingBag, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/sonner';
+import { Magnetic } from '@/components/ui/magnetic';
 
 const goals = [
   { id: 'lose-weight', icon: Target },
@@ -37,47 +38,47 @@ export function BuildYourStack() {
   };
 
   return (
-    <section className="relative py-24 bg-obsidian overflow-hidden grain-overlay">
-      {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-electric/10 rounded-full blur-[120px] -translate-y-1/2 opacity-20" />
+    <section className="relative py-40 bg-obsidian overflow-hidden grain-organic">
+      {/* Signature Light Leaks */}
+      <div className="absolute top-1/2 left-0 w-[800px] h-[800px] bg-terracotta/5 rounded-full blur-[160px] -translate-y-1/2 -translate-x-1/2 opacity-30" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-sage/5 rounded-full blur-[140px] opacity-20" />
       
-      <div className="container relative">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+      <div className="container relative z-10 px-4">
+        <div className="text-center max-w-5xl mx-auto mb-24 space-y-10">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="space-y-8"
           >
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary mb-3">
-              {t('buildStack')}
-            </p>
-            <h2 className="text-3xl md:text-5xl font-display font-black uppercase tracking-tight mb-4">
-              {t('buildStackDesc')}
+            <div className="flex items-center justify-center gap-4">
+               <div className="h-[1px] w-12 bg-terracotta/40" />
+               <span className="text-[10px] font-black uppercase tracking-[0.5em] text-terracotta/80">{t('buildStack')}</span>
+               <div className="h-[1px] w-12 bg-terracotta/40" />
+            </div>
+            <h2 className="text-huge font-display font-black uppercase tracking-tighter leading-[0.75] italic text-white">
+              VOTRE PROTOCOLE <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric via-white to-electric/40 drop-shadow-[0_0_20px_rgba(212,255,0,0.2)]">SUR MESURE.</span>
             </h2>
           </motion.div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
             {goals.map((g) => (
               <button
                 key={g.id}
                 type="button"
                 onClick={() => setSelected(g.id)}
                 className={cn(
-                  "relative flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300",
+                  "relative h-20 px-10 rounded-[2rem] text-[10px] font-black transition-all duration-700 uppercase tracking-[0.3em] backdrop-blur-3xl border-2",
                   selected === g.id
-                    ? "text-white scale-105"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    ? "bg-electric text-black border-electric shadow-[0_0_40px_rgba(212,255,0,0.3)] scale-105"
+                    : "bg-white/5 text-white/40 border-white/10 hover:border-white/20 hover:text-white"
                 )}
               >
-                {selected === g.id && (
-                  <motion.div
-                    layoutId="activeGoal"
-                    className="absolute inset-0 bg-primary rounded-xl shadow-[0_4px_20px_rgba(34,197,94,0.3)]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <g.icon className={cn("relative z-10 h-4 w-4", selected === g.id ? "text-white" : "text-primary")} />
-                <span className="relative z-10 uppercase tracking-wider">{goalLabels[g.id]}</span>
+                <div className="flex items-center gap-4 relative z-10">
+                  <g.icon className={cn("h-5 w-5", selected === g.id ? "text-black" : "text-electric/60")} />
+                  <span>{goalLabels[g.id]}</span>
+                </div>
               </button>
             ))}
           </div>
@@ -86,41 +87,48 @@ export function BuildYourStack() {
         <AnimatePresence mode="wait">
           <motion.div
             key={selected}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="grid lg:grid-cols-12 gap-8 items-stretch"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="grid lg:grid-cols-12 gap-10 items-stretch"
           >
-            {/* Main Bundle Card */}
-            <div className="lg:col-span-8 bg-card/30 backdrop-blur-sm border border-white/[0.05] rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8">
-                <div className="bg-primary/10 text-primary px-4 py-2 rounded-full text-xs font-black tracking-widest border border-primary/20 animate-pulse">
-                  OFFRE BUNDLE -{bundle.discount}%
+            {/* Main Bundle Card - Enhanced Depth */}
+            <div className="lg:col-span-8 bg-white/[0.01] backdrop-blur-3xl border-2 border-white/5 rounded-[4rem] p-10 md:p-16 relative overflow-hidden group shadow-4xl">
+              {/* Physical Detail: Glass corner reflection */}
+              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.03] blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+              
+              <div className="absolute top-10 right-10 p-4 z-20">
+                <div className="bg-terracotta text-white px-6 py-3 rounded-full text-[10px] font-black tracking-[0.3em] border border-white/10 shadow-2xl uppercase">
+                  ELITE DEAL -{bundle.discount}%
                 </div>
               </div>
 
-              <div className="relative z-10">
-                <h3 className="text-4xl md:text-5xl font-display font-black uppercase mb-12 max-w-md">
+              <div className="relative z-10 h-full flex flex-col">
+                <h3 className="text-5xl md:text-7xl font-display font-black uppercase mb-16 max-w-xl italic leading-[0.8] tracking-tighter">
                   {bundle.name[locale]}
                 </h3>
 
-                <div className="grid md:grid-cols-3 gap-6 items-center">
+                <div className="grid md:grid-cols-3 gap-10 items-center mt-auto">
                   {bundleProducts.map((p, i) => (
                     <div key={p.id} className="relative group/item">
-                      <div className="relative aspect-square bg-white/[0.03] rounded-2xl p-4 overflow-hidden mb-4 border border-white/[0.05] group-hover/item:border-primary/20 transition-all duration-500">
+                      <div className="relative aspect-square bg-white/[0.02] rounded-[2.5rem] p-8 overflow-hidden mb-6 border border-white/5 group-hover/item:border-electric/30 transition-all duration-1000 shadow-2xl">
                         <img
                           src={p.images[0]}
                           alt={p.name[locale]}
-                          className="w-full h-full object-contain filter drop-shadow-2xl group-hover/item:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] group-hover/item:scale-110 transition-transform duration-1000"
                         />
+                        {/* Interior Glow */}
+                        <div className="absolute inset-0 border border-white/5 rounded-[2.5rem] pointer-events-none" />
                       </div>
-                      <p className="text-xs font-black uppercase tracking-wider mb-1 opacity-60">{p.brand}</p>
-                      <p className="text-sm font-bold line-clamp-1">{p.name[locale]}</p>
+                      <div className="space-y-2 text-center md:text-left">
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-electric/60 mb-1">{p.brand}</p>
+                        <p className="text-lg font-display font-bold italic line-clamp-1 text-white">{p.name[locale]}</p>
+                      </div>
                       
                       {i < bundleProducts.length - 1 && (
-                        <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-12 h-6 w-6 items-center justify-center bg-primary text-white rounded-full z-20 shadow-lg">
-                          <Plus className="h-4 w-4" strokeWidth={4} />
+                        <div className="hidden md:flex absolute top-1/3 -right-5 -translate-y-1/2 h-10 w-10 items-center justify-center bg-white/5 backdrop-blur-2xl text-white/20 rounded-full z-20 border border-white/10">
+                          <Plus className="h-5 w-5" strokeWidth={3} />
                         </div>
                       )}
                     </div>
@@ -129,50 +137,59 @@ export function BuildYourStack() {
               </div>
             </div>
 
-            {/* Summary & Checkout */}
-            <div className="lg:col-span-4 flex flex-col justify-between bg-[#050914] border border-white/[0.05] rounded-[2.5rem] p-8 md:p-10 text-white relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0" />
+            {/* Summary & Checkout - Tactical Layout */}
+            <div className="lg:col-span-4 flex flex-col justify-between glass-terracotta border-2 border-terracotta/20 rounded-[4rem] p-10 md:p-14 text-white relative overflow-hidden shadow-4xl">
+               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                
                <div>
-                 <div className="flex items-center gap-2 mb-8">
-                   <Sparkles className="h-5 w-5 text-primary" />
-                   <span className="text-xs font-black uppercase tracking-widest text-primary">Inclus dans le stack</span>
+                 <div className="flex items-center gap-4 mb-12">
+                   <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
+                     <Sparkles className="h-5 w-5 text-electric" />
+                   </div>
+                   <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Contenu du Pack Élite</span>
                  </div>
 
-                 <ul className="space-y-4 mb-12">
+                 <ul className="space-y-6 mb-16">
                    {bundleProducts.map((p) => (
-                     <li key={p.id} className="flex items-center justify-between py-3 border-b border-white/[0.05]">
-                        <span className="text-sm font-medium opacity-80">{p.name[locale]}</span>
-                        <span className="text-xs font-bold opacity-60">{p.price} MAD</span>
+                     <li key={p.id} className="flex items-center justify-between pb-6 border-b border-white/5 group/li">
+                        <div className="space-y-1">
+                          <span className="text-sm font-medium text-white group-hover:text-electric transition-colors">{p.name[locale]}</span>
+                          <p className="text-[9px] font-bold opacity-30 uppercase tracking-widest">{p.brand}</p>
+                        </div>
+                        <span className="text-xs font-black text-white/40">{p.price} MAD</span>
                      </li>
                    ))}
                  </ul>
                </div>
 
-               <div className="space-y-6">
-                 <div className="flex items-end justify-between">
+               <div className="space-y-10">
+                 <div className="flex items-end justify-between p-8 rounded-[2.5rem] bg-black/40 border border-white/5">
                    <div>
-                     <p className="text-xs font-bold uppercase tracking-widest opacity-40 mb-1">Total Valeur</p>
-                     <p className="text-xl font-medium line-through opacity-40">{totalPrice} MAD</p>
+                     <p className="text-[9px] font-black uppercase tracking-[0.4em] opacity-40 mb-3">Prix Initial</p>
+                     <p className="text-2xl font-display font-medium line-through opacity-30 italic">{totalPrice} MAD</p>
                    </div>
                    <div className="text-right">
-                     <p className="text-xs font-bold uppercase tracking-widest text-electric mb-1">Prix Stack</p>
-                     <p className="text-4xl font-black">{discountedPrice} MAD</p>
+                     <p className="text-[10px] font-black uppercase tracking-[0.4em] text-electric mb-3">Prix Membre</p>
+                     <p className="text-5xl font-display font-black tracking-tighter italic text-white">{discountedPrice} MAD</p>
                    </div>
                  </div>
 
-                 <Button 
-                   onClick={handleAddBundle} 
-                   size="lg" 
-                   className="w-full h-16 rounded-2xl bg-electric hover:bg-white text-black font-black tracking-[0.1em] text-sm shadow-[0_10px_30px_rgba(34,197,94,0.3)] transition-all hover:-translate-y-1 active:translate-y-0"
-                 >
-                   <ShoppingBag className="mr-3 h-5 w-5" />
-                   AJOUTER LE BUNDLE
-                 </Button>
-                 
-                 <p className="text-[10px] text-center font-bold opacity-40 uppercase tracking-tighter">
-                   *Économisez {totalPrice - discountedPrice} MAD avec cette sélection d'experts
-                 </p>
+                 <div className="space-y-6">
+                   <Magnetic amount={0.15}>
+                     <Button 
+                       onClick={handleAddBundle} 
+                       className="w-full h-24 rounded-[2.5rem] bg-white text-black font-black tracking-[0.4em] text-xs shadow-4xl hover:bg-electric transition-all group overflow-hidden border-0"
+                     >
+                       <ShoppingBag className="mr-4 h-6 w-6 group-hover:scale-110 transition-transform" />
+                       ACTIVER LE PACK
+                       <ChevronRight className="ml-4 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                     </Button>
+                   </Magnetic>
+                   
+                   <p className="text-[9px] text-center font-black opacity-30 uppercase tracking-[0.2em] italic">
+                     *Économie garantie de {totalPrice - discountedPrice} MAD
+                   </p>
+                 </div>
                </div>
             </div>
           </motion.div>

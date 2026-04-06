@@ -1,6 +1,6 @@
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Truck, CreditCard, MessageCircle, Mail, Instagram, Facebook, Globe, Sparkles } from 'lucide-react';
+import { ShieldCheck, MessageCircle, Mail, Instagram, Facebook, Globe, Sparkles, ArrowUpRight } from 'lucide-react';
 import { categories } from '@/data/products';
 import { socialUrls, whatsappE164 } from '@/config/site';
 import { POLICY_ROUTES } from '@/config/policies';
@@ -8,150 +8,158 @@ import { PaymentMethodLogos } from '@/components/payment/PaymentMethodLogos';
 import { SupplementDisclaimer } from '@/components/legal/SupplementDisclaimer';
 import { LogoLink } from './LogoLink';
 import { cn } from '@/lib/utils';
+import { Magnetic } from '@/components/ui/magnetic';
 
 export function Footer() {
-  const { locale, t, dir } = useLanguage();
+  const { locale, t } = useLanguage();
   const showInstagram = Boolean(socialUrls.instagram);
   const showFacebook = Boolean(socialUrls.facebook);
 
   return (
-    <footer className="relative bg-[#020617] text-white overflow-hidden pt-20">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+    <footer className="relative bg-obsidian text-white overflow-hidden pt-32 pb-16 grain-organic border-t border-white/5">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-terracotta/[0.03] rounded-full blur-[140px] opacity-40" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-sage/[0.03] rounded-full blur-[120px] opacity-30" />
       
-      <div className="container relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+      <div className="container relative z-10 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
           
-          {/* Brand Column */}
-          <div className="space-y-8">
-            <LogoLink className="scale-110 origin-left" />
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs font-medium">
+          {/* Brand Column - Larger Span */}
+          <div className="lg:col-span-4 space-y-10">
+            <LogoLink className="scale-125 origin-left" />
+            <p className="text-lg text-slate-400 leading-relaxed font-medium italic max-w-sm">
               {locale === 'fr'
-                ? 'L’autorité suprême du fitness au Maroc. Nous ne vendons pas seulement des compléments, nous fournissons la performance.'
-                : 'السلطة العليا للياقة البدنية في المغرب. نحن لا نبيع المكملات الغذائية فحسب، بل نوفر الأداء.'}
+                ? "L’autorité suprême de la nutrition de performance au Maroc. Plus qu’une boutique, un standard d'élite."
+                : "السلطة العليا للتغذية الرياضية في المغرب. أكثر من مجرد متجر، معيار للنخبة."}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               {showInstagram && (
-                <a href={socialUrls.instagram} className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white transition-all">
-                  <Instagram className="h-5 w-5" />
-                </a>
+                <Magnetic amount={0.2}>
+                  <a href={socialUrls.instagram} className="h-14 w-14 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white hover:text-black transition-all duration-500 shadow-2xl">
+                    <Instagram className="h-6 w-6" />
+                  </a>
+                </Magnetic>
               )}
               {showFacebook && (
-                <a href={socialUrls.facebook} className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white transition-all">
-                  <Facebook className="h-4 w-4" />
-                </a>
+                <Magnetic amount={0.2}>
+                  <a href={socialUrls.facebook} className="h-14 w-14 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white hover:text-black transition-all duration-500 shadow-2xl">
+                    <Facebook className="h-5 w-5" />
+                  </a>
+                </Magnetic>
               )}
-              <a href={`https://wa.me/${whatsappE164}`} className="h-10 w-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-primary hover:text-white transition-all">
-                <MessageCircle className="h-5 w-5" />
-              </a>
+              <Magnetic amount={0.2}>
+                <a href={`https://wa.me/${whatsappE164}`} className="h-14 w-14 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-electric hover:text-black transition-all duration-500 shadow-2xl">
+                  <MessageCircle className="h-6 w-6" />
+                </a>
+              </Magnetic>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-6">
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-primary">{t('categories')}</h4>
-            <ul className="space-y-4">
-              {categories.slice(0, 5).map((cat) => (
-                <li key={cat.id}>
-                  <Link
-                    to={`/products?category=${encodeURIComponent(cat.id)}`}
-                    className="text-sm font-bold text-muted-foreground hover:text-white transition-all flex items-center gap-2 group"
-                  >
-                    <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                    {cat.name[locale]}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Experience */}
-          <div className="space-y-6">
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-primary">EXPÉRIENCE</h4>
-            <ul className="space-y-4">
-              <li>
-                <Link to="/track-order" className="text-sm font-bold text-muted-foreground hover:text-white transition-all flex items-center gap-2 group">
-                  <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                  {t('helpTrackTitle')}
-                </Link>
-              </li>
-              <li>
-                <Link to={POLICY_ROUTES.authenticity} className="text-sm font-bold text-muted-foreground hover:text-white transition-all flex items-center gap-2 group">
-                  <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                  {t('navAuthenticity')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/faq" className="text-sm font-bold text-muted-foreground hover:text-white transition-all flex items-center gap-2 group">
-                  <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                  {t('helpFaqTitle')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/returns" className="text-sm font-bold text-muted-foreground hover:text-white transition-all flex items-center gap-2 group">
-                  <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
-                  {t('helpReturnsTitle')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Trust Seal */}
-          <div className="space-y-8 bg-white/5 p-8 rounded-[2rem] border border-white/10 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform duration-700">
-               <ShieldCheck className="h-20 w-20" />
+          {/* Quick Links Group */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-10">
+            <div className="space-y-8">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-terracotta">{t('categories')}</h4>
+              <ul className="space-y-5">
+                {categories.slice(0, 5).map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      to={`/products?category=${encodeURIComponent(cat.id)}`}
+                      className="text-sm font-bold text-slate-400 hover:text-white transition-all flex items-center gap-3 group italic"
+                    >
+                      <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-electric transition-colors" />
+                      {cat.name[locale]}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-primary/20 text-primary">
-                  <Globe className="h-4 w-4" />
-                </div>
-                <div>
-                   <p className="text-[10px] font-black uppercase tracking-widest text-primary">Import Officiel</p>
-                   <p className="text-xs font-bold opacity-60">Logistique Cold-Chain</p>
-                </div>
-              </div>
 
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 flex items-center justify-center rounded-lg bg-primary/20 text-primary">
-                  <Sparkles className="h-4 w-4" />
-                </div>
-                <div>
-                   <p className="text-[10px] font-black uppercase tracking-widest text-primary">Qualité Labo</p>
-                   <p className="text-xs font-bold opacity-60">Testé & Approuvé</p>
-                </div>
-              </div>
+            <div className="space-y-8">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-sage">E-SERVICES</h4>
+              <ul className="space-y-5">
+                {[
+                  { to: "/track-order", label: t('helpTrackTitle') },
+                  { to: POLICY_ROUTES.authenticity, label: t('navAuthenticity') },
+                  { to: "/faq", label: t('helpFaqTitle') },
+                  { to: "/returns", label: t('helpReturnsTitle') },
+                ].map((link, idx) => (
+                  <li key={idx}>
+                    <Link to={link.to} className="text-sm font-bold text-slate-400 hover:text-white transition-all flex items-center gap-3 group italic">
+                      <div className="h-1.5 w-1.5 rounded-full bg-white/10 group-hover:bg-electric transition-colors" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-              <div className="pt-4">
-                 <a 
-                   href="mailto:contact@nutrimaroc.ma" 
-                   className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:text-primary transition-colors"
-                 >
-                   <Mail className="h-4 w-4" />
-                   {locale === 'fr' ? 'NOUS ÉCRIRE' : 'راسلنا'}
-                 </a>
+          {/* Legacy Seal Column */}
+          <div className="lg:col-span-3">
+            <div className="space-y-10 bg-white/[0.02] p-10 rounded-[3rem] border border-white/5 relative overflow-hidden group shadow-4xl backdrop-blur-3xl">
+              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:rotate-12 group-hover:scale-125 transition-all duration-1000">
+                 <ShieldCheck className="h-32 w-32" />
+              </div>
+              
+              <div className="space-y-8 relative z-10">
+                <div className="flex items-center gap-5">
+                  <div className="h-12 w-12 flex items-center justify-center rounded-2xl bg-terracotta/20 text-terracotta border border-terracotta/20">
+                    <Globe className="h-5 w-5" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-terracotta">ORIGINE CERTIFIÉE</p>
+                     <p className="text-xs font-bold text-white italic">Import direct USA/Europe</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <div className="h-12 w-12 flex items-center justify-center rounded-2xl bg-sage/20 text-sage-light border border-sage/20">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <div>
+                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-sage">CONTRÔLE ÉLITE</p>
+                     <p className="text-xs font-bold text-white italic">Sélection d'experts</p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-white/5">
+                   <a 
+                     href="mailto:contact@nutrimaroc.ma" 
+                     className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-white hover:text-electric transition-colors group"
+                   >
+                     <Mail className="h-5 w-5" />
+                     {locale === 'fr' ? 'SERVICE CONCIERGERIE' : 'خدمة العملاء'}
+                     <ArrowUpRight className="h-4 w-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                   </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Legal Strip */}
-        <div className="border-t border-white/5 py-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="space-y-4">
-               <SupplementDisclaimer tone="onDark" className="text-left" />
-               <p className="text-[10px] font-bold uppercase tracking-widest opacity-20">
-                 © 2026 NUTRIMAROC PERFORMANCE RETAIL. ALL RIGHTS RESERVED.
-               </p>
+        {/* Legal & Compliance Strip */}
+        <div className="border-t border-white/5 pt-16 mt-16">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+               <SupplementDisclaimer tone="onDark" className="text-left text-xs opacity-50 italic max-w-2xl" />
+               <div className="flex items-center gap-6">
+                  <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/20">
+                    © 2026 NUTRIMAROC PERFORMANCE
+                  </p>
+                  <div className="h-[1px] w-20 bg-white/5" />
+                  <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/10 italic">
+                    CASABLANCA — MARRAKECH — AGADIR
+                  </p>
+               </div>
             </div>
-            <div className="flex flex-col items-end gap-6">
-               <div className="flex items-center gap-6 opacity-60 mix-blend-lighten grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex flex-col items-end gap-10">
+               <div className="flex items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-1000 scale-110 origin-right">
                  <PaymentMethodLogos tone="on-dark" />
                </div>
-               <nav className="flex gap-6 text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
-                  <Link to={POLICY_ROUTES.privacy} className="hover:text-primary transition-colors">{t('navPrivacy')}</Link>
-                  <Link to={POLICY_ROUTES.terms} className="hover:text-primary transition-colors">{locale === 'fr' ? 'CGV' : 'الشروط'}</Link>
+               <nav className="flex gap-8 text-[10px] font-black uppercase tracking-[0.4em] text-white/30">
+                  <Link to={POLICY_ROUTES.privacy} className="hover:text-white transition-colors">{t('navPrivacy')}</Link>
+                  <Link to={POLICY_ROUTES.terms} className="hover:text-white transition-colors">{locale === 'fr' ? 'TERMES ET CONDITIONS' : 'الشروط والأحكام'}</Link>
+                  <Link to={POLICY_ROUTES.authenticity} className="hover:text-white transition-colors">{locale === 'fr' ? 'CHARTE QUALITÉ' : 'ميثاق الجودة'}</Link>
                </nav>
             </div>
           </div>
