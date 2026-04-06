@@ -9,27 +9,28 @@ export function TrendingGrid() {
   const products = getTrendingProducts();
 
   return (
-    <section className="relative py-24 bg-background overflow-hidden">
-      {/* Subtle Background Accent */}
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/2 rounded-full blur-[120px] translate-x-1/4 translate-y-1/4" />
+    <section className="py-32 bg-obsidian relative overflow-hidden">
+      {/* Precision Background Accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:40px_40px]" />
       
-      <div className="container relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12 md:mb-16"
-        >
-          <div className="flex items-center gap-2 mb-3">
-             <div className="h-1 w-8 bg-primary rounded-full" />
-             <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">{t('trending')}</p>
+      <div className="container relative z-10 px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12 max-w-7xl mx-auto">
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="h-px w-8 bg-electric" />
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-electric">{t('trending')}</span>
+            </div>
+            <h2 className="text-6xl md:text-huge font-display font-extrabold text-white uppercase tracking-tight leading-[0.9]">
+              SÉLECTION<br />
+              <span className="text-white/30">ELITE.</span>
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-5xl font-display font-black uppercase tracking-tight mb-4">
+          <p className="text-slate-500 text-base md:text-lg max-w-md font-normal leading-relaxed border-l-0 md:border-l border-white/10 md:pl-8">
             {t('trendingSubtitle')}
-          </h2>
-        </motion.div>
+          </p>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {products.map((p, idx) => (
             <motion.div
               key={p.id}

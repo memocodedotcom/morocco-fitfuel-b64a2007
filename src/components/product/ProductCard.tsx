@@ -46,7 +46,6 @@ export function ProductCard({ product, variant = 'obsidian' }: Props) {
   return (
     <motion.div
       ref={cardRef}
-      onMouseMove={handleMouseMove}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -55,86 +54,61 @@ export function ProductCard({ product, variant = 'obsidian' }: Props) {
       <Link to={`/products/${product.slug}`} className="block h-full">
         <div
           className={cn(
-            'h-full rounded-[2.5rem] overflow-hidden border transition-all duration-700 flex flex-col relative',
-            variant === 'obsidian'
-              ? 'bg-white/[0.03] border-white/[0.08] hover:border-electric/40 backdrop-blur-xl'
-              : variant === 'dark'
-              ? 'bg-secondary/40 border-white/5 hover:border-primary/40'
-              : 'bg-card border-border/60 hover:border-primary/20 hover:shadow-card-hover'
+            'h-full rounded-sm overflow-hidden border border-white/[0.05] transition-all duration-300 flex flex-col relative',
+            'bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/10'
           )}
         >
-          {/* Haptic Glow Effect */}
-          <motion.div
-            className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style={{
-              background: useTransform(
-                [mouseX, mouseY],
-                ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(212, 255, 0, 0.1), transparent 80%)`
-              ),
-            }}
-          />
-
-          {/* Image Container */}
-          <div className="relative aspect-[4/5] overflow-hidden bg-white/[0.02] p-8">
+          {/* Image Container - Geometric Split */}
+          <div className="relative aspect-square overflow-hidden bg-black/20 p-12 border-b border-white/[0.05]">
             <img
               src={product.images[0]}
               alt={product.name[locale]}
-              className="w-full h-full object-contain transition-transform duration-1000 ease-out group-hover:scale-110 group-hover:rotate-3"
+              className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
               loading="lazy"
             />
             
-            {/* Badges */}
-            <div className="absolute top-6 left-6 flex flex-col gap-2 pointer-events-none">
+            {/* Minimalist Tech Badges */}
+            <div className="absolute top-4 left-4 flex flex-col gap-2 pointer-events-none">
               {discount > 0 && (
-                <span className="bg-electric text-black font-black uppercase text-[10px] tracking-[0.2em] px-3 py-1.5 rounded-full shadow-[0_0_20px_rgba(212,255,0,0.3)]">
-                  -{discount}%
-                </span>
-              )}
-              {product.stock <= 5 && product.stock > 0 && (
-                <span className="bg-white/10 backdrop-blur-md text-white border border-white/10 text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full">
-                  LTD STOCK
+                <span className="bg-electric text-black font-extrabold uppercase text-[8px] tracking-[0.2em] px-2 py-1 rounded-none">
+                  SALE {discount}%
                 </span>
               )}
             </div>
 
-            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-               <div className="h-10 w-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-white hover:text-electric transition-colors">
-                  <ShieldCheck className="h-5 w-5" />
-               </div>
-            </div>
-
-            {/* Price Tag Overlay (Floating) */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+            {/* Flat CTA Overlay - Constant 48px height for alignment */}
+            <div className={cn(
+              "absolute inset-x-0 bottom-0 transition-transform duration-300 md:translate-y-full md:group-hover:translate-y-0",
+              added && "md:translate-y-0"
+            )}>
                <button
                 onClick={handleAdd}
                 className={cn(
-                  "w-full h-14 rounded-2xl flex items-center justify-center gap-3 font-black text-xs transition-all uppercase tracking-widest",
+                  "w-full h-12 flex items-center justify-center gap-2.5 font-extrabold text-[9px] transition-all uppercase tracking-widest border-t border-white/[0.05]",
                   added 
-                    ? "bg-electric text-black shadow-[0_0_30px_rgba(212,255,0,0.5)]" 
-                    : "bg-white text-black hover:bg-electric shadow-2xl"
+                    ? "bg-electric text-black" 
+                    : "bg-white text-black hover:bg-electric"
                 )}
               >
                 <AnimatePresence mode="wait">
                   {added ? (
                     <motion.div
                       key="checked"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 1.5, opacity: 0 }}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
                       className="flex items-center gap-2"
                     >
-                      <span>{locale === 'fr' ? 'DANS LE PANIER' : 'في السلة'}</span>
                       <CheckCircle className="h-4 w-4" />
+                      <span>{locale === 'fr' ? 'CONFIRMÉ' : 'تم التأكيد'}</span>
                     </motion.div>
                   ) : (
                     <motion.div
                       key="add"
-                      initial={{ y: 5, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -5, opacity: 0 }}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
                       className="flex items-center gap-2"
                     >
-                      <Plus className="h-4 w-4" strokeWidth={3} />
+                      <Plus className="h-4 w-4" />
                       <span>{t('addToCart')}</span>
                     </motion.div>
                   )}
@@ -143,44 +117,38 @@ export function ProductCard({ product, variant = 'obsidian' }: Props) {
             </div>
           </div>
 
-          {/* Info */}
-          <div className="p-8 pb-10 flex-1 flex flex-col space-y-4">
-            <div className="flex justify-between items-start">
-               <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-                 {product.brand}
-               </p>
-               <div className="flex items-center gap-1">
-                 <Star className="h-2.5 w-2.5 fill-electric text-electric" />
-                 <span className="text-[10px] font-black text-slate-400">{product.rating}</span>
-               </div>
-            </div>
+          {/* Structured Metadata Section */}
+          <div className="p-6 flex-1 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-[8px] font-extrabold uppercase tracking-widest text-white/40">
+                <span>{product.brand}</span>
+                <div className="flex items-center gap-1.5 border-l border-white/10 pl-2">
+                  <Star className="h-2 w-2 fill-electric text-electric" />
+                  <span>{product.rating} / 5</span>
+                </div>
+              </div>
 
-            <h3 className={cn(
-              "text-lg font-black uppercase tracking-tight leading-tight transition-colors duration-500",
-              variant === 'obsidian' || variant === 'dark' ? 'text-white group-hover:text-electric' : 'text-foreground'
-            )}>
-              {product.name[locale]}
-            </h3>
+              <h3 className="text-sm font-extrabold uppercase tracking-tight leading-tight text-white transition-colors group-hover:text-electric">
+                {product.name[locale]}
+              </h3>
+            </div>
             
-            <div className="flex items-baseline gap-3 pt-2">
-              <span className="text-2xl font-black tracking-tighter text-white">
-                {product.price}<span className="text-[10px] font-bold ml-1 opacity-60 italic">DH</span>
-              </span>
-              {product.originalPrice && (
-                <span className="text-xs font-bold text-slate-600 line-through decoration-electric/40">
-                  {product.originalPrice} DH
+            <div className="flex items-center justify-between pt-6 border-t border-white/[0.05] mt-4">
+              <div className="flex items-baseline gap-2">
+                <span className="text-lg font-extrabold tracking-tighter text-white">
+                  {product.price}<span className="text-[9px] font-bold ml-1 opacity-40">DH</span>
                 </span>
-              )}
-            </div>
-
-            {/* Performance Tags */}
-            <div className="flex items-center gap-3 pt-3 opacity-40 group-hover:opacity-100 transition-opacity duration-700">
-               <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-white/5 border border-white/5">
-                  <Zap className="h-3 w-3 text-electric" />
-                  <span className="text-[8px] font-black uppercase tracking-tighter text-white">High Purity</span>
-               </div>
-               <div className="h-1 w-1 rounded-full bg-slate-700" />
-               <span className="text-[8px] font-black uppercase tracking-tighter text-slate-500">Fast Absorb</span>
+                {product.originalPrice && (
+                  <span className="text-[10px] font-bold text-white/20 line-through">
+                    {product.originalPrice} DH
+                  </span>
+                )}
+              </div>
+              
+              <div className="flex items-center gap-2 text-[8px] font-bold uppercase tracking-widest text-white/20">
+                 <Zap className="h-2.5 w-2.5 text-white/20" />
+                 <span>PURETY SEALED</span>
+              </div>
             </div>
           </div>
         </div>

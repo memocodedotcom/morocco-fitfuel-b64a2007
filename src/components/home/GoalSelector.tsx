@@ -34,145 +34,104 @@ export function GoalSelector() {
       id: 'energy',
       title: locale === 'fr' ? 'Énergie & Focus' : 'طاقة وتركيز',
       subtitle: locale === 'fr' ? 'Endurance & Mental' : 'تحمل وذهن',
-      desc: locale === 'fr' ? 'Dominez vos entraînements avec une clarté mentale et une énergie infinie.' : 'سيطر على تمارينك بوضوح ذهني وطاقة لا نهائية.',
-      icon: Zap,
-      image: '/goals/energie_focus.png',
-      accent: 'sage',
-      tag: locale === 'fr' ? 'High Performance' : 'أداء عالي',
-    }
-  ];
-
-  return (
-    <section className="py-40 relative overflow-hidden bg-obsidian grain-organic">
-      {/* Background Decorative elements */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="absolute top-[10%] left-[5%] w-px h-[80%] bg-gradient-to-b from-transparent via-terracotta/20 to-transparent" />
-      
+      desc: locale === 'fr' ? 'Dominez vos entraînements avec une clarté mentale et une énergie infinie.' : 'سيطر على تمارينك بوضوح �    <section className="py-32 md:py-48 relative overflow-hidden bg-black atmospheric-depth">
       <div className="container relative z-10 px-4">
-        <div className="text-center max-w-5xl mx-auto mb-24 space-y-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-4 px-6 py-2.5 rounded-full glass-sage border-sage/20"
-          >
-            <Activity className="h-4 w-4 text-electric" />
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-white/90">Analyse de Performance NutriMaroc</span>
-          </motion.div>
+        {/* Asymmetric Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-32 md:mb-48 gap-12 max-w-7xl mx-auto">
+          <div className="space-y-8 lg:max-w-2xl">
+            <div className="flex items-center gap-6">
+              <div className="h-px w-12 bg-electric/30" />
+              <span className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-electric/60">VOTRE PROTOCOLE</span>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="space-y-2"
+            >
+              <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-white leading-none">
+                VOTRE
+              </h2>
+              <h3 className="serif-display text-5xl md:text-9xl text-white/40 leading-none -mt-4 ml-6 md:ml-12">
+                objectif.
+              </h3>
+            </motion.div>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="space-y-8"
-          >
-            <h2 className="text-huge font-display font-black uppercase tracking-tighter leading-[0.75] text-white italic">
-               VOTRE <span className="text-electric">DESTIN</span> <br />
-               COMMENCE ICI.
-            </h2>
-            <p className="text-slate-400 text-xl md:text-2xl font-medium leading-relaxed max-w-3xl mx-auto italic border-r-2 border-sage/40 pr-8">
+          <div className="lg:max-w-md">
+            <p className="text-slate-500 text-base md:text-lg font-normal leading-relaxed opacity-70 border-l border-white/5 pl-8 md:pl-12 py-2">
               {locale === 'fr' 
-                ? 'Une approche scientifique personnalisée pour libérer votre plein potentiel athlétique.'
-                : 'نهج علمي مخصص لإطلاق كامل إمكاناتك الرياضية.'}
+                ? "Une analyse précise de vos besoins métaboliques pour une optimisation athlétique absolue et une maîtrise totale de votre performance."
+                : "تحليل دقيق لاحتياجاتك الأيضية لتحقيق تحسين رياضي مطلق وسيطرة كاملة على أدائك."}
             </p>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        {/* Cinematic Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 max-w-7xl mx-auto">
           {goals.map((goal, idx) => (
             <motion.div
               key={goal.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
+              transition={{ delay: idx * 0.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setSelectedGoal(goal.id)}
               className={cn(
-                "group relative h-[700px] rounded-[4rem] overflow-hidden border-2 transition-all duration-1000 cursor-pointer shadow-3xl",
+                "group relative aspect-[3/4.5] rounded-sm border transition-all duration-700 cursor-pointer overflow-hidden shadow-2xl",
                 selectedGoal === goal.id 
-                  ? "border-electric ring-8 ring-electric/5 scale-[1.02]" 
-                  : "border-white/5 hover:border-white/20"
+                  ? "border-electric/40 bg-white/[0.03]" 
+                  : "border-white/[0.05] hover:border-white/10 bg-white/[0.01]"
               )}
             >
-              {/* Background Image with Ken Burns Effect */}
+              {/* Background with Contrast Overlay */}
               <img 
                 src={goal.image} 
                 alt={goal.title}
                 className={cn(
-                  "absolute inset-0 w-full h-full object-cover transition-transform duration-[12s] ease-out grayscale-[0.5]",
-                  selectedGoal === goal.id ? "scale-110 grayscale-0" : "group-hover:scale-110 group-hover:grayscale-0"
+                  "absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out grayscale group-hover:grayscale-0",
+                  selectedGoal === goal.id ? "scale-105 grayscale-0 opacity-40" : "opacity-30 group-hover:opacity-50"
                 )}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               
-              {/* Overlays - Refined Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
-              <div className={cn(
-                "absolute inset-0 transition-opacity duration-1000 opacity-20",
-                goal.accent === 'electric' ? "bg-electric" : 
-                goal.accent === 'terracotta' ? "bg-terracotta" : "bg-sage",
-                selectedGoal === goal.id ? "opacity-40" : "group-hover:opacity-40"
-              )} />
-              
-              {/* Selection Indicator - Physical Detail */}
-              <div className={cn(
-                "absolute top-12 right-12 flex items-center justify-center h-14 w-14 rounded-full border-2 border-white/20 backdrop-blur-3xl transition-all duration-700 shadow-2xl",
-                selectedGoal === goal.id ? "bg-electric border-electric scale-110" : "bg-black/60"
-              )}>
-                 {selectedGoal === goal.id ? (
-                   <CheckCircle2 className="h-7 w-7 text-black" />
-                 ) : (
-                   <div className="h-2 w-2 rounded-full bg-white/40" />
-                 )}
-              </div>
-
-              {/* Tag - Subtle */}
-              <div className="absolute top-12 left-12">
-                 <div className="px-5 py-2.5 rounded-full bg-black/60 backdrop-blur-2xl border border-white/10 text-[9px] font-black uppercase tracking-[0.3em] text-white/80">
-                    {goal.tag}
-                 </div>
-              </div>
-
-              {/* Content Box - Asymmetrical Padding */}
-              <div className="absolute inset-x-0 bottom-0 p-14 space-y-10 transform transition-transform duration-1000 group-hover:translate-y-[-10px]">
+              {/* Functional Content Overlay */}
+              <div className="absolute inset-x-0 bottom-0 p-10 space-y-8">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className={cn(
-                      "h-[2px] w-8 transition-all duration-1000",
-                      selectedGoal === goal.id ? "w-16 bg-white" : "bg-white/40",
-                      goal.accent === 'electric' ? "text-electric" : goal.accent === 'terracotta' ? "text-terracotta" : "text-sage-light"
-                    )} />
-                    <span className={cn(
-                      "text-[10px] font-black uppercase tracking-[0.4em] transition-colors duration-1000",
-                      selectedGoal === goal.id ? "text-white" : "text-white/40",
-                    )}>
+                     <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-electric">
                        {goal.subtitle}
-                    </span>
+                     </span>
+                     {selectedGoal === goal.id && (
+                       <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="h-1.5 w-1.5 rounded-full bg-electric shadow-[0_0_10px_#D4FF00]" />
+                     )}
                   </div>
-                  <h3 className="text-5xl font-display font-black uppercase tracking-tighter text-white leading-[0.8] italic">
+                  <h3 className="serif-display text-4xl md:text-5xl text-white group-hover:text-electric transition-colors">
                     {goal.title}
                   </h3>
+                  <p className="text-slate-400 text-sm font-normal leading-relaxed opacity-60 line-clamp-2">
+                    {goal.desc}
+                  </p>
                 </div>
 
-                <p className="text-slate-300 text-lg leading-relaxed font-medium italic opacity-70 group-hover:opacity-100 transition-opacity duration-1000">
-                  {goal.desc}
-                </p>
-
-                <div className="pt-4">
-                  <Button 
+                <div className="relative overflow-hidden">
+                   <Button 
+                    variant="outline"
                     className={cn(
-                      "w-full h-20 rounded-[2.5rem] px-10 font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-1000 group/btn border-2",
-                      selectedGoal === goal.id 
-                        ? "bg-electric text-black border-electric shadow-[0_0_50px_rgba(212,255,0,0.4)]" 
-                        : "bg-white/5 backdrop-blur-2xl text-white border-white/10 hover:bg-white hover:text-black hover:border-white"
+                      "w-full h-14 rounded-sm font-extrabold uppercase tracking-[0.2em] text-[10px] transition-all duration-500 shadow-none border-white/5",
+                      selectedGoal === goal.id ? "bg-white text-black border-white" : "bg-transparent text-white hover:bg-white hover:text-black"
                     )}
                   >
-                    {t('discoverMore')}
-                    <div className="ml-4 h-10 w-10 rounded-full bg-current opacity-10 flex items-center justify-center group-hover/btn:opacity-100 group-hover/btn:translate-x-2 transition-all duration-500">
-                      <ChevronRight className="h-5 w-5" />
-                    </div>
+                    CONTINUER
                   </Button>
                 </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>? "bg-electric text-black border-electric" : "hover:bg-white hover:text-black"
+                  )}
+                >
+                  SÉLECTIONNER CE PROTOCOLE
+                </Button>
               </div>
             </motion.div>
           ))}
@@ -182,23 +141,22 @@ export function GoalSelector() {
            <motion.div 
              initial={{ opacity: 0, y: 30 }}
              animate={{ opacity: 1, y: 0 }}
-             className="mt-20 flex justify-center"
+             className="mt-16 flex justify-center"
            >
-              <div className="flex flex-col items-center gap-8 p-12 rounded-[3.5rem] glass-sage border-sage/20 backdrop-blur-3xl shadow-4xl max-w-md w-full border-2">
-                 <div className="p-4 rounded-3xl bg-electric/10 border border-electric/20 relative">
-                   <Activity className="h-8 w-8 text-electric" />
-                   <div className="absolute inset-0 rounded-3xl bg-electric/20 blur-xl animate-pulse" />
+              <div className="flex flex-col items-center gap-6 p-10 rounded-sm border border-white/[0.05] bg-white/[0.02] backdrop-blur-3xl max-w-md w-full">
+                 <div className="p-3 rounded-sm bg-electric/10 border border-electric/20">
+                   <Activity className="h-6 w-6 text-electric" />
                  </div>
-                 <div className="space-y-4 text-center">
-                    <p className="text-white font-black uppercase tracking-[0.4em] text-[10px]">{t('analyzeProfile')}</p>
-                    <p className="text-slate-400 text-xs italic font-medium opacity-80">{t('protocolGeneration')}</p>
+                 <div className="space-y-2 text-center">
+                    <p className="text-white font-extrabold uppercase tracking-widest text-[10px]">{t('analyzeProfile')}</p>
+                    <p className="text-slate-500 text-[11px] font-normal">{t('protocolGeneration')}</p>
                  </div>
-                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
+                 <div className="h-1 w-full bg-white/5 rounded-none overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: "100%" }}
                       transition={{ duration: 2.5, repeat: Infinity }}
-                      className="h-full bg-electric shadow-[0_0_20px_rgba(212,255,0,0.6)]"
+                      className="h-full bg-electric"
                     />
                  </div>
               </div>

@@ -11,23 +11,31 @@ export function MobileHeader({ className }: { className?: string }) {
   const { itemCount, setCartOpen } = useCart();
 
   return (
-    <header className={cn('md:hidden border-b border-white/[0.05] bg-background/80 backdrop-blur-xl sticky top-0 z-40', className)}>
-      <div className="container flex items-center justify-between h-14 gap-3">
-        <LogoLink className="text-lg min-w-0" />
-        <div className="flex items-center gap-0.5 shrink-0">
+    <header className={cn('md:hidden border-b border-white/[0.05] bg-black/90 backdrop-blur-3xl sticky top-0 z-40', className)}>
+      <div className="container flex items-center justify-between h-16 gap-3 px-4">
+        <LogoLink className="scale-90 origin-left" />
+        <div className="flex items-center gap-1 shrink-0">
           <ThemeToggle />
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             onClick={() => setLocale(locale === 'fr' ? 'ar' : 'fr')}
-            title={t('language')}
+            className="h-10 w-10 border-white/[0.05] rounded-sm bg-white/[0.02]"
           >
-            <Globe className="h-4 w-4" />
+            <Globe className="h-4 w-4 text-slate-500" />
           </Button>
-          <Button variant="ghost" size="icon" className="relative" onClick={() => setCartOpen(true)}>
-            <ShoppingCart className="h-5 w-5" />
+          <Button 
+            variant="outline" 
+            size="icon" 
+            className={cn(
+              "relative h-10 w-10 border-white/[0.05] rounded-sm transition-colors",
+              itemCount > 0 ? "bg-electric border-electric" : "bg-white/[0.02]"
+            )} 
+            onClick={() => setCartOpen(true)}
+          >
+            <ShoppingCart className={cn("h-4 w-4", itemCount > 0 ? "text-black" : "text-slate-500")} />
             {itemCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-white text-black text-[8px] font-extrabold rounded-none h-4 w-4 flex items-center justify-center border border-black">
                 {itemCount}
               </span>
             )}

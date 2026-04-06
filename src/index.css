@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 
 :root {
   /* Fluid Typography - Using clamp(min, preferred, max) */
@@ -7,9 +7,9 @@
   --font-base: clamp(0.9rem, 0.8vw + 0.7rem, 1rem);
   --font-lg: clamp(1.1rem, 1.2vw + 1rem, 1.25rem);
   --font-xl: clamp(1.2rem, 1.5vw + 1.2rem, 1.5rem);
-  --font-2xl: clamp(1.5rem, 2.5vw + 1.5rem, 2.25rem);
-  --font-3xl: clamp(2rem, 4vw + 2rem, 3.5rem);
-  --font-huge: clamp(3rem, 10vw + 2rem, 12rem);
+  --font-2xl: clamp(1.5rem, 2.5vw + 1.25rem, 2rem);
+  --font-3xl: clamp(2rem, 3vw + 1.5rem, 2.75rem);
+  --font-huge: clamp(3rem, 8vw + 1.5rem, 7.5rem);
 }
 
 @tailwind base;
@@ -46,7 +46,7 @@
     --input: 220 13% 91%;
     --ring: 142 76% 36%;
 
-    --radius: 1rem;
+    --radius: 0.25rem;
 
     --urgency: 0 0% 8%;
     --urgency-foreground: 0 0% 100%;
@@ -74,54 +74,54 @@
   }
 
   .dark {
-    --background: 222 47% 5%;
+    --background: 0 0% 2%; /* #050505 */
     --foreground: 220 20% 98%;
 
-    --card: 222 47% 8%;
+    --card: 0 0% 4%; /* #0a0a0a */
     --card-foreground: 220 20% 98%;
 
-    --popover: 222 47% 9%;
+    --popover: 0 0% 5%;
     --popover-foreground: 220 20% 98%;
 
     --primary: 142 76% 45%;
     --primary-foreground: 142 20% 98%;
 
-    --secondary: 220 20% 10%;
+    --secondary: 0 0% 6%;
     --secondary-foreground: 220 20% 98%;
 
-    --muted: 220 20% 10%;
+    --muted: 0 0% 7%;
     --muted-foreground: 220 10% 68%;
 
-    --accent: 142 76% 45%;
-    --accent-foreground: 142 20% 98%;
+    --accent: 72 100% 50%; /* Electric Lime */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 20% 14%;
-    --input: 220 20% 14%;
-    --ring: 142 76% 45%;
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
+    --ring: 72 100% 50%;
     /* Subtle glow for dark mode primary */
-    --primary-glow: hsla(142, 76%, 45%, 0.15);
+    --primary-glow: hsla(72, 100%, 50%, 0.1);
 
-    --radius: 1rem;
+    --radius: 0.25rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-white/5;
   }
 
-  /* Custom Scrollbar */
+  /* Custom Scrollbar - Precision */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    @apply bg-black;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/10 rounded-full border-4 border-solid border-background transition-colors hover:bg-primary/40;
+    @apply bg-white/5 rounded-none transition-all border-y-[10px] border-black;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-electric/40;
   }
 
   html {
@@ -133,7 +133,7 @@
     }
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-[#000000] text-foreground antialiased selection:bg-electric selection:text-black;
     font-family:
       'Plus Jakarta Sans',
       system-ui,
@@ -161,48 +161,33 @@
   }
   
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    @apply bg-white/[0.02] backdrop-blur-3xl border border-white/5 shadow-none;
   }
 
   .glass-primary {
-    @apply bg-primary/10 backdrop-blur-md border border-primary/20;
+    @apply bg-electric/[0.03] backdrop-blur-3xl border border-electric/5 shadow-none;
   }
 
-  .glass-terracotta {
-    @apply bg-terracotta/10 backdrop-blur-md border border-terracotta/20;
+  /* Avant-Garde Utilities */
+  .atmospheric-depth {
+    background: radial-gradient(circle at 50% -20%, rgba(212, 255, 0, 0.03) 0%, transparent 70%);
   }
 
-  .glass-sage {
-    @apply bg-sage/10 backdrop-blur-md border border-sage/20;
+  .layered-section {
+    @apply relative z-10 -mt-20 md:-mt-32;
   }
 
-  .grain-overlay {
-    position: relative;
+  .serif-display {
+    font-family: 'Instrument Serif', serif;
+    @apply italic font-normal tracking-tight;
+  }
+  
+  .asymmetric-gap {
+    @apply pl-4 md:pl-24 lg:pl-32;
   }
 
-  .grain-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-    opacity: 0.03;
-    z-index: 1;
-  }
-
-  .grain-organic::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    z-index: 1;
+  .mask-radial {
+    mask-image: radial-gradient(circle, black 0%, transparent 100%);
   }
 }
 

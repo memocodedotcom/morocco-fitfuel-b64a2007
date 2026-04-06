@@ -8,7 +8,7 @@ import { PageTransition } from './PageTransition';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <PromoBar />
       <MobileHeader className="sticky top-0 z-40" />
       <DesktopHeader />

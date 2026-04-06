@@ -22,11 +22,8 @@ export function BottomNav() {
 
   return (
     <>
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-obsidian/90 backdrop-blur-2xl border-t border-white/5 safe-area-bottom shadow-3xl">
-        {/* Physical Detail: Subtle Top Light Leak */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-electric/20 to-transparent" />
-        
-        <div className="flex items-center justify-around h-20">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-3xl border-t border-white/[0.05] safe-area-bottom">
+        <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const isActive = item.path && location.pathname === item.path;
             const Component = item.path ? Link : 'button';
@@ -38,26 +35,26 @@ export function BottomNav() {
                 key={item.label}
                 {...(props as any)}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-1.5 flex-1 h-full relative transition-all duration-500",
-                  isActive ? "text-electric" : "text-white/30"
+                  "flex flex-col items-center justify-center gap-2 flex-1 h-full relative transition-all duration-300",
+                  isActive ? "text-electric" : "text-slate-600"
                 )}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-x-4 top-0 h-1 bg-electric rounded-b-full shadow-[0_5px_15px_rgba(212,255,0,0.4)]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    className="absolute inset-x-6 top-0 h-0.5 bg-electric"
+                    transition={{ type: "spring", bounce: 0, duration: 0.4 }}
                   />
                 )}
                 <div className="relative">
-                  <item.icon className={cn("h-6 w-6 transition-transform duration-500", isActive && "scale-110")} />
+                  <item.icon className={cn("h-5 w-5 transition-transform duration-300", isActive && "scale-105")} strokeWidth={1} />
                   {item.badge ? (
-                    <span className="absolute -top-2 -right-3 bg-white text-black text-[9px] font-black rounded-full h-5 w-5 flex items-center justify-center border-2 border-electric shadow-xl">
+                    <span className="absolute -top-1.5 -right-2 bg-white text-black text-[8px] font-extrabold rounded-none h-4 w-4 flex items-center justify-center border border-black shadow-none">
                       {item.badge}
                     </span>
                   ) : null}
                 </div>
-                <span className="text-[9px] font-black uppercase tracking-[0.2em]">{item.label}</span>
+                <span className="text-[8px] font-extrabold uppercase tracking-widest leading-none">{item.label}</span>
               </Component>
             );
           })}

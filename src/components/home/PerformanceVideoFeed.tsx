@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Star, User, Quote, Heart, ShoppingBag, Plus, Activity, Instagram } from 'lucide-react';
+import { Play, User, ShoppingBag, Activity, Instagram } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -53,59 +53,46 @@ export function PerformanceVideoFeed() {
   const { t, locale } = useLanguage();
   
   return (
-    <section className="py-32 bg-obsidian overflow-hidden grain-overlay">
-      <div className="container px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <div className="space-y-6">
-            <motion.div 
-               initial={{ opacity: 0, x: -20 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               viewport={{ once: true }}
-               className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-primary"
-            >
-               <Activity className="h-4 w-4 text-electric animate-pulse" />
-               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">Live Performance Feed</span>
-            </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-display font-black tracking-tighter uppercase italic leading-[0.8] text-white"
-            >
-               PROUVEZ VOTRE <br />
-               <span className="text-electric">PERFORMANCE.</span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-slate-400 font-medium text-xl max-w-xl italic"
-            >
-               {locale === 'fr' 
-                 ? 'Rejoignez la communauté NutriMaroc sur Instagram et identifiez-nous pour apparaitre.'
-                 : 'انضم إلى مجتمع نيوترالماروك على إنستغرام وشاركنا تجربتك لتظهر هنا.'}
-            </motion.p>
+    <section className="py-32 bg-obsidian relative overflow-hidden">
+      {/* Precision Grid Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:40px_40px]" />
+      
+      <div className="container relative z-10 px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-12 max-w-6xl mx-auto">
+          <div className="space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="h-[1px] w-8 bg-electric" />
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-electric">COMMUNAUTÉ EN ACTION</span>
+            </div>
+            <h2 className="text-huge font-display font-extrabold text-white uppercase tracking-tight leading-[0.85]">
+              FLUX DE<br />
+              <span className="text-white/30">PERFORMANCE.</span>
+            </h2>
           </div>
-          <motion.div
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-          >
-             <Button className="rounded-full px-10 py-8 bg-electric text-black font-black uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,255,0,0.3)]">
-                <Instagram className="mr-3 h-5 w-5" />
-                @NutriMarocElite
-             </Button>
-          </motion.div>
+          <p className="text-slate-500 text-lg max-w-md font-normal leading-relaxed border-l border-white/10 pl-8">
+            {locale === 'fr' 
+              ? "Rejoignez l'élite sur Instagram. Visualisez les protocoles en conditions réelles."
+              : "انضم إلى النخبة على إنستغرام. شاهد البروتوكولات في ظروف حقيقية."}
+          </p>
         </div>
 
-        {/* Video Reel */}
-        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        {/* Video Reel - Geometric Alignment */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 md:px-0">
           {TESTIMONIALS.map((testimonial, idx) => (
              <VideoCard key={testimonial.id} testimonial={testimonial} index={idx} />
           ))}
         </div>
+
+        <motion.div 
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           className="mt-20 flex justify-center"
+        >
+           <Button variant="outline" className="h-14 px-10 rounded-sm border-white/10 text-white font-extrabold uppercase tracking-widest text-[9px] hover:bg-white hover:text-black transition-all duration-300">
+              <Instagram className="mr-3 h-4 w-4" />
+              SUIVRE @NUTRIMAROCELITE
+           </Button>
+        </motion.div>
       </div>
     </section>
   );
@@ -114,9 +101,6 @@ export function PerformanceVideoFeed() {
 function VideoCard({ testimonial, index }: { testimonial: VideoTestimonial, index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [showHeart, setShowHeart] = useState(false);
-  const { t } = useLanguage();
 
   const handleInteraction = () => {
     if (videoRef.current) {
@@ -130,30 +114,18 @@ function VideoCard({ testimonial, index }: { testimonial: VideoTestimonial, inde
     }
   };
 
-  const handleDoubleTap = (e: React.MouseEvent) => {
-     setShowHeart(true);
-     setIsLiked(true);
-     setTimeout(() => setShowHeart(false), 800);
-  };
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.2, type: 'spring', damping: 20 }}
-      className="relative flex-none aspect-[9/19] rounded-[4rem] group"
+      transition={{ delay: index * 0.1, duration: 1 }}
+      className="relative aspect-[9/16] rounded-sm group overflow-hidden border border-white/[0.05] bg-white/[0.02]"
     >
-      {/* Phone Frame Decoration */}
-      <div className="absolute -inset-4 border-[12px] border-white/5 rounded-[4.5rem] pointer-events-none group-hover:border-electric/10 transition-colors duration-700" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-obsidian rounded-b-3xl z-30" /> {/* Speaker/Sensors */}
-      
       <div 
-         className="relative w-full h-full rounded-[4rem] overflow-hidden bg-white/5 border-4 border-slate-800 shadow-[0_40px_100px_rgba(0,0,0,0.6)] group-hover:shadow-electric/10 transition-all duration-700"
+         className="relative w-full h-full cursor-pointer"
          onClick={handleInteraction}
-         onDoubleClick={handleDoubleTap}
       >
-        {/* Video Element */}
         <video
           ref={videoRef}
           src={testimonial.videoUrl}
@@ -161,89 +133,46 @@ function VideoCard({ testimonial, index }: { testimonial: VideoTestimonial, inde
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-60 transition-opacity group-hover:opacity-80"
         />
 
-        {/* Dynamic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30 opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
 
-        {/* Double Tap Heart */}
-        <AnimatePresence>
-           {showHeart && (
-              <motion.div 
-                 initial={{ scale: 0, opacity: 0 }}
-                 animate={{ scale: 1.5, opacity: 1 }}
-                 exit={{ scale: 2, opacity: 0 }}
-                 className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none"
-              >
-                 <Heart className="h-24 w-24 text-electric fill-electric drop-shadow-[0_0_30px_rgba(212,255,0,0.8)]" />
-              </motion.div>
-           )}
-        </AnimatePresence>
-
-        {/* Interaction Prompts */}
+        {/* Functional Meta Overlay */}
         <div className="absolute inset-x-0 bottom-0 p-8 space-y-6">
-           {/* Buy Now Widget */}
-           <motion.div 
-             initial={{ x: -20, opacity: 0 }}
-             whileInView={{ x: 0, opacity: 1 }}
-             className="glass-primary p-5 rounded-[2rem] border-white/20 transform transition-transform group-hover:translate-y-[-10px]"
-           >
+           {/* Product Attachment */}
+           <div className="p-4 bg-black/40 backdrop-blur-xl border border-white/10 rounded-sm">
               <div className="flex items-center justify-between gap-4">
-                 <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center shadow-lg pt-1">
-                       <ShoppingBag className="h-6 w-6 text-black" />
-                    </div>
-                    <div>
-                       <p className="text-[10px] font-black uppercase text-electric">{testimonial.productName}</p>
-                       <p className="text-sm font-black text-white">{testimonial.productPrice}</p>
-                    </div>
+                 <div className="space-y-1">
+                    <p className="text-[8px] font-extrabold uppercase text-electric tracking-widest">{testimonial.productName}</p>
+                    <p className="text-xs font-extrabold text-white">{testimonial.productPrice}</p>
                  </div>
-                 <Button className="h-10 w-10 p-0 rounded-full bg-electric text-black hover:scale-110 transition-transform">
-                    <Plus className="h-5 w-5" />
-                 </Button>
+                 <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                    <ShoppingBag className="h-4 w-4" />
+                 </div>
               </div>
-           </motion.div>
+           </div>
 
            {/* User Meta */}
-           <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                 <div className="h-10 w-10 rounded-full border-2 border-electric p-0.5">
-                    <div className="h-full w-full rounded-full bg-slate-800 overflow-hidden flex items-center justify-center">
-                       <User className="h-5 w-5 text-slate-400" />
-                    </div>
-                 </div>
-                 <div>
-                    <h4 className="text-sm font-black text-white">{testimonial.username}</h4>
-                    <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest">{testimonial.role}</p>
-                 </div>
+           <div className="flex items-center gap-3 border-t border-white/10 pt-4">
+              <div className="h-8 w-8 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
+                 <User className="h-4 w-4 text-white/40" />
               </div>
-              <div 
-                 className={cn(
-                    "flex flex-col items-center gap-1 transition-all",
-                    isLiked ? "text-electric" : "text-white"
-                 )}
-                 onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
-              >
-                 <Heart className={cn("h-6 w-6 transition-all", isLiked && "fill-current scale-125")} />
-                 <span className="text-[10px] font-black">2.4k</span>
+              <div className="space-y-0.5">
+                 <h4 className="text-[10px] font-extrabold text-white uppercase tracking-widest">{testimonial.username}</h4>
+                 <p className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{testimonial.role}</p>
               </div>
            </div>
         </div>
 
-        {/* Play Icon if Not Playing */}
+        {/* Minimal Play Icon */}
         <AnimatePresence>
           {!isPlaying && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm pointer-events-none"
-            >
-              <div className="h-20 w-20 bg-electric/20 rounded-full border border-electric/40 flex items-center justify-center">
-                 <Play className="h-10 w-10 text-electric fill-electric ml-2" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-16 w-16 bg-white/5 backdrop-blur-md rounded-full border border-white/10 flex items-center justify-center text-white transition-transform group-hover:scale-110">
+                 <Play className="h-6 w-6 fill-current ml-1" />
               </div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </div>

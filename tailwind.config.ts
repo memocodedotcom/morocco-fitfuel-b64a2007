@@ -49,6 +49,7 @@ export default {
       fontFamily: {
         sans: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
         display: ["Syne", "Outfit", "Plus Jakarta Sans", "system-ui", "sans-serif"],
+        serif: ["Instrument Serif", "Playfair Display", "serif"],
         arabic: ["Cairo", "Tahoma", "system-ui", "sans-serif"],
       },
       colors: {
@@ -87,25 +88,16 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         obsidian: {
-          DEFAULT: "#020617",
-          light: "#0f172a",
+          DEFAULT: "#050505",
+          light: "#111111",
         },
         electric: {
           DEFAULT: "#D4FF00",
-          glow: "rgba(212, 255, 0, 0.15)",
-        },
-        // Phase 1: Earth Tone Additions
-        sage: {
-          DEFAULT: "#3A4D39",
-          light: "#4F6F52",
-        },
-        terracotta: {
-          DEFAULT: "#8B4513",
-          light: "#A0522D",
+          glow: "rgba(212, 255, 0, 0.1)",
         },
         "slate-luxury": {
-          DEFAULT: "#1E293B",
-          accent: "#334155",
+          DEFAULT: "#111111",
+          accent: "#1A1A1A",
         },
       },
       borderRadius: {

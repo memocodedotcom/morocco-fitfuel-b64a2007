@@ -10,62 +10,61 @@ export function BrandMarquee() {
   const marqueeClass = dir === 'rtl' ? 'animate-marquee-rtl' : 'animate-marquee';
 
   return (
-    <section className="relative py-10 border-y bg-[#050914] overflow-hidden group">
-      {/* Subtle overlay gradients for fade effect */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050914] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#050914] to-transparent z-10 pointer-events-none" />
-
-      <div className="container mb-6 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">
+    <section className="relative py-16 bg-black overflow-hidden border-y border-white/5">
+      {/* Precision Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(#ffffff04_1px,transparent_1px)] bg-[size:24px_24px]" />
+      
+      <div className="container relative z-10 mb-8 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="h-px w-6 bg-electric" />
+          <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500">
             {t('marqueePartnerBrands')}
           </span>
         </div>
       </div>
 
-      <div className="flex marquee-hover-pause overflow-hidden">
+      <div className="flex marquee-hover-pause overflow-hidden border-y border-white/5 py-10 bg-white/[0.02]">
         <div className={cn(
-          "flex gap-16 items-center whitespace-nowrap py-2 transition-all duration-700",
+          "flex gap-24 items-center whitespace-nowrap transition-all duration-700",
           marqueeClass
         )}>
           {allBrands.map((brand, i) => (
-            <div key={i} className="flex items-center gap-16 shrink-0">
-              <span className="text-white/30 font-black text-lg md:text-2xl tracking-tighter uppercase transition-colors hover:text-primary cursor-default">
+            <div key={i} className="flex items-center gap-24 shrink-0">
+              <span className="text-white/20 font-display font-extrabold text-3xl tracking-tight uppercase transition-colors hover:text-electric cursor-default">
                 {brand.name}
               </span>
-              <div className="h-1 w-1 rounded-full bg-white/10" aria-hidden />
+              <div className="h-2 w-2 rounded-none bg-white/5" aria-hidden />
             </div>
           ))}
         </div>
       </div>
 
-      <div className="container mt-8 grid grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/5 transition-colors hover:bg-white/10 group/item">
-          <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <ShieldCheck className="h-5 w-5" />
+      <div className="container relative z-10 mt-12 grid grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex items-center gap-4 bg-white/[0.02] p-5 rounded-sm border border-white/5 group/item transition-colors hover:border-white/10">
+          <div className="h-12 w-12 flex items-center justify-center rounded-sm bg-white/5 text-white/40 group-hover:bg-electric group-hover:text-black transition-colors">
+            <ShieldCheck className="h-6 w-6" strokeWidth={1} />
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">{t('marqueeAuthentic')}</p>
-            <p className="text-xs text-muted-foreground font-medium">100% Officiel</p>
+            <p className="text-[9px] font-extrabold uppercase tracking-widest text-electric mb-1">{t('marqueeAuthentic')}</p>
+            <p className="text-xs text-white/60 font-normal uppercase tracking-tight">VERIFICATION TOTALE</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/5 transition-colors hover:bg-white/10 group/item">
-          <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <Truck className="h-5 w-5" />
+        <div className="flex items-center gap-4 bg-white/[0.02] p-5 rounded-sm border border-white/5 group/item transition-colors hover:border-white/10">
+          <div className="h-12 w-12 flex items-center justify-center rounded-sm bg-white/5 text-white/40 group-hover:bg-electric group-hover:text-black transition-colors">
+            <Truck className="h-6 w-6" strokeWidth={1} />
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">{t('marqueeDelivery24h')}</p>
-            <p className="text-xs text-muted-foreground font-medium">Livraison Express</p>
+            <p className="text-[9px] font-extrabold uppercase tracking-widest text-electric mb-1">{t('marqueeDelivery24h')}</p>
+            <p className="text-xs text-white/60 font-normal uppercase tracking-tight">LOGISTIQUE EXPRESS</p>
           </div>
         </div>
-        <div className="hidden lg:flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/5 transition-colors hover:bg-white/10 group/item">
-          <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <CreditCard className="h-5 w-5" />
+        <div className="hidden lg:flex items-center gap-4 bg-white/[0.02] p-5 rounded-sm border border-white/5 group/item transition-colors hover:border-white/10">
+          <div className="h-12 w-12 flex items-center justify-center rounded-sm bg-white/5 text-white/40 group-hover:bg-electric group-hover:text-black transition-colors">
+            <CreditCard className="h-6 w-6" strokeWidth={1} />
           </div>
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-0.5">{t('marqueeSecurePay')}</p>
-            <p className="text-xs text-muted-foreground font-medium">CMI & Cash</p>
+            <p className="text-[9px] font-extrabold uppercase tracking-widest text-electric mb-1">{t('marqueeSecurePay')}</p>
+            <p className="text-xs text-white/60 font-normal uppercase tracking-tight">CRYPTAGE BANCAIRE</p>
           </div>
         </div>
       </div>
