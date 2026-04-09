@@ -94,7 +94,15 @@ export function HomeValueCards() {
   );
 }
 
-function ValueCardContent({ card, isRTL }: { card: any; isRTL: boolean }) {
+interface Card {
+  icon: React.ElementType;
+  title: string;
+  desc: string;
+  link?: string;
+  cta?: string;
+}
+
+function ValueCardContent({ card, isRTL }: { card: Card; isRTL: boolean }) {
   return (
     <div className="h-full bg-white/[0.02] border border-white/5 rounded-sm p-12 flex flex-col justify-between transition-all duration-700 hover:bg-white/[0.04] hover:border-white/10 hover:-translate-y-2 group/card">
       <div className="space-y-8">

@@ -42,11 +42,11 @@ export function PerformanceVideoFeed() {
             <div className="h-0.5 w-12 bg-electric" />
             <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-white leading-tight">
                L'ACTION<br/>
-               <span className="serif-display text-white/30 italic">R├ëELLE.</span>
+               <span className="serif-display text-white/30 italic">RÉELLE.</span>
             </h2>
           </div>
           <p className="text-slate-500 max-w-sm text-base md:text-lg font-normal mb-2 leading-relaxed">
-             Des athl├⌐tes de haut niveau, une intensit├⌐ maximale. D├⌐couvrez la performance NutriMaroc.
+             Des athlètes de haut niveau, une intensité maximale. Découvrez la performance NutriMaroc.
           </p>
         </div>
 

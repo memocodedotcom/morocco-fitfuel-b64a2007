@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/hooks/use-cart';
+import { useCart } from '@/contexts/CartContext';
 import { products } from '@/data/products';
 import { cn } from '@/lib/utils';
 import { Zap, Target, Dumbbell, ArrowRight, ShoppingCart, Check } from 'lucide-react';
@@ -37,10 +37,10 @@ export function BuildYourStack() {
         ar: `باقة ${goals.find(g => g.id === selectedGoal)?.label}`
       }
     };
-  }, [selectedGoal, locale]);
+  }, [selectedGoal, locale, goals]);
 
   const handleAddBundle = () => {
-    currentBundle.products.forEach(p => addItem(p));
+    currentBundle.products.forEach(p => addItem(p.id));
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -125,10 +125,10 @@ export function BuildYourStack() {
                       {currentBundle.products.map((product) => (
                         <div key={product.id} className="flex items-center gap-6 group/item">
                            <div className="h-16 w-16 bg-white/5 p-2 rounded-sm border border-white/5 group-hover/item:border-white/20 transition-colors">
-                              <img src={product.images[0]} alt={product.name} className="w-full h-full object-contain grayscale group-hover/item:grayscale-0 transition-all" />
+                              <img src={product.images[0]} alt={product.name[locale]} className="w-full h-full object-contain grayscale group-hover/item:grayscale-0 transition-all" />
                            </div>
                            <div className="space-y-1">
-                              <h4 className="text-xs font-black uppercase tracking-widest text-white">{product.name}</h4>
+                              <h4 className="text-xs font-black uppercase tracking-widest text-white">{product.name[locale]}</h4>
                               <p className="text-[10px] text-slate-500 uppercase tracking-widest">{product.brand}</p>
                            </div>
                         </div>
@@ -146,7 +146,7 @@ export function BuildYourStack() {
                   {added ? (
                     <>
                       <Check className="mr-2 h-5 w-5" />
-                      {locale === 'fr' ? 'ADDITIONN├ë' : '┘à╪│╪¬╪╣╪» ┘ä┘ä╪¬┘ê╪╡┘è┘ä'}
+                      {locale === 'fr' ? 'ADDITIONNÉ' : 'تمت الإضافة'}
                     </>
                   ) : (
                     <>

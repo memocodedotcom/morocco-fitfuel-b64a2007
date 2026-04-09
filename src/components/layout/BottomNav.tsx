@@ -26,18 +26,9 @@ export function BottomNav() {
         <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const isActive = item.path && location.pathname === item.path;
-            const Component = item.path ? Link : 'button';
-            const props = item.path ? { to: item.path } : { onClick: item.action };
-
-            return (
-              <Component
-                key={item.label}
-                {...(props as any)}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-2 flex-1 h-full relative transition-all duration-300",
-                  isActive ? "text-electric" : "text-slate-600"
-                )}
-              >
+            const isLink = !!item.path;
+            const navContent = (
+              <>
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
@@ -54,7 +45,25 @@ export function BottomNav() {
                   ) : null}
                 </div>
                 <span className="text-[8px] font-extrabold uppercase tracking-widest leading-none">{item.label}</span>
-              </Component>
+              </>
+            );
+
+            const commonProps = {
+              key: item.label,
+              className: cn(
+                "flex flex-col items-center justify-center gap-2 flex-1 h-full relative transition-all duration-300",
+                isActive ? "text-electric" : "text-slate-600"
+              )
+            };
+
+            return isLink ? (
+              <Link to={item.path!} {...commonProps}>
+                {navContent}
+              </Link>
+            ) : (
+              <button onClick={item.action} {...commonProps}>
+                {navContent}
+              </button>
             );
           })}
         </div>
