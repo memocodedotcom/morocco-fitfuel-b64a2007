@@ -30,6 +30,8 @@ export interface Product {
   certificateOnRequest?: boolean;
   /** High-caffeine / stimulant pre-workout — show age & health notice */
   stimulantWarning?: boolean;
+  isNew?: boolean;
+  discountPrice?: number;
 }
 
 export interface Category {

@@ -56,12 +56,14 @@ export function BottomNav() {
               )
             };
 
+            const { key, ...rest } = commonProps;
+
             return isLink ? (
-              <Link to={item.path!} {...commonProps}>
+              <Link key={key} to={item.path!} {...rest}>
                 {navContent}
               </Link>
             ) : (
-              <button onClick={item.action} {...commonProps}>
+              <button key={key} onClick={item.action} {...rest}>
                 {navContent}
               </button>
             );

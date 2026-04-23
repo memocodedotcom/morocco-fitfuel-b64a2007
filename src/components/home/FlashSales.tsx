@@ -40,7 +40,7 @@ export function FlashSales() {
                 <div className="h-8 w-8 flex items-center justify-center rounded-sm bg-electric text-black">
                    <Zap className="h-4 w-4 fill-black" strokeWidth={3} />
                 </div>
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.4em] text-electric">VENTE FLASH LIMIT├ëE</span>
+                <span className="text-[10px] font-extrabold uppercase tracking-[0.4em] text-electric">VENTE FLASH LIMITÉE</span>
               </div>
               
               <h2 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tight text-white">

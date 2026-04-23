@@ -9,8 +9,8 @@ export function SuccessStories() {
   const stories = [
     {
       name: "Ahmed K.",
-      role: "Athl├⌐te Pro",
-      text: "NutriMaroc a litt├⌐ralement transform├⌐ ma pr├⌐paration. La qualit├⌐ des prot├⌐ines est in├⌐gal├⌐e au Maroc.",
+      role: "Athlète Pro",
+      text: "NutriMaroc a littéralement transformé ma préparation. La qualité des protéines est inégalée au Maroc.",
       image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop",
       results: "+5kg Muscle",
       rating: 5
@@ -18,7 +18,7 @@ export function SuccessStories() {
     {
       name: "Sara L.",
       role: "CrossFit Coach",
-      text: "Enfin une marque locale qui respecte les standards internationaux. Ma r├⌐cup├⌐ration est 2x plus rapide.",
+      text: "Enfin une marque locale qui respecte les standards internationaux. Ma récupération est 2x plus rapide.",
       image: "https://images.unsplash.com/photo-1548690312-e3b507d17a12?w=400&h=400&fit=crop",
       results: "Peak Performance",
       rating: 5
@@ -26,7 +26,7 @@ export function SuccessStories() {
     {
        name: "Yassine M.",
        role: "Bodybuilder",
-       text: "La Whey Isolate NutriMaroc est ma favorite. Digestion parfaite et go├╗t exceptionnel.",
+       text: "La Whey Isolate NutriMaroc est ma favorite. Digestion parfaite et goût exceptionnel.",
        image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=400&fit=crop",
        results: "Elite Recovery",
        rating: 5
@@ -43,7 +43,7 @@ export function SuccessStories() {
             <div className="h-0.5 w-12 bg-electric" />
             <h2 className="text-5xl md:text-8xl font-display font-black uppercase tracking-tight text-white leading-tight">
               HISTOIRES DE<br/>
-              <span className="serif-display text-white/30 italic">SUCC├êS.</span>
+              <span className="serif-display text-white/30 italic">SUCCÈS.</span>
             </h2>
           </div>
           <p className="text-slate-500 max-w-sm text-base md:text-lg font-normal mb-2 leading-relaxed">

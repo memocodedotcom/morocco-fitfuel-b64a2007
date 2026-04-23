@@ -35,6 +35,7 @@ export default function ProductsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryFilter = searchParams.get('category') || '';
   const brandFilter = searchParams.get('brand') || '';
+  const goalFilter = searchParams.get('goal') || '';
   const priceTier = searchParams.get('price') || PRICE_ALL;
 
   const [sortBy, setSortBy] = useState('popularity');
@@ -58,6 +59,7 @@ export default function ProductsPage() {
     const next = new URLSearchParams(searchParams);
     next.delete('brand');
     next.delete('price');
+    next.delete('goal');
     setSearchParams(next, { replace: true });
   };
 
@@ -68,6 +70,9 @@ export default function ProductsPage() {
     }
     if (brandFilter) {
       list = list.filter((p) => p.brand === brandFilter);
+    }
+    if (goalFilter) {
+      list = list.filter((p) => p.goalTags?.includes(goalFilter));
     }
     if (priceTier === PRICE_UNDER_500) {
       list = list.filter((p) => p.price < 500);
@@ -90,7 +95,7 @@ export default function ProductsPage() {
         list.sort((a, b) => b.reviewCount - a.reviewCount);
     }
     return list;
-  }, [categoryFilter, brandFilter, priceTier, sortBy]);
+  }, [categoryFilter, brandFilter, goalFilter, priceTier, sortBy]);
 
   const hasExtraFilters = Boolean(brandFilter) || (priceTier !== PRICE_ALL && priceTier !== '');
 

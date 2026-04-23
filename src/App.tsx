@@ -21,7 +21,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
       <LanguageProvider>
         <CartProvider>
           <TooltipProvider>
@@ -37,6 +37,7 @@ const App = () => (
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/returns" element={<ReturnsPage />} />
                 <Route path="/authenticity" element={<AuthenticityPage />} />
+                <Route path="/terms" element={<PrivacyPage />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

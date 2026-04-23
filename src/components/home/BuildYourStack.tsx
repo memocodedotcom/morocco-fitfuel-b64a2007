@@ -13,11 +13,11 @@ export function BuildYourStack() {
   const [selectedGoal, setSelectedGoal] = useState<'lose-weight' | 'gain-muscle' | 'energy'>('gain-muscle');
   const [added, setAdded] = useState(false);
 
-  const goals = [
+  const goals = useMemo(() => [
     { id: 'gain-muscle', label: t('gainMuscle'), icon: Dumbbell, color: 'electric' },
     { id: 'lose-weight', label: t('loseWeight'), icon: Target, color: 'terracotta' },
     { id: 'energy', label: t('energy'), icon: Zap, color: 'teal' },
-  ] as const;
+  ] as const, [t]);
 
   const currentBundle = useMemo(() => {
     // Basic logic for bundle generation
@@ -33,11 +33,11 @@ export function BuildYourStack() {
       totalPrice,
       bundlePrice,
       name: {
-        fr: `Stack ${goals.find(g => g.id === selectedGoal)?.label}`,
-        ar: `باقة ${goals.find(g => g.id === selectedGoal)?.label}`
+        fr: `Stack ${goals.find(g => g.id === selectedGoal)?.label || ''}`,
+        ar: `باقة ${goals.find(g => g.id === selectedGoal)?.label || ''}`
       }
     };
-  }, [selectedGoal, locale, goals]);
+  }, [selectedGoal, locale, goals, t]);
 
   const handleAddBundle = () => {
     currentBundle.products.forEach(p => addItem(p.id));

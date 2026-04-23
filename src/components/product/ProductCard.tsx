@@ -38,7 +38,7 @@ export function ProductCard({ product, variant = 'default' }: Props) {
        >
           <img 
             src={product.images[0]} 
-            alt={product.name}
+            alt={product.name[locale]}
             className="w-full h-full object-contain transition-transform duration-1000 ease-out group-hover:scale-110"
           />
           
@@ -99,7 +99,7 @@ export function ProductCard({ product, variant = 'default' }: Props) {
                 <div className="space-y-1">
                    <p className="text-[10px] font-extrabold uppercase tracking-widest text-electric/60">{product.brand}</p>
                    <Link to={`/products/${product.slug}`} className="block">
-                      <h3 className="text-sm md:text-base font-display font-black uppercase tracking-tight text-white group-hover:text-electric transition-colors line-clamp-1">{product.name}</h3>
+                      <h3 className="text-sm md:text-base font-display font-black uppercase tracking-tight text-white group-hover:text-electric transition-colors line-clamp-1">{product.name[locale]}</h3>
                    </Link>
                 </div>
                 <div className="flex items-center gap-1 text-white">

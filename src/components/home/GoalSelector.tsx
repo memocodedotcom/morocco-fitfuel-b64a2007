@@ -33,7 +33,7 @@ export function GoalSelector() {
       title: locale === 'fr' ? 'Énergie & Focus' : 'طاقة وتركيز',
       subtitle: locale === 'fr' ? 'Endurance & Mental' : 'تحمل وذهن',
       desc: locale === 'fr' ? 'Dominez vos entraînements avec une clarté mentale et une énergie infinie.' : 'سيطر على تمارينك بوضوح ذهني وطاقة لا حصر لها.',
-      image: '/goals/masse_musculaire.png',
+      image: '/goals/energie_focus.png',
       accent: 'teal',
       tag: locale === 'fr' ? 'Total Performance' : 'أداء كامل',
     }
